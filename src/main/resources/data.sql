@@ -1,2 +1,0 @@
-insert into categories (name, description, is_visible, created_at, updated_at) values ('Office Supplies', 'Office Supplies' , 'Y', current_timestamp,  current_timestamp);
-insert into categories (name, description, is_visible, created_at, updated_at) values ('Emergency Supplies', 'Emergency Supplies' , 'Y', current_timestamp,  current_timestamp);
