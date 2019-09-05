@@ -43,7 +43,12 @@
             <artifactId>thymeleaf-layout-dialect</artifactId>
             <version>2.3.0</version>
         </dependency>
+        <!-- Spring Security -->
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
 
         <!--Webjars-->
         <dependency>

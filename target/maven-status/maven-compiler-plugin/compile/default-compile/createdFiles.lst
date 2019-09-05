@@ -1,5 +1,7 @@
+com/techieonthenet/config/LoggingAccessDeniedHandler.class
 com/techieonthenet/controller/ErrorController.class
 com/techieonthenet/config/ThymeleafWebMvcConfig.class
 com/techieonthenet/controller/PageController.class
 com/techieonthenet/BootstrapApp.class
+com/techieonthenet/config/SecurityConfig.class
 com/techieonthenet/controller/LoginController.class

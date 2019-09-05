@@ -11,19 +11,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class LoginController {
 
-    private static Logger logger = LoggerFactory.getLogger(LoginController.class);
+    private static Logger LOGGER = LoggerFactory.getLogger(LoginController.class);
 
     // Login form
     @GetMapping({"/", "/login"})
     public String login() {
-        logger.info("Inside login Mapping");
+        LOGGER.info("Inside login Mapping");
 
         return "login-page";
     }
 
     @PostMapping({"/login-submit"})
     public String loginSubmit() {
-        logger.info("Inside login Mapping");
+        LOGGER.info("Inside login Mapping");
         return "product";
     }
 
