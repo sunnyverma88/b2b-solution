@@ -14,23 +14,22 @@ public class LoginController {
     private static Logger LOGGER = LoggerFactory.getLogger(LoginController.class);
 
     // Login form
-    @GetMapping({"/", "/login"})
+    @GetMapping({"/" , "/login"})
     public String login() {
-        LOGGER.info("Inside login Mapping");
+        LOGGER.info("Inside login page");
 
         return "login-page";
     }
 
-    @PostMapping({"/login-submit"})
-    public String loginSubmit() {
-        LOGGER.info("Inside login Mapping");
-        return "product";
-    }
+
 
     // Login form with error
     @GetMapping("/login-error")
     public String loginError(Model model) {
+        LOGGER.info("Inside login Error");
         model.addAttribute("loginError", true);
         return "login-page";
     }
+
+
 }

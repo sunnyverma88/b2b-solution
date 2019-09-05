@@ -1,6 +1,5 @@
 package com.techieonthenet.service;
 
-import com.techieonthenet.config.security.SecurityUtility;
 import com.techieonthenet.entity.Role;
 import com.techieonthenet.entity.User;
 import com.techieonthenet.entity.UserRole;
@@ -24,13 +23,13 @@ public class InitDBService {
         User user1 = new User();
         user1.setFirstName("John");
         user1.setLastName("Adams");
-        user1.setUsername("JAdams@gmail.com");
-        user1.setPassword(SecurityUtility.passwordEncoder().encode("p"));
+        user1.setUsername("jadams");
+        user1.setPassword("p");
         user1.setEmail("JAdams@gmail.com");
         Set<UserRole> userRoles = new HashSet<>();
         Role role1 = new Role();
         role1.setId(1L);
-        role1.setName("ROLE_USER");
+        role1.setName("USER");
 
         userRoles.add(new UserRole(user1, role1));
 
@@ -41,11 +40,11 @@ public class InitDBService {
         user2.setFirstName("Admin");
         user2.setLastName("Admin");
         user2.setUsername("admin");
-        user2.setPassword(SecurityUtility.passwordEncoder().encode("p"));
+        user2.setPassword("p");
         user2.setEmail("Admin@gmail.com");
         Role role2 = new Role();
         role2.setId(0L);
-        role2.setName("ROLE_ADMIN");
+        role2.setName("ADMIN");
         userRoles.add(new UserRole(user2, role2));
 
         userService.createUser(user2, userRoles);

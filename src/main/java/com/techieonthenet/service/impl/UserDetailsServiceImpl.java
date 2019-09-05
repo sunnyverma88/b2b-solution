@@ -1,4 +1,4 @@
-package com.techieonthenet.service;
+package com.techieonthenet.service.impl;
 
 import com.techieonthenet.entity.User;
 import com.techieonthenet.repository.UserRepository;
@@ -12,9 +12,9 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-public class UserSecurityService implements UserDetailsService{
+public class UserDetailsServiceImpl implements UserDetailsService{
 
-    private static final Logger LOG = LoggerFactory.getLogger(UserSecurityService.class);
+    private static final Logger LOG = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
 
     @Autowired
     private UserRepository userRepository;

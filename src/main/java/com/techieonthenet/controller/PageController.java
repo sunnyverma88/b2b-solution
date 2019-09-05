@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class PageController {
 
 
-   @GetMapping("/pricing-tables")
+   @GetMapping("/product")
     public String pricingTables() {
         return "pricing-tables";
     }

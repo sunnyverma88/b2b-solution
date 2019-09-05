@@ -6,15 +6,13 @@ import com.techieonthenet.repository.UserRepository;
 import com.techieonthenet.entity.UserRole;
 import com.techieonthenet.service.UserService;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
@@ -28,6 +26,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private RoleRepository roleRepository;
 
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public User createUser(User user, Set<UserRole> userRoles) {
@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
             userRoles.forEach((ur) -> {
                 roleRepository.save(ur.getRole());
             });
-
+            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
             user.getUserRoles().addAll(userRoles);
             localUser = userRepository.save(user);
         }
