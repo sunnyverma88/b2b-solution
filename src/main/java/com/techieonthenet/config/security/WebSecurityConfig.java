@@ -43,7 +43,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
 
-
         http
                 .authorizeRequests()
                 .antMatchers(
@@ -79,18 +78,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return authenticationManager();
     }
 
-    @Bean
-    public DaoAuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
-        auth.setUserDetailsService(userDetailsService);
-        auth.setPasswordEncoder(passwordEncoder());
-        return auth;
-    }
-
-
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(authenticationProvider());
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
 }
