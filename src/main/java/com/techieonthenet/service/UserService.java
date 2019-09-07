@@ -2,13 +2,14 @@ package com.techieonthenet.service;
 
 import java.util.Set;
 
+import com.techieonthenet.entity.Role;
 import com.techieonthenet.entity.User;
 import com.techieonthenet.entity.UserRole;
 
 
 public interface UserService {
-	
-	User createUser(User user, Set<UserRole> userRoles);
+
+	public User createUser(User user, Set<Role> roles);
 
 	User findByUsername(String username);
 	

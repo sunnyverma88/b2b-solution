@@ -1,5 +1,6 @@
 package com.techieonthenet.entity;
 
+import com.techieonthenet.entity.common.Auditable;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,10 +8,10 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name="user_role")
+@Table(name="users_roles")
 @Getter
 @Setter
-public class UserRole implements Serializable {
+public class UserRole extends Auditable implements Serializable {
     private static final long serialVersionUID = 890345L;
 
     @Id

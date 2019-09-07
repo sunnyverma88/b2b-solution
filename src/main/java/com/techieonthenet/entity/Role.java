@@ -7,11 +7,12 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "App_Role")
+@Table(name = "App_Roles")
 @Getter
 @Setter
 public class Role extends Auditable implements Serializable{
@@ -26,8 +27,12 @@ public class Role extends Auditable implements Serializable{
 
     private String name;
 
-    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<UserRole> userRoles = new HashSet<>();
+    @ManyToMany(mappedBy = "roles")
+    private Collection<User> users;
+
+    @ManyToMany(fetch = FetchType.EAGER , cascade = CascadeType.MERGE)
+    @JoinTable(name = "roles_privileges", joinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "priv_id", referencedColumnName = "id"))
+    private Collection<Privilege> privileges = new HashSet<>();
 
     public Role(){}
 

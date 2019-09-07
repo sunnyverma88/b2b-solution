@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security" lang="en">
 <div id="sidebar-menu" class="main_menu_side hidden-print main_menu" data-th-fragment="sidebar-menu">
     <div class="menu_section">
         <h3>General</h3>
@@ -55,7 +57,7 @@
             </li>
         </ul>
     </div>
-    <div class="menu_section">
+    <div class="menu_section" sec:authorize="hasAuthority('USER')">
         <h3>Live On</h3>
         <ul class="nav side-menu">
             <li><a><i class="fa fa-bug"></i> Additional Pages <span class="fa fa-chevron-down"></span></a>

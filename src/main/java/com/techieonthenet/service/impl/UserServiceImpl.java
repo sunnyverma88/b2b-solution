@@ -1,5 +1,6 @@
 package com.techieonthenet.service.impl;
 
+import com.techieonthenet.entity.Role;
 import com.techieonthenet.entity.User;
 import com.techieonthenet.repository.RoleRepository;
 import com.techieonthenet.repository.UserRepository;
@@ -30,17 +31,19 @@ public class UserServiceImpl implements UserService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
-    public User createUser(User user, Set<UserRole> userRoles) {
+    public User createUser(User user, Set<Role> roles) {
         User localUser = userRepository.findByUsername(user.getUsername());
 
         if (localUser != null) {
             LOGGER.info("User with username {} already exist. Nothing will be done. ", user.getUsername());
         } else {
-            userRoles.forEach((ur) -> {
-                roleRepository.save(ur.getRole());
-            });
+
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-            user.getUserRoles().addAll(userRoles);
+            for(Role role : roles)
+            {
+                user.getRoles().add(role);
+            }
+
             localUser = userRepository.save(user);
         }
 

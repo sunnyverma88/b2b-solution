@@ -4,12 +4,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.techieonthenet</groupId>
-    <artifactId>endgate-b2b-solutions</artifactId>
+    <artifactId>b2b-solution</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>endgate-b2b-solutions</name>
-    <description>Endgate B2B Solutions</description>
+    <name>b2b-solution</name>
+    <description>B2B Solution</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -50,6 +50,13 @@
             <groupId>nz.net.ultraq.thymeleaf</groupId>
             <artifactId>thymeleaf-layout-dialect</artifactId>
             <version>2.3.0</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-springsecurity5 -->
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-springsecurity5</artifactId>
+            <version>3.0.4.RELEASE</version>
         </dependency>
 
         <!-- Spring Security -->
@@ -138,4 +145,4 @@
 </build>
 
 
-        </project>
+</project>

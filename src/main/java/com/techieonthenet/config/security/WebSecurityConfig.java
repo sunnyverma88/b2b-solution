@@ -50,12 +50,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/css/**",
                         "/images/**",
                         "/webjars/**").permitAll()
-                //.antMatchers("/product").hasRole("ADMIN")
+                .antMatchers("/main-page").hasAuthority("PRIV_VIEW_PRODUCT")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/product")
+                .defaultSuccessUrl("/main-page")
                 .permitAll()
                 .and()
                 .logout()
