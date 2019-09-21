@@ -1,6 +1,6 @@
 package com.techieonthenet.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.techieonthenet.entity.common.Auditable;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
@@ -9,20 +9,23 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
 
 @Entity
 @Table(name="APP_USERS")
 @Getter
 @Setter
-public class User implements UserDetails , Serializable{
+@SequenceGenerator(name = "app_user_generator", sequenceName = "app_user_seq", allocationSize = 1)
+public class User extends Auditable implements UserDetails, Serializable {
 
     private static final long serialVersionUID = 902783495L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "app_user_generator")
-    @SequenceGenerator(name = "app_user_generator", sequenceName = "app_user_seq", allocationSize = 50)
-    @Column(name="Id", nullable=false, updatable = false)
+    @Column(name = "Id", nullable = false, updatable = false)
     private Long id;
 
     private String username;
@@ -34,11 +37,15 @@ public class User implements UserDetails , Serializable{
     private String phone;
     private boolean enabled = true;
 
+    private boolean passwordResetRequired = false;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private Collection<Role> roles = new HashSet<>();
 
-
+    @ManyToOne
+    @JoinColumn(name = "group_id")
+    private Group group;
 
     private final List<String> getPrivileges() {
         final List<String> privileges = new ArrayList<>();
@@ -78,4 +85,5 @@ public class User implements UserDetails , Serializable{
     public boolean isCredentialsNonExpired() {
         return false;
     }
+
 }

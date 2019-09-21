@@ -11,13 +11,12 @@ import java.io.Serializable;
 @Table(name="users_roles")
 @Getter
 @Setter
+@SequenceGenerator(name = "user_role_generator", sequenceName = "user_role_seq", allocationSize = 1)
 public class UserRole extends Auditable implements Serializable {
     private static final long serialVersionUID = 890345L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_role_generator")
-    @SequenceGenerator(name = "user_role_generator", sequenceName = "user_role_seq", allocationSize = 50)
-    @Column(name="user_role_id", nullable=false, updatable = false)
     private long userRoleId;
 
     public UserRole () {}

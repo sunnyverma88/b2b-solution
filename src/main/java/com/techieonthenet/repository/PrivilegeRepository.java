@@ -1,10 +1,9 @@
 package com.techieonthenet.repository;
 
 import com.techieonthenet.entity.Privilege;
-import com.techieonthenet.entity.Role;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
-public interface PrivilegeRepository extends CrudRepository<Privilege, Long> {
+public interface PrivilegeRepository extends PagingAndSortingRepository<Privilege, Long> {
 
-    public Privilege findByName(String name);
+    Privilege findByName(String name);
 }

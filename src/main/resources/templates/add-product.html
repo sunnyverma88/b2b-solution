@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html data-layout-decorate="~{fragments/layout}" lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Product Page</title>
+</head>
+
+<body>
+<div class="right_col" data-layout-fragment="content" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>ADD PRODUCT</h3>
+            </div>
+
+            <div class="title_right">
+                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                    <div class="input-group">
+                        <input class="form-control" placeholder="Search for..." type="text">
+                        <span class="input-group-btn">
+                      <button class="btn btn-default" type="button">Go!</button>
+                    </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Add Product Form </h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="alert alert-success" th:if="${message}" th:text="${message}">
+
+                        </div>
+                        <br/>
+                        <form class="form-horizontal form-label-left" data-parsley-validate id="add-product"
+                              method="post" th:action="@{/product/add}" th:object="${product}">
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Product Name <span
+                                        class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input class="form-control col-md-7 col-xs-12" id="name" maxlength="50" name="name"
+                                           required th:field="*{name}" type="text">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="brand"> Product Brand
+                                    <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input class="form-control col-md-7 col-xs-12" id="brand" name="brand"
+                                           required="required" th:field="*{brand}" type="text">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="actualPrice">Product
+                                    Actual Price <span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input class="form-control col-md-7 col-xs-12" id="actualPrice" name="actualPrice"
+                                           required th:field="*{actualPrice}" type="number">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="mrpPrice">Product MRP
+                                    Price <span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input class="form-control col-md-7 col-xs-12" id="mrpPrice" name="mrpPrice"
+                                           required th:field="*{mrpPrice}" type="number">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">HSN Code <span
+                                        class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <select class="form-control" th:field="*{hsnCode}">
+                                        <option th:each="hsnCode : ${hsnCodes}" th:text="${hsnCode.hsnCode}"
+                                                th:value="${hsnCode.hsnCode}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Categories <span
+                                        class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <select class="form-control" th:field="*{categoryId}">
+                                        <option th:each="category : ${categories}" th:text="${category.name}"
+                                                th:value="${category.id}"></option>
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="shippingDays">Product
+                                    Shipping Timeframe <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input class="form-control col-md-7 col-xs-12" id="shippingDays" name="shippingDays"
+                                           required th:field="*{shippingDays}" type="text">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="imgUrl">Product Image Url
+                                    <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input class="form-control col-md-7 col-xs-12" id="imgUrl" name="imgUrl" required
+                                           th:field="*{imgUrl}" type="url">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="description">Product
+                                    Description <span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                            <textarea class="form-control col-md-7 col-xs-12" data-parsley-maxlength="100"
+                                      data-parsley-minlength="20"
+                                      data-parsley-minlength-message="Enter the Address with Zip Code and States "
+                                      data-parsley-trigger="keyup" data-parsley-validation-threshold="10"
+                                      id="description" name="description" required="required"
+                                      th:field="*{description}"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="specifications">Product
+                                    Specifications <span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                            <textarea class="form-control col-md-7 col-xs-12" data-parsley-maxlength="100"
+                                      data-parsley-minlength="20"
+                                      data-parsley-minlength-message="Enter the Address with Zip Code and States "
+                                      data-parsley-trigger="keyup" data-parsley-validation-threshold="10"
+                                      id="specifications" name="specifications" required="required"
+                                      th:field="*{specifications}"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="ln_solid"></div>
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                    <button class="btn btn-primary" type="button">Cancel</button>
+                                    <button class="btn btn-primary" type="reset">Reset</button>
+                                    <button class="btn btn-success" type="submit">Submit</button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+</body>
+<!-- /page content -->

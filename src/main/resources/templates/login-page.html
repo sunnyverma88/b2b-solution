@@ -21,19 +21,26 @@
     <link href="/css/b2b.css" rel="stylesheet">
 </head>
 
-<body>
+<body style="background-image:url(/images/bg2.png); /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;">
+
 <div class="container" align="center">
 
     <form  name="f" class="form-signin" th:action="@{/login}" method="post">
-        <img class="mb-4" src="/images/b2b_logo.jpeg" alt="" width="300" height="200">
+
         <div th:if="${param.error}" class="alert alert-error">
             Invalid username and password.
         </div>
-        <div th:if="${param.logout}" class="alert alert-success">
+        <div class="alert alert-success" th:if="${param.logout}">
             You have been logged out.
         </div>
 
-        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+        <h1 class="h3 mb-3 font-weight-normal"></h1>
         <label for="username" class="sr-only">Email address</label>
         <input type="text" id="username" name="username" class="form-control" placeholder="Email address" required autofocus>
         <label for="password" class="sr-only">Password</label>
@@ -42,16 +49,12 @@
                 type="hidden"
                 th:name="${_csrf.parameterName}"
                 th:value="${_csrf.token}" />
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" value="remember-me"> Remember me
-            </label>
-        </div>
+
         <button name="login-submit" id="login-submit" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
     </form>
     <form class="form-signin" th:action="@{/login-submit}" method="post">
 
-        <button class="btn btn-lg btn-primary btn-block" type="submit">New User</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Request a Demo</button>
     </form>
 </div>
 <!-- jQuery -->

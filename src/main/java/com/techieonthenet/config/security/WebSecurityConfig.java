@@ -2,8 +2,6 @@ package com.techieonthenet.config.security;
 
 
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,8 +19,6 @@ import java.security.SecureRandom;
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private static Logger LOGGER = LoggerFactory.getLogger(LoggingAccessDeniedHandler.class);
-
     @Autowired
     private LoggingAccessDeniedHandler accessDeniedHandler;
 
@@ -31,15 +27,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     private static final String SALT = "salt"; //Salt should be protected carefully
+    private static final String PRIV_VIEW_PRODUCT = "PRIV_VIEW_PRODUCT";
 
     @Bean
-    public static BCryptPasswordEncoder passwordEncoder() {
+    private static BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(12, new SecureRandom(SALT.getBytes()));
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
 
         http
                 .authorizeRequests()
@@ -50,7 +46,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/css/**",
                         "/images/**",
                         "/webjars/**").permitAll()
-                .antMatchers("/main-page").hasAuthority("PRIV_VIEW_PRODUCT")
+                .antMatchers("/main-page").hasAuthority(PRIV_VIEW_PRODUCT)
+                .antMatchers("/group/add").hasAuthority(PRIV_VIEW_PRODUCT)
+                .antMatchers("/product/add").hasAuthority(PRIV_VIEW_PRODUCT)
+                .antMatchers("/category/add").hasAuthority(PRIV_VIEW_PRODUCT)
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

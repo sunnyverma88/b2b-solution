@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html data-layout-decorate="~{fragments/layout}" lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Product Page </title>
+</head>
+<body>
+<!-- page content -->
+<div class="right_col" data-layout-fragment="content" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3> Shopping Cart </h3>
+            </div>
+
+            <div class="title_right">
+                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                    <div class="input-group">
+                        <input class="form-control" placeholder="Search for..." type="text">
+                        <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">Go!</button>
+                    </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2> Shopping Cart</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link "><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li><a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <section class="shopping-cart dark">
+                            <div class="container">
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="col-md-12 col-lg-8">
+                                            <form action="#" method="post" th:action="@{/cart/update}"
+                                                  th:object="${cartDtoForm}">
+                                                <div class="items"
+                                                     th:each="cartItem , itemStat: ${cartDtoForm.cartItems}">
+
+                                                    <div class="product">
+                                                        <div class="row">
+                                                            <div class="col-sm-2">
+
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <div class="info">
+                                                                    <div class="row">
+                                                                        <div class="col-md-5 product-name">
+                                                                            <div class="product-name">
+                                                                                <a href="#"
+                                                                                   th:text="${cartItem.getProduct().name}"></a>
+                                                                                <div class="product-info">
+                                                                                    <div>Brand : <span
+                                                                                            class="value"
+                                                                                            th:text="${cartItem.getProduct().brand}"></span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-4 quantity">
+                                                                            <input hidden
+                                                                                   th:field="*{cartItems[__${itemStat.index}__].id}"
+                                                                                   th:value="${cartItem.getId()}"/>
+                                                                            <label for="quantity">Quantity:</label>
+                                                                            <input class="form-control quantity-input"
+                                                                                   id="quantity"
+                                                                                   th:field="*{cartItems[__${itemStat.index}__].qty}"
+                                                                                   th:value="${cartItem.qty}"
+                                                                                   type="number">
+                                                                        </div>
+                                                                        <div class="col-md-3 price">
+                                                                            <p>&#x20b9;<span
+                                                                                    th:text="${cartItem.subTotal}"></span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <button class="btn btn-primary btn-block"
+                                                        th:if="${cart.cartTotal &gt; 0}" type="submit" }>
+                                                    Update Cart
+                                                </button>
+                                            </form>
+                                        </div>
+                                        <div class="col-md-12 col-lg-4">
+                                            <div class="summary" th:if="${cart.cartTotal &gt; 0}">
+                                                <h3>Summary</h3>
+                                                <div class="summary-item"><span class="text">Subtotal</span>
+                                                    <p class="price">&#x20b9;<span class="price"
+                                                                                   th:text="${cart.cartTotal}"></span>
+                                                    </p></div>
+                                                <div class="summary-item"><span class="text">GST</span>
+                                                    <p class="price">&#x20b9;<span class="price"
+                                                                                   th:text="${cart.gst}"></span></div>
+                                                <div class="summary-item"><span class="text">Shipping</span>
+                                                    <p class="price">&#x20b9;<span class="price">0</span></div>
+                                                <div class="summary-item"><span class="text">Total</span>
+                                                    <p class="price">&#x20b9;<span class="price"
+                                                                                   th:text="${cart.grandTotal}"></span>
+                                                </div>
+                                                <button class="btn btn-primary btn-lg btn-block"
+                                                        onclick="window.location.href='/order/details'" type="button">
+                                                    Checkout
+                                                </button>
+                                            </div>
+                                            <a href="/product/all">
+                                                <button class="btn btn-primary btn-lg btn-block" type="button">
+                                                    Continue Shopping
+                                                </button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- /page content -->
+
+</body>
+
+</html>

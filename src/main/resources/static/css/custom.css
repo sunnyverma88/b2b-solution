@@ -285,6 +285,7 @@
   padding: 0;
   position: absolute;
   display: -ms-flexbox;
+  overflow-y: auto;
   display: flex;
   z-index: 1; }
 
@@ -411,7 +412,8 @@ body .container.body .right_col {
 
 .container {
   width: 100%;
-  padding: 0; }
+  padding: 0;
+  }
 
 .navbar-nav > li > a, .navbar-brand, .navbar-nav > li > a {
   color: #fff !important; }

@@ -23,7 +23,6 @@ public class ErrorController {
         model.addAttribute("errorMessage", errorMessage);
         return "error";
     }
-
 }
 
 
