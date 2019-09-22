@@ -2,6 +2,7 @@ package com.techieonthenet.service;
 
 import com.techieonthenet.entity.Privilege;
 import com.techieonthenet.entity.Role;
+import com.techieonthenet.entity.ShoppingCart;
 import com.techieonthenet.entity.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +27,9 @@ public class InitDBService {
 
     @Autowired
     private PrivilegeService privilegeService;
+
+    @Autowired
+    private ShoppingCartService shoppingCartService;
 
     @PostConstruct
     public void createUser() {
@@ -69,6 +73,9 @@ public class InitDBService {
         LOGGER.info("User Role - {}", roleService.findByName("USER"));
         userRoles.add(roleService.findByName("USER"));
         userService.createUser(user1, userRoles);
+        ShoppingCart cart1 = new ShoppingCart();
+        cart1.setUser(user1);
+        shoppingCartService.save(cart1);
 
 
         userRoles.clear();
@@ -82,6 +89,10 @@ public class InitDBService {
         user2.setEmail("Admin@gmail.com");
         userRoles.add(roleService.findByName("ADMIN"));
         userService.createUser(user2, userRoles);
+        ShoppingCart cart2 = new ShoppingCart();
+        cart2.setUser(user2);
+        shoppingCartService.save(cart2);
+
 
         userRoles.clear();
 
@@ -94,6 +105,9 @@ public class InitDBService {
         user3.setPasswordResetRequired(false);
         userRoles.add(roleService.findByName("SUPER_ADMIN"));
         userService.createUser(user3, userRoles);
+        ShoppingCart cart3 = new ShoppingCart();
+        cart3.setUser(user3);
+        shoppingCartService.save(cart3);
 
         userRoles.clear();
 

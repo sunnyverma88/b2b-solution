@@ -32,7 +32,7 @@ public class ShoppingCart extends Auditable implements Serializable {
     @JsonIgnore
     private List<CartItem> cartItemList = new ArrayList<>();
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
