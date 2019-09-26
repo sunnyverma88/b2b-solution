@@ -1,10 +1,9 @@
 package com.techieonthenet.service;
 
-import java.util.Set;
-
 import com.techieonthenet.entity.Role;
 import com.techieonthenet.entity.User;
-import com.techieonthenet.entity.UserRole;
+
+import java.util.Set;
 
 
 public interface UserService {
@@ -12,6 +11,7 @@ public interface UserService {
 	public User createUser(User user, Set<Role> roles);
 
 	User findByUsername(String username);
+	public User findByUsernameAndEnabled(String username);
 	
 	User findByEmail (String email);
 	

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html data-layout-decorate="~{fragments/layout}" lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Order Confirmation</title>
+</head>
+
+<body>
+<div id="snackbar"  class="show" th:if="${message}" th:text="${message}">Some text some message..</div>
+<div class="right_col" data-layout-fragment="content" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>ORDER CONFIRMATION</h3>
+            </div>
+
+            <div class="title_right">
+                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                    <div class="input-group">
+                        <input class="form-control" placeholder="Search for..." type="text">
+                        <span class="input-group-btn">
+                      <button class="btn btn-default" type="button">Go!</button>
+                    </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Order Confirmation </h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+
+                        <div class="jumbotron text-center">
+                            <h1 class="display-3">Thank You!</h1>
+                            <h3 class="display-3">Order # 12334455</h3>
+                            <p class="lead">Order has been submitted for Approval process. <br><strong>Please save the purchase order added below and email @ support@endgategroup.com </strong> </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<!-- /page content -->

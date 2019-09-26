@@ -40,13 +40,11 @@ public class CartController {
     public RedirectView add(@PathVariable(name = "pid") Long productId, Principal principal, HttpSession session) {
 
         Product product = ps.findById(productId);
-        User user = us.findByUsername(principal.getName());
+        User user = us.findByUsernameAndEnabled(principal.getName());
         ShoppingCart cart = scs.findByUserId(user.getId());
         if (cart == null) {
             cart = new ShoppingCart();
             cart.setUser(user);
-            cart.setGst(new BigDecimal(0));
-            cart.setGrandTotal(new BigDecimal(0));
             scs.save(cart);
         }
         cis.addProductToCartItem(product, cart, 1);
@@ -56,18 +54,22 @@ public class CartController {
 
     @GetMapping(value = "/all")
     public String add(Principal principal, Model model, HttpSession session) {
-        User user = us.findByUsername(principal.getName());
+        User user = us.findByUsernameAndEnabled(principal.getName());
         ShoppingCart cart = scs.findByUserId(user.getId());
-        model.addAttribute("cart", cart);
+
         ShoppingCartDto dto = new ShoppingCartDto();
         if (cart != null) {
             logger.info("Item Cart List - {}", cart.getCartItemList());
             dto.setCartItems(cart.getCartItemList());
             logger.info("Item Cart List - {}", dto.getCartItems());
-            session.setAttribute(CART_SIZE, cart.getTotalItems());
+        } else {
+            cart = new ShoppingCart();
+            cart.setUser(user);
+            scs.save(cart);
         }
         model.addAttribute("cartDtoForm", dto);
-        session.setAttribute(CART_SIZE, 0);
+        session.setAttribute(CART_SIZE, cart.getTotalItems());
+        model.addAttribute("cart", cart);
         return "cart";
     }
 
@@ -86,7 +88,7 @@ public class CartController {
                 cis.save(updatedItem);
             }
         });
-        ShoppingCart cart = scs.updateShoppingCart(scs.updateShoppingCart(scs.findByUserId(us.findByUsername(principal.getName()).getId())));
+        ShoppingCart cart = scs.updateShoppingCart(scs.updateShoppingCart(scs.findByUserId(us.findByUsernameAndEnabled(principal.getName()).getId())));
         session.setAttribute(CART_SIZE, cart.getTotalItems());
         return new RedirectView("/cart/all");
     }

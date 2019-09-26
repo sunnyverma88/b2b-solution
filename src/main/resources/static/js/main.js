@@ -23,22 +23,21 @@ var quantity=0;
 
 });
 
-function myFunction() {
-  document.getElementById("myDropdown").classList.toggle("show");
-}
+$(document).ready(function(){
+$("input").prop('required',true);
+ $('#same-address').prop('required',false);
+    $('#same-address').change(function(){
+        if(this.checked){
+            $('#shippingAddress').fadeOut('slow');
+             $("input").prop('required',false);
+             $('#same-address').prop('required',true);}
 
-function filterFunction() {
-  var input, filter, ul, li, a, i;
-  input = document.getElementById("myInput");
-  filter = input.value.toUpperCase();
-  var div = document.getElementById("myDropdown");
-  a = div.getElementsByTagName("a");
-  for (i = 0; i < a.length; i++) {
-    var txtValue = a[i].textContent || a[i].innerText;
-    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-      a[i].style.display = "";
-    } else {
-      a[i].style.display = "none";
-    }
-  }
-}
+        else
+        {  $('#shippingAddress').fadeIn('slow');
+            $("input").prop('required',true);
+             $('#same-address').prop('required',false);}
+    });
+});
+
+
+

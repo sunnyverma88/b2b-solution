@@ -23,16 +23,16 @@ public class ShoppingCart extends Auditable implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "shopping_cart_generator")
     private Long id;
-    private BigDecimal gst;
-    private BigDecimal grandTotal;
-    private BigDecimal cartTotal;
-    private int totalItems;
+    private BigDecimal gst = new BigDecimal(0);
+    private BigDecimal grandTotal = new BigDecimal(0);;
+    private BigDecimal cartTotal = new BigDecimal(0);;
+    private int totalItems= 0;
 
     @OneToMany(mappedBy = "shoppingCart", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
     private List<CartItem> cartItemList = new ArrayList<>();
 
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 

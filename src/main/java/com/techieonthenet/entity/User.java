@@ -37,6 +37,7 @@ public class User extends Auditable implements UserDetails, Serializable {
     private String phone;
     private boolean enabled = true;
 
+
     private boolean passwordResetRequired = false;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -87,3 +88,4 @@ public class User extends Auditable implements UserDetails, Serializable {
     }
 
 }
+

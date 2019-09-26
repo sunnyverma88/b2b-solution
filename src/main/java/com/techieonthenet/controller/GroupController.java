@@ -4,8 +4,6 @@ package com.techieonthenet.controller;
 import com.techieonthenet.dto.GroupDto;
 import com.techieonthenet.entity.Address;
 import com.techieonthenet.entity.Group;
-import com.techieonthenet.entity.Role;
-import com.techieonthenet.entity.User;
 import com.techieonthenet.entity.common.AddressType;
 import com.techieonthenet.entity.common.GroupType;
 import com.techieonthenet.service.GroupService;
@@ -16,10 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 @RequestMapping("/group")
 @Controller
@@ -34,24 +31,26 @@ public class GroupController {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @GetMapping("/add")
-    public String addGroup(Model model) {
+    public String addGroup(Model model , @RequestParam(name = "message" , required = false) String message) {
         model.addAttribute("group", new GroupDto());
+        model.addAttribute("message", message);
         return "add-group";
     }
 
     @PostMapping("/add")
-    public String addGroup(@ModelAttribute GroupDto groupDto, Model model) {
+    public RedirectView addGroup( @ModelAttribute GroupDto groupDto, RedirectAttributes redirectAttributes) {
+        String message = "";
         try {
-
             Group group = convertGroupDtoToGroup(groupDto);
+            if(groupService.findByGstNo(group.getGstNo()) == null){
             groupService.save(group);
-            model.addAttribute("group", new GroupDto());
-            model.addAttribute("message", "Group has been successfully added");
+            message="Group has been successfully added";}
+            else { message="Group with provided GST No already exists";}
         } catch (Exception e) {
-            model.addAttribute("error", "Something went Wrong !! Please try again . Error Code  " + e.getLocalizedMessage());
-            model.addAttribute("group", groupDto);
+            message ="Something went Wrong !! Please try again . Error Code  " + e.getLocalizedMessage();
         }
-        return "add-group";
+        redirectAttributes.addAttribute("message"  , message);
+        return new RedirectView("/group/add");
     }
 
     private Group convertGroupDtoToGroup(GroupDto groupDto) {
@@ -73,18 +72,6 @@ public class GroupController {
         group.setGstNo(groupDto.getGstNo());
         group.setProfitPercentage(groupDto.getProfitPercentage());
         group.setType(GroupType.valueOf(groupDto.getType()));
-        User adminUser = new User();
-        adminUser.setEmail(groupDto.getAdminEmail());
-        adminUser.setEnabled(true);
-        adminUser.setFirstName(groupDto.getAdminFirstName());
-        adminUser.setLastName(groupDto.getAdminLastName());
-        adminUser.setUsername(groupDto.getAdminEmail());
-        adminUser.setPasswordResetRequired(true);
-        adminUser.setPassword(bCryptPasswordEncoder.encode("randomPasword")); //TODO random implementation
-        adminUser.setGroup(group);
-        Role adminRole = roleService.findByName("GROUP_ADMIN");
-        adminUser.getRoles().add(adminRole);
-        group.getUsers().add(adminUser);
         return group;
     }
 

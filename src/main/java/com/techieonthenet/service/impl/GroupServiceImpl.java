@@ -26,4 +26,9 @@ public class GroupServiceImpl implements GroupService {
     public Group findById(Long groupId) {
         return groupRepository.findById(groupId).get();
     }
+
+    @Override
+    public Group findByGstNo(String gstNo) {
+        return groupRepository.findByGstNo(gstNo);
+    }
 }

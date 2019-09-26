@@ -2,18 +2,17 @@ package com.techieonthenet.service.impl;
 
 import com.techieonthenet.entity.Role;
 import com.techieonthenet.entity.User;
+import com.techieonthenet.exception.UserAlreadyExist;
 import com.techieonthenet.repository.RoleRepository;
 import com.techieonthenet.repository.UserRepository;
-import com.techieonthenet.entity.UserRole;
 import com.techieonthenet.service.UserService;
-
-import java.util.Set;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Set;
 
 
 @Service
@@ -32,21 +31,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createUser(User user, Set<Role> roles) {
-        User localUser = userRepository.findByUsername(user.getUsername());
+        user.setUsername(user.getEmail().toLowerCase());
 
+        User localUser = findByUsernameAndEnabled(user.getUsername().toLowerCase());
         if (localUser != null) {
             LOGGER.info("User with username {} already exist. Nothing will be done. ", user.getUsername());
+            throw new UserAlreadyExist("User with username - " + user.getUsername() +"already exist. Nothing will be done");
         } else {
-
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-            for(Role role : roles)
-            {
+            for (Role role : roles) {
                 user.getRoles().add(role);
             }
-
             localUser = userRepository.save(user);
         }
-
         return localUser;
     }
 
@@ -67,8 +64,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findByUsernameAndEnabled(String username) { return userRepository.findByUsernameAndEnabled(username , true); }
+
+    @Override
     public User findById(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       return userRepository.findById(id).get();
     }
 
 

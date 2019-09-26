@@ -10,4 +10,5 @@ public interface GroupService {
 
     Group findById(Long groupId);
 
+    Group findByGstNo(String gstNo);
 }

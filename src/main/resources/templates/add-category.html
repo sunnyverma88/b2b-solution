@@ -5,6 +5,7 @@
 </head>
 
 <body>
+<div id="snackbar"  class="show" th:if="${message}" th:text="${message}">Some text some message..</div>
 <div class="right_col" data-layout-fragment="content" role="main">
     <div class="">
         <div class="page-title">
@@ -37,10 +38,8 @@
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
-                        <div class="alert alert-success" th:if="${message}" th:text="${message}">
 
-                        </div>
-                        <div class="alert alert-success" th:if="${error}" th:text="${error}">
+                        <div class="alert alert-success" th:if="${message}" th:text="${message}">
 
                         </div>
                         <br/>

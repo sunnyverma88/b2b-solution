@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface GroupRepository extends PagingAndSortingRepository<Group, Long> {
 
 
+    Group findByGstNo(String gstNo);
 }

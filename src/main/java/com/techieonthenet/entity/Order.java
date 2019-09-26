@@ -22,8 +22,8 @@ public class Order implements Serializable {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<CartItem> cartItemList;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private ShippingAddress shippingAddress;
+    @OneToOne(cascade = CascadeType.PERSIST)
+    private Address address;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Payment payment;

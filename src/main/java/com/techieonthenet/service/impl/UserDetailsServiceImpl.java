@@ -3,7 +3,7 @@ package com.techieonthenet.service.impl;
 import com.techieonthenet.entity.Privilege;
 import com.techieonthenet.entity.Role;
 import com.techieonthenet.entity.User;
-import com.techieonthenet.repository.UserRepository;
+import com.techieonthenet.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ public class UserDetailsServiceImpl implements UserDetailsService{
     private static final Logger LOG = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     @Autowired
     private HttpServletRequest request;
@@ -36,10 +36,11 @@ public class UserDetailsServiceImpl implements UserDetailsService{
         final String ip = getClientIP();
 
         try {
-            final User user = userRepository.findByUsername(username);
+            final User user = userService.findByUsernameAndEnabled(username.toLowerCase());
             if (user == null) {
                 throw new UsernameNotFoundException("No user found with username: " + username);
             }
+
             return org.springframework.security.core.userdetails.User
                     .withUsername(username)
                     .password(user.getPassword())

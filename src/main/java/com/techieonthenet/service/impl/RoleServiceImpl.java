@@ -1,6 +1,5 @@
 package com.techieonthenet.service.impl;
 
-import com.techieonthenet.controller.ErrorController;
 import com.techieonthenet.entity.Privilege;
 import com.techieonthenet.entity.Role;
 import com.techieonthenet.repository.RoleRepository;
@@ -31,6 +30,11 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public void save(Role role) {
          roleRepo.save(role);
+    }
+
+    @Override
+    public Iterable<Role> findAll() {
+        return roleRepo.findAll();
     }
 
     @Override

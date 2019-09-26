@@ -29,4 +29,5 @@ public class Address extends Auditable implements Serializable {
     private int zipcode;
     private String city;
     private String state;
+
 }

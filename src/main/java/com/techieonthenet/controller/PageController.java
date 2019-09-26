@@ -33,9 +33,9 @@ public class PageController {
     public String pricingTables(Principal principal, Model model, HttpSession session) {
         model.addAttribute("user", principal.getName());
         model.addAttribute("categories", cs.findAll());
-        if ((scs.findByUserId(us.findByUsername(principal.getName()).getId()) != null))
+        if ((scs.findByUserId(us.findByUsernameAndEnabled(principal.getName()).getId()) != null))
             session.setAttribute("cartSize", scs.findByUserId(us.findByUsername(principal.getName()).getId()).getTotalItems());
-        session.setAttribute("user", principal.getName());
+        session.setAttribute("user", us.findByUsername(principal.getName()).getFirstName());
         return "main-page";
     }
 

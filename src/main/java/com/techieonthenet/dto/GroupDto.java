@@ -14,7 +14,10 @@ public class GroupDto {
     private String website;
 
     private String type;
+
+   // @Pattern(regexp = "\\d{2}[A-Z]{5}\\d{4}[A-Z]{1}[A-Z\\d]{1}[Z]{1}[A-Z\\d]{1}" , message = "GST is invalid")
     private String gstNo;
+
     private BigDecimal profitPercentage;
     private BigDecimal approvalThreshold;
 
@@ -25,9 +28,5 @@ public class GroupDto {
     private String city;
     private String state;
 
-    private String adminFirstName;
-    private String adminLastName;
-
-    private String adminEmail;
 
 }
