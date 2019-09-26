@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
@@ -42,8 +41,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     @Override
     public ShoppingCart findById(Long id) {
-        Optional<ShoppingCart> shoppingCart = shoppingCartRepository.findById(id);
-        return shoppingCart.orElse(null);
+        return shoppingCartRepository.findById(id).get();
     }
 
     @Override

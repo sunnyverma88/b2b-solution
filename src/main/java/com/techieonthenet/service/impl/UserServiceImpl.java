@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
     public User createUser(User user, Set<Role> roles) {
         user.setUsername(user.getEmail().toLowerCase());
 
-        User localUser = findByUsernameAndEnabled(user.getUsername().toLowerCase());
+        User localUser = findByUsernameAndEnabled(user.getUsername());
         if (localUser != null) {
             LOGGER.info("User with username {} already exist. Nothing will be done. ", user.getUsername());
             throw new UserAlreadyExist("User with username - " + user.getUsername() +"already exist. Nothing will be done");
@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findByUsername(String username) {
-        return userRepository.findByUsername(username);
+        return userRepository.findByUsername(username.toLowerCase());
     }
 
     @Override
@@ -64,7 +64,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findByUsernameAndEnabled(String username) { return userRepository.findByUsernameAndEnabled(username , true); }
+    public User findByUsernameAndEnabled(String username) { return userRepository.findByUsernameAndEnabled(username.toLowerCase() , true); }
 
     @Override
     public User findById(Long id) {
