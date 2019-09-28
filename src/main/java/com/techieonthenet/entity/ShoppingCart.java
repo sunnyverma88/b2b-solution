@@ -1,6 +1,5 @@
 package com.techieonthenet.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.techieonthenet.entity.common.Auditable;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,7 +28,6 @@ public class ShoppingCart extends Auditable implements Serializable {
     private int totalItems= 0;
 
     @OneToMany(mappedBy = "shoppingCart", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnore
     private List<CartItem> cartItemList = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.DETACH)

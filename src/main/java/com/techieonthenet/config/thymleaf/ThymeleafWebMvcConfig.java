@@ -2,6 +2,8 @@ package com.techieonthenet.config.thymleaf;
 
 
 import nz.net.ultraq.thymeleaf.LayoutDialect;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.ViewResolver;
@@ -18,6 +20,9 @@ import org.thymeleaf.templateresolver.ITemplateResolver;
 
 @Configuration
 public class ThymeleafWebMvcConfig implements WebMvcConfigurer {
+
+    @Autowired
+    ApplicationContext context;
 
     @Bean
     public ViewResolver viewResolver() {
@@ -36,6 +41,7 @@ public class ThymeleafWebMvcConfig implements WebMvcConfigurer {
 
     private ITemplateResolver templateResolver() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
+        templateResolver.setApplicationContext(context);
         templateResolver.setPrefix("classpath:/templates/");
         templateResolver.setSuffix(".html");
         templateResolver.setTemplateMode(TemplateMode.HTML);

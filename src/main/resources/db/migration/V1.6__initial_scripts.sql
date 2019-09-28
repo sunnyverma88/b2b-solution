@@ -1,0 +1,5 @@
+
+ALTER TABLE orders ADD COLUMN gst NUMERIC;
+ALTER TABLE orders ADD COLUMN sub_total NUMERIC;
+
+

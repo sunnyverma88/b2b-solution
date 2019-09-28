@@ -40,7 +40,7 @@ public class CartController {
     public RedirectView add(@PathVariable(name = "pid") Long productId, Principal principal, HttpSession session) {
 
         Product product = ps.findById(productId);
-        User user = us.findByUsernameAndEnabled(principal.getName());
+        User user = (User) session.getAttribute("user");
         ShoppingCart cart = scs.findByUserId(user.getId());
         if (cart == null) {
             cart = new ShoppingCart();
@@ -48,13 +48,13 @@ public class CartController {
             scs.save(cart);
         }
         cis.addProductToCartItem(product, cart, 1);
-        session.setAttribute(CART_SIZE, scs.findByUserId(us.findByUsername(principal.getName()).getId()).getTotalItems());
+        session.setAttribute(CART_SIZE, scs.findByUserId(user.getId()).getTotalItems());
         return new RedirectView("/cart/all");
     }
 
     @GetMapping(value = "/all")
     public String add(Principal principal, Model model, HttpSession session) {
-        User user = us.findByUsernameAndEnabled(principal.getName());
+        User user = (User) session.getAttribute("user");
         ShoppingCart cart = scs.findByUserId(user.getId());
 
         ShoppingCartDto dto = new ShoppingCartDto();
@@ -69,6 +69,7 @@ public class CartController {
         }
         model.addAttribute("cartDtoForm", dto);
         session.setAttribute(CART_SIZE, cart.getTotalItems());
+        session.setAttribute("user" , user);
         model.addAttribute("cart", cart);
         return "cart";
     }

@@ -35,7 +35,7 @@ public class PageController {
         model.addAttribute("categories", cs.findAll());
         if ((scs.findByUserId(us.findByUsernameAndEnabled(principal.getName()).getId()) != null))
             session.setAttribute("cartSize", scs.findByUserId(us.findByUsername(principal.getName()).getId()).getTotalItems());
-        session.setAttribute("user", us.findByUsernameAndEnabled(principal.getName()).getFirstName());
+        session.setAttribute("user", us.findByUsernameAndEnabled(principal.getName()));
         return "main-page";
     }
 

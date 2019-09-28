@@ -1,0 +1,32 @@
+<div th:fragment="letterhead">
+    <table>
+        <tr class="address-block">
+            <td class="bottom">
+                <img src="https://www.sparksuite.com/images/logo.png" style="width:100%; max-width:300px;">
+            </td>
+            <td class="bottom right">
+                Purchase Order #: 123<br>
+                Created: January 1, 2015<br>
+                Due: February 1, 2015
+            </td>
+        </tr>
+    </table>
+    <table>
+        <tr class="address-block">
+            <td class="bottom">
+                <strong>[[${data.getFirstname()}]] [[${data.getLastname()}]]</strong><br>
+                [[${data.getStreet()}]]<br>
+                [[${data.getZipCode()}]] [[${data.getCity()}]]<br>
+            </td>
+            <td class="bottom right">
+                <strong>Aprise.In -  An EndGate Global Solution</strong><br>
+                Thymeleaf Street 42<br>
+                12345 Thymecity<br>
+                <br>
+                <b>Phone:</b> 0100 1234 1111<br>
+                <b>E-Mail:</b> example@test.com<br>
+            </td>
+        </tr>
+    </table>
+    <hr>
+</div>

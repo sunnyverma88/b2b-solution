@@ -80,7 +80,7 @@
                                                                                    id="quantity"
                                                                                    th:field="*{cartItems[__${itemStat.index}__].qty}"
                                                                                    th:value="${cartItem.qty}"
-                                                                                   type="number">
+                                                                                   type="number" min="0">
                                                                         </div>
                                                                         <div class="col-md-3 price">
                                                                             <p>&#x20b9;<span

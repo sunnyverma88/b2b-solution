@@ -48,6 +48,9 @@ public class User extends Auditable implements UserDetails, Serializable {
     @JoinColumn(name = "group_id")
     private Group group;
 
+    @OneToMany(mappedBy = "user" , cascade = CascadeType.ALL)
+    private List<Order> orders = new ArrayList<>();
+
     private final List<String> getPrivileges() {
         final List<String> privileges = new ArrayList<>();
         final List<Privilege> collection = new ArrayList<Privilege>();

@@ -72,4 +72,22 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         return shoppingCart;
     }
 
+    public ShoppingCart clearShoppingCart(ShoppingCart shoppingCart) {
+        List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
+
+        cartItemList.stream().map((cartItem) -> {
+            cartItem.setShoppingCart(null);
+            return cartItem;
+        }).forEachOrdered((cartItem) -> {
+            cartItemService.save(cartItem);
+        });
+
+        shoppingCart.setGrandTotal(new BigDecimal(0));
+        shoppingCart.setCartTotal(new BigDecimal(0));
+        shoppingCart.setTotalItems(0);
+        shoppingCart.setGst(new BigDecimal(0));
+
+        return shoppingCartRepository.save(shoppingCart);
+    }
+
 }

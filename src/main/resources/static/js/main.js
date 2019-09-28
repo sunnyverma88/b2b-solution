@@ -39,5 +39,25 @@ $("input").prop('required',true);
     });
 });
 
-
+$(document).ready(function(){
+        $(".show-toast").click(function(){
+            $("#myToast").toast('show');
+        });
+    });
+$(document).ready(function(){
+ $('#printPO').click(function(){
+            Popup();
+            function Popup()
+            {    var topNav = document.getElementById("top_nav");
+                 var poTitle=document.getElementById("po_title");
+                         //Set the print button visibility to 'hidden'
+                         topNav.style.visibility = 'collapse';
+                         poTitle.style.visibility='collapse';
+                  window.print();
+                  topNav.style.visibility = 'visible';
+                  poTitle.style.visibility='visible';
+                  return true;
+            }
+        });
+});
 

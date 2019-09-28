@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<div class="top_nav" data-th-fragment="top-navigation">
+<div class="top_nav" data-th-fragment="top-navigation" id="top_nav">
     <div class="nav_menu">
         <nav>
             <div class="nav toggle">
@@ -11,7 +11,7 @@
                 <li class="">
                     <a aria-expanded="false" class="user-profile dropdown-toggle" data-toggle="dropdown"
                        href="javascript:;">
-                        <img alt="" src="/images/img.jpg" th:text="${session.user}">
+                        <img alt="" src="/images/img.jpg" th:text="${session.user.firstName}">
                         <span class=" fa fa-angle-down"></span>
                     </a>
                     <ul class="dropdown-menu dropdown-usermenu pull-right">

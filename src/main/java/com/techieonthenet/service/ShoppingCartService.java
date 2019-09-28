@@ -4,14 +4,16 @@ import com.techieonthenet.entity.ShoppingCart;
 
 public interface ShoppingCartService {
 
-    Iterable<ShoppingCart> findAll();
+    public Iterable<ShoppingCart> findAll();
 
-    ShoppingCart save(ShoppingCart cart);
+    public ShoppingCart save(ShoppingCart cart);
 
-    ShoppingCart findById(Long id);
+    public ShoppingCart findById(Long id);
 
-    ShoppingCart findByUserId(Long userId);
+    public ShoppingCart findByUserId(Long userId);
 
-    ShoppingCart updateShoppingCart(ShoppingCart shoppingCart);
+    public ShoppingCart updateShoppingCart(ShoppingCart shoppingCart);
+
+    public ShoppingCart clearShoppingCart(ShoppingCart shoppingCart);
 
 }

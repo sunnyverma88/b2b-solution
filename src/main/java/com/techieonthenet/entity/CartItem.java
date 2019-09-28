@@ -1,6 +1,5 @@
 package com.techieonthenet.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.techieonthenet.config.LocalDateConverter;
 import com.techieonthenet.entity.common.Auditable;
 import lombok.Getter;
@@ -34,7 +33,10 @@ public class CartItem extends Auditable implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "shopping_cart_id")
-    @JsonIgnore
     private ShoppingCart shoppingCart;
+
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
 
 }
