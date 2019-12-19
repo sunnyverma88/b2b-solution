@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+
+    <!-- Bootstrap -->
+    <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="/css/custom.min.css" rel="stylesheet">
+    <link href="/css/cart.css" rel="stylesheet">
+</head>
+
+<body style="background-color: #f7fbff;">
+<div class="right_col" id="po" role="main" s>
+    <div>
+        <div class="row" id="purchaseOrder">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Order Details</h2>
+                        <h2 class="pull-right">Apprize - eProcurement Solution</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="container">
+                            <div class="card">
+                                <div class="card-header">
+                                    Order # : <span th:text="${order.id}"/><br>
+                                    Date -
+                                    <strong th:text="${order.orderDate}"></strong>
+                                    <span class="pull-right"> <strong>Status : </strong><span
+                                            th:text="${order.orderStatus.toString()}"/></span>
+                                </div>
+                                <div class="card-body">
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <address>
+                                                <strong><u>Buyer</u></strong><br>
+                                                <span th:text="${order.user.group.name}"></span><br>
+                                                GST - <span th:text="${order.user.group.gstNo}"></span><br>
+                                            </address>
+                                        </div>
+                                    </div>
+
+                                    <div class="table-responsive-sm right">
+                                        <br><br>
+                                        <table class="table table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th class="center">#</th>
+                                                <th class="center">Item</th>
+                                                <th></th>
+                                                <th class="right">Unit Cost</th>
+                                                <th class="center">Qty</th>
+                                                <th style="text-align: right;">Total</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr th:each="cartItem , itemStat: ${order.cartItemList}">
+                                                <td class="center" th:text="${itemStat.count}">1</td>
+                                                <td class="center" th:text="${cartItem.product.name}"></td>
+                                                <td></td>
+                                                <td class="right"><span>&#x20b9;</span><span
+                                                        th:text="${cartItem.product.mrpPrice}"/></td>
+                                                <td class="center" th:text="${cartItem.qty}">1</td>
+                                                <td style="text-align: right;"><span>&#x20b9;</span><span
+                                                        th:text="${cartItem.subTotal}"/></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="row">
+                                        <hr>
+
+                                        <div class="col-lg-4 col-sm-5 ml-auto pull-right">
+                                            <table class="table table-clear">
+                                                <tbody>
+                                                <tr>
+                                                    <td class="left">
+                                                        <strong>Subtotal</strong>
+                                                    </td>
+                                                    <td class="pull-right"><span>&#x20b9;</span><span
+                                                            th:text="${order.subTotal}"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="left">
+                                                        <strong>GST</strong>
+                                                    </td>
+                                                    <td class="pull-right"><span>&#x20b9;</span><span
+                                                            th:text="${order.gst}"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="left">
+                                                        <strong>Total</strong>
+                                                    </td>
+                                                    <td class="pull-right">
+                                                        <span>&#x20b9;</span><strong
+                                                            th:text="${order.orderTotal}"></strong>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="col-lg-4 col-sm-5">
+                                            <b><span>Shipping Address :</span></b>
+                                            <br><span th:text="${order.address.addressline1}"></span>
+                                            <br><span th:text="${order.address.addressline2}"></span>
+                                            <br><span th:text="${order.address.city}"></span>
+                                            <br><span th:text="${order.address.state}"></span>
+                                            -- <span th:text="${order.address.zipcode}"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="tasklist">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel" style="background-color: #f7fbff;">
+                    <div class="x_title">
+                        <h2>Task Details</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="table-responsive-sm right">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th class="center">Task ID</th>
+                                    <th class="center">Task Name</th>
+                                    <th class="center">Task Status</th>
+                                    <th class="center">Assignee</th>
+                                    <th class="center">Remarks</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class='clickable-row' th:each="taskItem , itemStat: ${order.taskItems}">
+                                    <td class="center" th:text="${taskItem.id}"></td>
+                                    <td class="center" th:text="${taskItem.taskName}"></td>
+                                    <td class="center" th:text="${taskItem.taskStatus}"></td>
+                                    <td class="center">
+                                        <li th:each="user : ${taskItem.users}">
+                                            <span th:text="${user.firstName}"></span>
+                                        </li>
+                                    </td>
+                                    <td class="center" th:text="${taskItem.remarks}"></td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            !!We apprize our association!!
+            <br><a href="https://apprize.in" target="_blank">Apprize Team</a>
+            <br><a href="https://endgateGlobal.com" target="_blank">An EndGate Global Innovation</a>
+            <br><span>support@apprize.in / +91 9513398353</span>
+        </div>
+    </div>
+</div>
+</body>
+<!-- /page content -->

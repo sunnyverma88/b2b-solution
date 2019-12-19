@@ -1,10 +1,14 @@
 package com.techieonthenet.dto;
 
+import com.techieonthenet.entity.common.ApproverType;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
 
+/**
+ * The type User dto.
+ */
 @Getter
 @Setter
 public class UserDto implements Serializable {
@@ -18,6 +22,7 @@ public class UserDto implements Serializable {
     private String email;
     private String phone;
     private boolean enabled = true;
+    private ApproverType approverType;
 
     private boolean passwordResetRequired = false;
     private Long groupId;

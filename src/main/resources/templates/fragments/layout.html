@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
     <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
 
-    <title data-layout-title-pattern="$LAYOUT_TITLE | $CONTENT_TITLE">EndGate B2B!</title>
+    <title data-layout-title-pattern="$LAYOUT_TITLE | $CONTENT_TITLE">Apprize - eProcurement Solution!</title>
 
     <!-- Bootstrap -->
     <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/images/b2b_logo.jpeg" rel="icon">
     <!-- Font Awesome -->
     <link href="/webjars/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
@@ -27,7 +28,7 @@
         <div class="col-md-3 left_col">
             <div class="left_col scroll-view">
                 <div class="navbar nav_title" style="border: 0;">
-                    <a class="site_title" href="/main-page"><i class="fa fa-paw"></i> <span>EndGate B2B!</span></a>
+                    <a class="site_title" href="/dashboard"><i class="fa fa-accusoft"></i> <span>APPRIZE</span></a>
                 </div>
 
                 <div class="clearfix"></div>
@@ -73,10 +74,13 @@
 <script src="/webjars/nprogress/nprogress.js"></script>
 
 <!-- Custom Theme Scripts -->
-<script src="/js/custom.min.js"></script>
+<script src="/js/custom.js"></script>
 <script src="/js/main.js"></script>
-<script src="/js/jquery-print.min.js"></script>
+
+<script src="/js/highcharts.js"></script>
+<script src="/js/highcharts-3d.js"></script>
 
 
+<th:block layout:fragment="script"></th:block>
 </body>
 </html>

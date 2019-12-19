@@ -9,6 +9,9 @@ import javax.persistence.OneToOne;
 import java.io.Serializable;
 
 
+/**
+ * The type Payment.
+ */
 public class Payment implements Serializable {
     private static final long serialVersionUID = 79151235145L;
 

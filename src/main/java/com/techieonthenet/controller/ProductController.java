@@ -8,6 +8,7 @@ import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,9 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Product controller.
+ */
 @Controller
 @RequestMapping("/product")
 public class ProductController {
@@ -38,6 +42,14 @@ public class ProductController {
     @Autowired
     private ShoppingCartService scs;
 
+    /**
+     * Add product string.
+     *
+     * @param model     the model
+     * @param principal the principal
+     * @param session   the session
+     * @return the string
+     */
     @GetMapping("/add")
     public String addProduct(Model model, Principal principal, HttpSession session) {
 
@@ -47,6 +59,13 @@ public class ProductController {
         return "add-product";
     }
 
+    /**
+     * Add submitted product string.
+     *
+     * @param productDto the product dto
+     * @param model      the model
+     * @return the string
+     */
     @PostMapping("/add")
     public String addSubmittedProduct(@ModelAttribute ProductDto productDto, Model model) {
         logger.info("Adding Product  - Name - {}", productDto.getName());
@@ -64,6 +83,13 @@ public class ProductController {
         return "add-product";
     }
 
+    /**
+     * Find all products string.
+     *
+     * @param model the model
+     * @return the string
+     */
+    @Cacheable("products")
     @GetMapping("/all")
     public String findAllProducts(Model model) {
 

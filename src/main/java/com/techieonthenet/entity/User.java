@@ -1,5 +1,6 @@
 package com.techieonthenet.entity;
 
+import com.techieonthenet.entity.common.ApproverType;
 import com.techieonthenet.entity.common.Auditable;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,6 +15,9 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 
+/**
+ * The type User.
+ */
 @Entity
 @Table(name="APP_USERS")
 @Getter
@@ -37,6 +41,9 @@ public class User extends Auditable implements UserDetails, Serializable {
     private String phone;
     private boolean enabled = true;
 
+    @Enumerated(EnumType.STRING)
+    private ApproverType approverType;
+
 
     private boolean passwordResetRequired = false;
 
@@ -50,6 +57,9 @@ public class User extends Auditable implements UserDetails, Serializable {
 
     @OneToMany(mappedBy = "user" , cascade = CascadeType.ALL)
     private List<Order> orders = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "users")
+    private Collection<TaskItem> taskItems;
 
     private final List<String> getPrivileges() {
         final List<String> privileges = new ArrayList<>();

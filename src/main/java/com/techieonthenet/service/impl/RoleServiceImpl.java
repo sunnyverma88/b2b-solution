@@ -11,12 +11,17 @@ import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
+/**
+ * The type Role service.
+ */
 @Service
 public class RoleServiceImpl implements RoleService {
 
+    /**
+     * The Role repo.
+     */
     @Autowired
     RoleRepository roleRepo;
-
 
 
     private static Logger LOGGER = LoggerFactory.getLogger(RoleServiceImpl.class);
@@ -29,7 +34,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public void save(Role role) {
-         roleRepo.save(role);
+        roleRepo.save(role);
     }
 
     @Override
@@ -38,8 +43,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public Role createRole(Role role , Set<Privilege> privileges)
-    {
+    public Role createRole(Role role , Set<Privilege> privileges) {
         Role localRole = roleRepo.findByName(role.getName());
         LOGGER.info("Creating Role");
         if (localRole != null) {

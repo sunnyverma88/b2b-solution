@@ -21,6 +21,9 @@ import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
 import java.security.Principal;
 
+/**
+ * The type Cart controller.
+ */
 @Controller
 @RequestMapping("/cart")
 public class CartController {
@@ -36,6 +39,14 @@ public class CartController {
     @Autowired
     private ShoppingCartService scs;
 
+    /**
+     * Add redirect view.
+     *
+     * @param productId the product id
+     * @param principal the principal
+     * @param session   the session
+     * @return the redirect view
+     */
     @GetMapping(value = "/add/{pid}")
     public RedirectView add(@PathVariable(name = "pid") Long productId, Principal principal, HttpSession session) {
 
@@ -52,6 +63,14 @@ public class CartController {
         return new RedirectView("/cart/all");
     }
 
+    /**
+     * Add string.
+     *
+     * @param principal the principal
+     * @param model     the model
+     * @param session   the session
+     * @return the string
+     */
     @GetMapping(value = "/all")
     public String add(Principal principal, Model model, HttpSession session) {
         User user = (User) session.getAttribute("user");
@@ -74,6 +93,14 @@ public class CartController {
         return "cart";
     }
 
+    /**
+     * Update cart redirect view.
+     *
+     * @param cartDtoForm the cart dto form
+     * @param principal   the principal
+     * @param session     the session
+     * @return the redirect view
+     */
     @PostMapping("/update")
     public RedirectView updateCart(@ModelAttribute ShoppingCartDto cartDtoForm, Principal principal, HttpSession session) {
         logger.info("Shopping Cart item size - {}", cartDtoForm.getCartItems().size());

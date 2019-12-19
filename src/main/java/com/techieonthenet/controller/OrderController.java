@@ -2,8 +2,7 @@ package com.techieonthenet.controller;
 
 import com.techieonthenet.dto.ShippingAddressDto;
 import com.techieonthenet.entity.*;
-import com.techieonthenet.entity.common.AddressType;
-import com.techieonthenet.entity.common.OrderStatus;
+import com.techieonthenet.entity.common.TaskStatus;
 import com.techieonthenet.service.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,11 +13,17 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.security.Principal;
-import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+/**
+ * The type Order controller.
+ */
 @Controller
 @RequestMapping("/order")
 public class OrderController {
@@ -41,8 +46,22 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
+    @Autowired
+    private TaskService taskService;
+
+    @Autowired
+    private EmailService emailService;
+
+    /**
+     * Gets order details.
+     *
+     * @param model     the model
+     * @param principal the principal
+     * @param message   the message
+     * @return the order details
+     */
     @GetMapping("/details")
-    public String getOrderDetails(Model model, Principal principal) {
+    public String getOrderDetails(Model model, Principal principal, @RequestParam(name = "message", required = false) String message) {
         User user = userService.findByUsernameAndEnabled(principal.getName());
         model.addAttribute("cart", shoppingCartService.findByUserId(user.getId()));
         Address billingAddress = groupService.findById(user.getGroup().getId()).getAddress();
@@ -55,21 +74,52 @@ public class OrderController {
         dto.setState(billingAddress.getState());
         dto.setZipcode(billingAddress.getZipcode());
         model.addAttribute("shippingAddress", dto);
+        if (message != null) {
+            model.addAttribute("message", message);
+        }
         return "order";
     }
 
+    /**
+     * Save order redirect view.
+     *
+     * @param dto                the dto
+     * @param redirectAttributes the redirect attributes
+     * @param session            the session
+     * @return the redirect view
+     */
     @PostMapping("/save")
     public RedirectView saveOrder(@ModelAttribute ShippingAddressDto dto, RedirectAttributes redirectAttributes, HttpSession session) {
-        User user = (User) session.getAttribute("user");
-        ShoppingCart cart = shoppingCartService.findByUserId(user.getId());
-        List<CartItem> cartItemList = cartItemService.findByShoppingCart(cart);
-        Order order = createOrder(cartItemList, dto, user, cart);
-        cart=shoppingCartService.clearShoppingCart(cart);
-        session.setAttribute("cartSize" , cart.getTotalItems());
-        String url = "/order/" + order.getId() + "/po";
+        String url = "";
+        try {
+            User user = (User) session.getAttribute("user");
+
+            ShoppingCart cart = shoppingCartService.findByUserId(user.getId());
+            List<CartItem> cartItemList = cartItemService.findByShoppingCart(cart);
+            Order order = orderService.createOrder(cartItemList, dto, user, cart);
+            cart = shoppingCartService.clearShoppingCart(cart);
+            taskService.createApprovalTasks(user.getGroup(), order);
+            session.setAttribute("cartSize", 0);
+            session.setAttribute("tasks", taskService.findByUserAndTaskStatus(user, TaskStatus.PENDING_APPROVAL));
+            sendOrderConfirmationEmail(order);
+            url = "/order/" + order.getId() + "/po";
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error("Error Occurred : {}", e.getMessage());
+            redirectAttributes.addFlashAttribute("message", e.getMessage());
+            url = "/order/details";
+        }
         return new RedirectView(url);
     }
 
+    /**
+     * Gets order confirmation.
+     *
+     * @param model     the model
+     * @param principal the principal
+     * @param orderId   the order id
+     * @return the order confirmation
+     */
     @GetMapping("/{orderId}/po")
     public String getOrderConfirmation(Model model, Principal principal, @PathVariable Long orderId) {
         Order order = orderService.findById(orderId);
@@ -77,27 +127,54 @@ public class OrderController {
         return "order-po";
     }
 
-    private Order createOrder(List<CartItem> cartItemList, ShippingAddressDto dto, User user, ShoppingCart cart) {
-        Order order = new Order();
-        for (CartItem cartItem : cartItemList) {
-            cartItem.setOrder(order);
-        }
-        order.setCartItemList(cartItemList);
-        Address address = new Address();
-        address.setType(AddressType.SHIPPING_ADDRESS);
-        address.setState(dto.getState());
-        address.setZipcode(dto.getZipcode());
-        address.setAddressline1(dto.getAddressline1());
-        address.setAddressline2(dto.getAddressline2());
-        address.setCity(dto.getCity());
+    /**
+     * Gets order details.
+     *
+     * @param model     the model
+     * @param principal the principal
+     * @param orderId   the order id
+     * @return the order details
+     */
+    @GetMapping("/{orderId}/details")
+    public String getOrderDetails(Model model, Principal principal, @PathVariable Long orderId) {
+        Order order = orderService.findById(orderId);
+        model.addAttribute("order", order);
+        return "order-details";
+    }
 
-        order.setAddress(address);
-        order.setOrderStatus(OrderStatus.PENDING_APPROVAL);
-        order.setUser(user);
-        order.setOrderDate(LocalDate.now());
-        order.setGst(cart.getGst());
-        order.setSubTotal(cart.getCartTotal());
-        order.setOrderTotal(cart.getGrandTotal());
-        return orderService.save(order);
+    /**
+     * Gets order history for user.
+     *
+     * @param model   the model
+     * @param session the session
+     * @return the order history for user
+     */
+    @GetMapping("/history")
+    public String getOrderHistoryForUser(Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        List<Order> orders = orderService.findByUser(user);
+        model.addAttribute("orders", orders);
+        return "order-history";
+    }
+
+    /**
+     * Gets order history for group.
+     *
+     * @param model   the model
+     * @param session the session
+     * @return the order history for group
+     */
+    @GetMapping("/history/group")
+    public String getOrderHistoryForGroup(Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        List<Order> orders = orderService.findByGroup(user.getGroup());
+        model.addAttribute("orders", orders);
+        return "order-history";
+    }
+
+    private void sendOrderConfirmationEmail(Order order) throws IOException, MessagingException {
+        Map<String, Object> valueMap = new HashMap<>();
+        valueMap.put("order", order);
+        emailService.sendSimpleMessage(order.getUser().getEmail(), "Thanks for your order - Apprize !!", valueMap, "order-details");
     }
 }

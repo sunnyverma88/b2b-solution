@@ -11,6 +11,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpSession;
+import java.security.Principal;
+
+/**
+ * The type Category controller.
+ */
 @Controller
 @RequestMapping("/category")
 public class CategoryController {
@@ -22,6 +28,13 @@ public class CategoryController {
     @Autowired
     private ModelMapper modelMapper;
 
+    /**
+     * Add category string.
+     *
+     * @param model   the model
+     * @param message the message
+     * @return the string
+     */
     @GetMapping( "/add"  )
     public String addCategory(Model model, @RequestParam( name = "message" , required = false) String message) {
         model.addAttribute(CATEGORY, new CategoryDto());
@@ -31,6 +44,14 @@ public class CategoryController {
         return "add-category";
     }
 
+    /**
+     * Add submitted category redirect view.
+     *
+     * @param categoryDto the category dto
+     * @param model       the model
+     * @param attributes  the attributes
+     * @return the redirect view
+     */
     @PostMapping("/add")
     public RedirectView addSubmittedCategory(@ModelAttribute CategoryDto categoryDto, Model model , RedirectAttributes attributes) {
         String message = "";
@@ -48,10 +69,24 @@ public class CategoryController {
         return new RedirectView("/category/add");
     }
 
+    /**
+     * Find product by category string.
+     *
+     * @param id    the id
+     * @param model the model
+     * @return the string
+     */
     @GetMapping("/{id}/products")
     public String findProductByCategory(@PathVariable(name = "id") long id, Model model) {
         model.addAttribute("products", cs.findById(id).getProducts());
         return "products";
+    }
+
+    @GetMapping("/all")
+    public String pricingTables(Principal principal, Model model, HttpSession session) {
+
+        model.addAttribute("categories", cs.findAll());
+        return "categories";
     }
 
 

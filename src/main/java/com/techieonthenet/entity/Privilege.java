@@ -9,6 +9,9 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
 
+/**
+ * The type Privilege.
+ */
 @Entity
 @Getter
 @Setter
@@ -28,11 +31,19 @@ public class Privilege extends Auditable implements Serializable {
     @ManyToMany(mappedBy = "privileges" , fetch = FetchType.EAGER)
     private Collection<Role> roles = new HashSet<>();
 
+    /**
+     * Instantiates a new Privilege.
+     */
     public Privilege() {
         super();
 
     }
 
+    /**
+     * Instantiates a new Privilege.
+     *
+     * @param name the name
+     */
     public Privilege(final String name) {
         super();
         this.name = name;

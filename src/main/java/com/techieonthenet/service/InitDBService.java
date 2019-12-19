@@ -14,6 +14,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 
+/**
+ * The type Init db service.
+ */
 @Component
 public class InitDBService {
 
@@ -31,6 +34,9 @@ public class InitDBService {
     @Autowired
     private ShoppingCartService shoppingCartService;
 
+    /**
+     * Create user.
+     */
     @PostConstruct
     public void createUser() {
 

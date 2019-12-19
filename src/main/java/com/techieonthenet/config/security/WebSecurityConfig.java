@@ -16,6 +16,9 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import java.security.SecureRandom;
 
 
+/**
+ * The type Web security config.
+ */
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -45,16 +48,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/js/**",
                         "/css/**",
                         "/images/**",
-                        "/webjars/**").permitAll()
+                        "/webjars/**",
+                        "/user/forgotPwd").permitAll()
                 .antMatchers("/main-page").hasAuthority(PRIV_VIEW_PRODUCT)
                 .antMatchers("/group/add").hasAuthority(PRIV_VIEW_PRODUCT)
                 .antMatchers("/product/add").hasAuthority(PRIV_VIEW_PRODUCT)
                 .antMatchers("/category/add").hasAuthority(PRIV_VIEW_PRODUCT)
+                .antMatchers("/task/modify").hasAuthority(PRIV_VIEW_PRODUCT)
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/main-page")
+                .defaultSuccessUrl("/dashboard")
                 .permitAll()
                 .and()
                 .logout()
@@ -67,9 +72,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling()
                 .accessDeniedHandler(accessDeniedHandler);
 
-
     }
 
+    /**
+     * Custom authentication manager authentication manager.
+     *
+     * @return the authentication manager
+     * @throws Exception the exception
+     */
     @Bean
     public AuthenticationManager customAuthenticationManager() throws Exception {
         return authenticationManager();

@@ -6,8 +6,14 @@
         <ul class="nav side-menu">
             <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
-                    <li><a href="/main-page">Dashboard</a></li>
-                    <li><a href="/product/all">Products</a></li>
+                    <li><a href="/dashboard" sec:authorize="hasAuthority('PRIV_VIEW_PRODUCT')">Dashboard</a></li>
+                    <li><a href="/category/all" sec:authorize="hasAuthority('PRIV_VIEW_PRODUCT')">Categories</a></li>
+                    <li><a href="/product/all" sec:authorize="hasAuthority('PRIV_VIEW_PRODUCT')">Products</a></li>
+                    <li><a href="/order/history" sec:authorize="hasAuthority('PRIV_VIEW_PRODUCT')">Order History</a>
+                    </li>
+                    <li><a href="/order/history/group" sec:authorize="hasAuthority('PRIV_VIEW_PRODUCT')">Group Order
+                        History</a></li>
+                    <li><a href="/task/pending" sec:authorize="hasAuthority('PRIV_VIEW_PRODUCT')">Approvals</a></li>
                 </ul>
             </li>
         </ul>

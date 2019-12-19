@@ -6,9 +6,15 @@ import com.techieonthenet.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * The type Product service.
+ */
 @Service
 public class ProductServiceImpl implements ProductService {
 
+    /**
+     * The Product repository.
+     */
     @Autowired
     ProductRepository productRepository;
 

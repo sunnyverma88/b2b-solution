@@ -15,6 +15,9 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.List;
 
+/**
+ * The type Shopping cart service.
+ */
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
 

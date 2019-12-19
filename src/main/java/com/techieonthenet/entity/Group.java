@@ -10,6 +10,9 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Group.
+ */
 @Entity
 @Getter
 @Setter
@@ -36,5 +39,8 @@ public class Group extends Auditable {
 
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
     private List<User> users = new ArrayList<>();
+
+    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
+    private List<Order> orders = new ArrayList<>();
 
 }

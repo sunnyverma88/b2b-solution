@@ -13,6 +13,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Order.
+ */
 @Entity
 @Getter
 @Setter
@@ -45,8 +48,15 @@ public class Order extends Auditable implements Serializable {
     @JoinColumn(name = "shipping_address_id", referencedColumnName = "id")
     private Address address;
 
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private List<TaskItem> taskItems = new ArrayList<>();
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "group_id")
+    private Group group;
 
 }

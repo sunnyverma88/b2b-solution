@@ -2,18 +2,56 @@ package com.techieonthenet.service;
 
 import com.techieonthenet.entity.ShoppingCart;
 
+/**
+ * The interface Shopping cart service.
+ */
 public interface ShoppingCartService {
 
-    public Iterable<ShoppingCart> findAll();
+    /**
+     * Find all iterable.
+     *
+     * @return the iterable
+     */
+    Iterable<ShoppingCart> findAll();
 
-    public ShoppingCart save(ShoppingCart cart);
+    /**
+     * Save shopping cart.
+     *
+     * @param cart the cart
+     * @return the shopping cart
+     */
+    ShoppingCart save(ShoppingCart cart);
 
-    public ShoppingCart findById(Long id);
+    /**
+     * Find by id shopping cart.
+     *
+     * @param id the id
+     * @return the shopping cart
+     */
+    ShoppingCart findById(Long id);
 
-    public ShoppingCart findByUserId(Long userId);
+    /**
+     * Find by user id shopping cart.
+     *
+     * @param userId the user id
+     * @return the shopping cart
+     */
+    ShoppingCart findByUserId(Long userId);
 
-    public ShoppingCart updateShoppingCart(ShoppingCart shoppingCart);
+    /**
+     * Update shopping cart shopping cart.
+     *
+     * @param shoppingCart the shopping cart
+     * @return the shopping cart
+     */
+    ShoppingCart updateShoppingCart(ShoppingCart shoppingCart);
 
-    public ShoppingCart clearShoppingCart(ShoppingCart shoppingCart);
+    /**
+     * Clear shopping cart shopping cart.
+     *
+     * @param shoppingCart the shopping cart
+     * @return the shopping cart
+     */
+    ShoppingCart clearShoppingCart(ShoppingCart shoppingCart);
 
 }

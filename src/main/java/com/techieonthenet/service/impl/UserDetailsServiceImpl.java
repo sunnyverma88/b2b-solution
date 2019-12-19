@@ -20,6 +20,9 @@ import java.util.Collection;
 import java.util.List;
 
 
+/**
+ * The type User details service.
+ */
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService{
 

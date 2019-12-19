@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+
+    <title data-layout-title-pattern="$LAYOUT_TITLE | $CONTENT_TITLE">Gentellela!</title>
+
+    <!-- Bootstrap -->
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="/webjars/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="/webjars/nprogress/nprogress.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+
+    <link href="/css/b2b.css" rel="stylesheet">
+</head>
+
+<body>
+
+
+<br><br><br>
+<div align="center" class="container">
+
+    <form class="form-signin" method="post" name="f" th:action="@{/login}">
+        <img src="/images/logo_1.png">
+
+        <div class="alert alert-warning" th:if="${param.error}">
+            Invalid username and password.
+        </div>
+        <div class="alert alert-success" th:if="${param.logout}">
+            You have been logged out.
+        </div>
+
+        <h1 class="h3 mb-3 font-weight-normal"></h1>
+        <label class="sr-only" for="username">Email address</label>
+        <input autofocus class="form-control" id="username" name="username" placeholder="Email address" required
+               type="email">
+        <label class="sr-only" for="password">Password</label>
+        <input class="form-control" id="password" name="password" placeholder="Password" required type="password">
+        <input
+                th:name="${_csrf.parameterName}"
+                th:value="${_csrf.token}"
+                type="hidden"/>
+
+        <button class="btn btn-lg btn-primary btn-block" id="login-submit" name="login-submit" type="submit">Sign in
+        </button>
+    </form>
+
+
+    <div class="container">
+        <a data-target="#pwdModal" data-toggle="modal" href="#">What's My Password?</a>
+    </div>
+
+    <!--modal-->
+    <div aria-hidden="true" class="modal fade" id="pwdModal" role="dialog" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button aria-hidden="true" class="close" data-dismiss="modal" type="button">×</button>
+                    <h1 class="text-center">What's My Password?</h1>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="text-center">
+
+                                    <p>If you have forgotten your password you can reset it here.</p>
+                                    <div class="panel-body">
+                                        <form class="form-signin" id="forgotPass" method="post"
+                                              th:action="@{/user/forgotPwd}" th:object="${userDto}">
+                                            <fieldset>
+                                                <div class="form-group">
+                                                    <input class="form-control input-lg" name="email"
+                                                           placeholder="E-mail Address" th:field="*{email}"
+                                                           type="email">
+                                                </div>
+                                                <input class="btn btn-lg btn-primary btn-block" type="submit"
+                                                       value="Send My Password">
+                                            </fieldset>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="col-md-12">
+                        <button aria-hidden="true" class="btn" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- jQuery -->
+<script src="/webjars/jquery/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+<!-- FastClick -->
+<script src="/webjars/fastclick/fastclick.js"></script>
+<!-- NProgress -->
+<script src="/webjars/nprogress/nprogress.js"></script>
+
+<!-- Custom Theme Scripts -->
+<script src="/js/custom.min.js"></script>
+</body>
+<footer>
+    <br><br><br>
+    <button class="btn-primary pull-right" type="submit">Want to know about this product ?? Request a Demo</button>
+</footer>
+</html>

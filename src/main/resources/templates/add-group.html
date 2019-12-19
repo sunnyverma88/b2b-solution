@@ -66,6 +66,7 @@
                                     No</label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <input class="form-control col-md-7 col-xs-12" id="gstNo" name="gstNo"
+                                           pattern="^([0][1-9]|[1-2][0-9]|[3][0-7])([A-Z]{5})([0-9]{4})([A-Z]{1}[1-9A-Z]{1})([Z]{1})([0-9A-Z]{1})+$"
                                            th:field="*{gstNo}" type="text">
                                 </div>
                             </div>

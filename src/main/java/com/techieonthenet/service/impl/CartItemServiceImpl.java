@@ -13,6 +13,9 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * The type Cart item service.
+ */
 @Service
 public class CartItemServiceImpl implements CartItemService {
 

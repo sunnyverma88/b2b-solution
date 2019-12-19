@@ -23,24 +23,18 @@
 
 </head>
 
-<body class="nav-md" th:with="httpStatus=${T(org.springframework.http.HttpStatus).valueOf(#response.status)}">
-<div class="container body">
-    <div class="main_container">
-        <!-- page content -->
-        <div class="col-md-12">
-            <div class="col-middle">
-                <div class="text-center text-center">
-                    <h1 class="error-number" th:text="|${httpStatus}|">404</h1>
-                    <h2 th:text="|${httpStatus.reasonPhrase}|"></h2>
-                    <p>Something Went Wrong</p>
-                    <a href="index.html" th:href="@{/}">Back to Home Page</a>
+<body th:with="httpStatus=${T(org.springframework.http.HttpStatus).valueOf(#response.status)}">
 
-                </div>
+
+<div class="d-flex justify-content-center align-items-center" id="main" style="height: 100vh;">
+    <h1 class="mr-3 pr-3 align-top border-right inline-block align-content-center">404</h1>
+    <div class="inline-block align-middle">
+        <h2 class="font-weight-normal lead" id="desc">The page you requested was not found.</h2>
+        <a class="btn btn-link" th:href="@{/}">Back to Home</a>
             </div>
         </div>
-        <!-- /page content -->
-    </div>
-</div>
+
+<!-- /page content -->
 
 
 </body>

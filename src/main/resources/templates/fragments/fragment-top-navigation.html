@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
 <div class="top_nav" data-th-fragment="top-navigation" id="top_nav">
     <div class="nav_menu">
         <nav>
@@ -16,23 +17,42 @@
                     </a>
                     <ul class="dropdown-menu dropdown-usermenu pull-right">
                         <li><a href="javascript:;"> Profile</a></li>
-                        <li>
-                            <a href="javascript:;">
-                                <span class="badge bg-red pull-right">50%</span>
-                                <span>Settings</span>
-                            </a>
-                        </li>
-                        <li><a href="javascript:;">Help</a></li>
                         <li><a href="/logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                     </ul>
                 </li>
 
+                <li class="dropdown" role="presentation" sec:authorize="hasAuthority('PRIV_VIEW_PRODUCT')">
+                    <a aria-expanded="false" class="dropdown-toggle info-number" data-toggle="dropdown"
+                       href="javascript:;">
+                        <i class="fa fa-envelope-o"></i>
+                        <span class="badge bg-green" th:text="${session.tasks.size()}"></span>
+                    </a>
+                    <ul class="dropdown-menu list-unstyled msg_list" id="menu1" role="menu"
+                        th:if="${session.tasks.size() &gt; 0}">
+                        <li th:each="task : ${session.tasks}">
+                            <a>
+                          <span>Task - <span th:text="${task.id}"></span>
+                          <span th:text="${task.taskName}"></span>
+                        </span></a>
+                        </li>
+                        <li>
+                            <div class="text-center">
+                                <a href="/task/pending">
+                                    <strong>See All Alerts</strong>
+                                    <i class="fa fa-angle-right"></i>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+
                 <li role="presentation" class="dropdown">
-                    <a aria-expanded="false" class="info-number" href="/cart/all">
+                    <a aria-expanded="false" class="info-number" href="/cart/all" th:if="${session.cartSize &gt; 0}">
                         <i class="fa fa-shopping-cart"></i>
                         <span class="badge bg-green" th:text="${session.cartSize}"></span>
                     </a>
                 </li>
+
             </ul>
         </nav>
     </div>

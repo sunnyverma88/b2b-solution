@@ -15,6 +15,9 @@ import org.springframework.stereotype.Service;
 import java.util.Set;
 
 
+/**
+ * The type User service.
+ */
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -49,6 +52,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User save(User user) {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
@@ -64,11 +68,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findByUsernameAndEnabled(String username) { return userRepository.findByUsernameAndEnabled(username.toLowerCase() , true); }
+    public User findByUsernameAndEnabled(String username) {
+        System.out.println("Inside findByUsernameAndEnabled ");
+        return userRepository.findByUsernameAndEnabled(username.toLowerCase(), true);
+    }
 
     @Override
     public User findById(Long id) {
-       return userRepository.findById(id).get();
+        return userRepository.findById(id).get();
     }
 
 

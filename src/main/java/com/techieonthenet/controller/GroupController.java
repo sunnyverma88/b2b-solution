@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+/**
+ * The type Group controller.
+ */
 @RequestMapping("/group")
 @Controller
 public class GroupController {
@@ -30,6 +33,13 @@ public class GroupController {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    /**
+     * Add group string.
+     *
+     * @param model   the model
+     * @param message the message
+     * @return the string
+     */
     @GetMapping("/add")
     public String addGroup(Model model , @RequestParam(name = "message" , required = false) String message) {
         model.addAttribute("group", new GroupDto());
@@ -37,15 +47,21 @@ public class GroupController {
         return "add-group";
     }
 
+    /**
+     * Add group redirect view.
+     *
+     * @param groupDto           the group dto
+     * @param redirectAttributes the redirect attributes
+     * @return the redirect view
+     */
     @PostMapping("/add")
-    public RedirectView addGroup( @ModelAttribute GroupDto groupDto, RedirectAttributes redirectAttributes) {
+    public RedirectView addGroup(@ModelAttribute GroupDto groupDto, RedirectAttributes redirectAttributes) {
         String message = "";
         try {
             Group group = convertGroupDtoToGroup(groupDto);
             if(groupService.findByGstNo(group.getGstNo()) == null){
-            groupService.save(group);
-            message="Group has been successfully added";}
-            else { message="Group with provided GST No already exists";}
+                groupService.save(group);
+                message="Group has been successfully added";} else { message="Group with provided GST No already exists";}
         } catch (Exception e) {
             message ="Something went Wrong !! Please try again . Error Code  " + e.getLocalizedMessage();
         }

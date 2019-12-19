@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html data-layout-decorate="~{fragments/layout}" lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Pricing Tables</title>
+</head>
+
+<body>
+<div class="right_col" data-layout-fragment="content" role="main">
+    <!-- top tiles -->
+    <div class="row">
+        <div class="tile_count">
+            <div class="col-md-3 col-sm-6  tile_stats_count">
+                <span class="count_top"><i class="fa fa-user"></i> Total Items</span>
+                <div class="count" th:text="${totalOrdersTillDate}"></div>
+                <span class="count_bottom"> From Inception</span>
+            </div>
+            <div class="col-md-3  col-sm-6  tile_stats_count">
+                <span class="count_top"><i class="fa fa-clock-o"></i> Total Items</span>
+                <div class="count" th:text="${totalItemsLastMonth}"></div>
+                <span class="count_bottom">Last Month</span>
+            </div>
+            <div class="col-md-3 col-sm-6  tile_stats_count">
+                <span class="count_top"><i class="fa fa-user"></i>Total Expense( Rs )</span>
+                <div class="count green" th:text="${totalExpenseLastMonth}"></div>
+                <span class="count_bottom">Last Month</span>
+            </div>
+            <div class="col-md-3  col-sm-6  tile_stats_count">
+                <span class="count_top"><i class="fa fa-user"></i> Total Females</span>
+                <div class="count">4,567</div>
+                <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> From last Week</span>
+            </div>
+
+        </div>
+    </div>
+    <!-- /top tiles -->
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12 ">
+            <div class="dashboard_graph">
+
+                <div class="row x_title">
+                    <div class="col-md-6">
+                        <h3>Last 3 Months Statistics</h3>
+                    </div>
+                    <div class="col-md-6"></div>
+                </div>
+
+
+                <div class="row" style="margin-bottom:30px">
+                    <div class="col-md-6" style="margin-top:20px">
+                        <div id="purchaseByMonth" style="width:100%;height:400px;"></div>
+                    </div>
+                    <div class="col-md-6" style="margin-top:20px">
+                        <div id="purchaseByCategory" style="width:100%;height:400px;"></div>
+                    </div>
+                </div>
+
+
+                <div class="clearfix"></div>
+            </div>
+        </div>
+
+    </div>
+    <br/>
+
+
+</div>
+<th:block layout:fragment="script">
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+            $(document).ready(function () {
+                Highcharts.setOptions({
+                    lang: {
+                        decimalPoint: '.',
+                        thousandsSep: ','
+                    }
+                });
+                drawPurchaseByMonthChart();
+				drawPurchaseByCategoryChart();
+            });
+
+
+            function drawPurchaseByCategoryChart() {
+                var purchaseByCategoryChart = Highcharts.chart('purchaseByCategory', {
+                    chart: {
+                        type: 'pie',
+                        margin: 40,
+                        options3d: {
+                    		enabled: true,
+                            alpha: 45,
+                            beta: 0
+                        }
+                    },
+                    title: {
+                        text: 'Purchase by Category'
+                    },
+                    tooltip: {
+                      	pointFormat: "Rs {point.y:,.0f}"
+                    },
+                    plotOptions: {
+                    	pie: {
+                    		allowPointSelect: true,
+                    		depth: 35
+                    	}
+                    },
+                    series: [{
+                        name: 'Categories',
+                        colorByPoint:true,
+                        data: [[${pieJsonData}]]
+                	}],
+                	 responsive: {
+                                    rules: [{
+                                        condition: {
+                                            maxWidth: 500
+                                        },
+                                        chartOptions: {
+                                            legend: {
+                                                align: 'center',
+                                                verticalAlign: 'bottom',
+                                                layout: 'horizontal'
+                                            },
+                                            yAxis: {
+                                                labels: {
+                                                    align: 'left',
+                                                    x: 0,
+                                                    y: -5
+                                                },
+                                                title: {
+                                                    text: null
+                                                }
+                                            },
+                                            subtitle: {
+                                                text: null
+                                            },
+                                            credits: {
+                                                enabled: false
+                                            }
+                                        }
+                                    }]
+                                }
+                });
+            }
+
+            function drawPurchaseByMonthChart() {
+                var purchaseByMonthChart = Highcharts.chart('purchaseByMonth', {
+                    chart: {
+                        type: 'column',
+                        margin: 75,
+                        options3d: {
+   							enabled: true,
+                        	alpha: 15,
+                        	beta: 15,
+                        	depth: 110
+                        }
+                    },
+                    title: {
+                        text: 'Purchase per Month'
+                    },
+                    xAxis: {
+                        categories: [[${chartData.keySet()}]]
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Purchase (Rs)'
+                        }
+                    },
+                    tooltip: {
+                      	pointFormat: "Rs {point.y:,.0f}"
+                    },
+                    plotOptions: {
+                    	column: {
+                    		depth: 60,
+                      		stacking: true,
+                       		grouping: false,
+                      		groupZPadding: 10
+                        }
+                    },
+                    series: [{
+
+                        data: [[${chartData.values()}]]
+                    }],
+                     responsive: {
+                        rules: [{
+                           condition: {
+                            maxWidth: 500
+                        },
+            chartOptions: {
+                legend: {
+                    align: 'center',
+                    verticalAlign: 'bottom',
+                    layout: 'horizontal'
+                },
+                yAxis: {
+                    labels: {
+                        align: 'left',
+                        x: 0,
+                        y: -5
+                    },
+                    title: {
+                        text: ""
+                    }
+                },
+                subtitle: {
+                    text: null
+                },
+                credits: {
+                    enabled: false
+                }
+            }
+        }]
+    }
+                });
+            }
+            /*]]>*/
+
+
+
+
+    </script>
+</th:block>
+</body>
+</html>

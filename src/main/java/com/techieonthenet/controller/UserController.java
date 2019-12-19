@@ -3,6 +3,7 @@ package com.techieonthenet.controller;
 import com.techieonthenet.dto.UserDto;
 import com.techieonthenet.entity.Role;
 import com.techieonthenet.entity.User;
+import com.techieonthenet.service.EmailService;
 import com.techieonthenet.service.GroupService;
 import com.techieonthenet.service.RoleService;
 import com.techieonthenet.service.UserService;
@@ -17,10 +18,17 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.mail.MessagingException;
+import java.io.IOException;
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
+/**
+ * The type User controller.
+ */
 @Controller
 @RequestMapping("/user")
 public class UserController {
@@ -35,8 +43,19 @@ public class UserController {
     @Autowired
     private ModelMapper modelMapper;
 
+    @Autowired
+    EmailService emailService;
+
+    /**
+     * Add user string.
+     *
+     * @param model     the model
+     * @param principal the principal
+     * @param message   the message
+     * @return the string
+     */
     @GetMapping("/add")
-    public String addUser(Model model, Principal principal , @RequestParam (name ="message" , required = false) String message) {
+    public String addUser(Model model, Principal principal, @RequestParam(name = "message", required = false) String message) {
         model.addAttribute("roles", roleService.findAll());
         model.addAttribute("groups", groupService.findAll());
         if (message != null) {
@@ -46,33 +65,71 @@ public class UserController {
         return "add-user";
     }
 
+    /**
+     * Add submitted user redirect view.
+     *
+     * @param userDto            the user dto
+     * @param model              the model
+     * @param redirectAttributes the redirect attributes
+     * @return the redirect view
+     */
     @PostMapping("/add")
-    public RedirectView addSubmittedUser(@ModelAttribute UserDto userDto, Model model , RedirectAttributes redirectAttributes) {
-        String message="";
+    public RedirectView addSubmittedUser(@ModelAttribute UserDto userDto, RedirectAttributes redirectAttributes) {
+        String message = "";
         try {
             Set<Role> userRoles = new HashSet<>();
             userRoles.add(roleService.findByName(userDto.getRoleName()));
-            userService.createUser(convertUserDtoToUser(userDto), userRoles);
-            message ="User has been successfully added";
+            String generatedPassword = AppUtils.getAlphaNumericString(8);
+            userDto.setPassword(generatedPassword);
+            User user = convertUserDtoToUser(userDto);
+            userService.createUser(user, userRoles);
+
+            sendEmailToUser(user, generatedPassword, "new-user", "Welcome to Apprize !!");
+            message = "User has been successfully added";
         } catch (Exception e) {
             logger.error("Exception adding user {}", e.getMessage());
             message = "Something Went Wrong ! Please contact administrator  -  Exception - " + e.getMessage();
 
         }
-        redirectAttributes.addFlashAttribute("message" , message);
+        redirectAttributes.addFlashAttribute("message", message);
         return new RedirectView("/user/add");
     }
 
-    private User convertUserDtoToUser(UserDto userDto)
-    {
+    private User convertUserDtoToUser(UserDto userDto) {
         User user = new User();
         user.setFirstName(userDto.getFirstName());
         user.setLastName(userDto.getLastName());
-        user.setPassword(AppUtils.getAlphaNumericString(8));
+        user.setPassword(userDto.getPassword());
         user.setEmail(userDto.getEmail());
-        logger.info("Password : {}", user.getPassword());
+        user.setApproverType(userDto.getApproverType());
+        user.setPasswordResetRequired(true);
         if (userDto.getGroupId() != null) user.setGroup(groupService.findById(userDto.getGroupId()));
         return user;
+    }
+
+    private void sendEmailToUser(User user, String genPassword, String templateName, String subject) throws IOException, MessagingException {
+
+
+        Map<String, Object> valueMap = new HashMap<>();
+        valueMap.put("user", user);
+        valueMap.put("genPass", genPassword);
+        emailService.sendSimpleMessage(user.getEmail(), subject, valueMap, templateName);
+    }
+
+    @PostMapping("/forgotPwd")
+    public RedirectView forgotPassword(@ModelAttribute UserDto userDto) throws IOException, MessagingException {
+        try {
+            logger.info("Inside Forgot Password - {}", userDto.getEmail());
+            User user = userService.findByUsernameAndEnabled(userDto.getEmail());
+            user.setPasswordResetRequired(true);
+            String generatedPwd = AppUtils.getAlphaNumericString(8);
+            user.setPassword(generatedPwd);
+            sendEmailToUser(user, generatedPwd, "new-user", "Welcome to Apprize !!");
+            userService.save(user);
+        } catch (final Exception e) {
+            throw new RuntimeException(e);
+        }
+        return new RedirectView("/login");
     }
 
 }

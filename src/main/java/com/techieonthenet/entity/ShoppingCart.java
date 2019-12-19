@@ -10,6 +10,9 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Shopping cart.
+ */
 @Entity
 @Getter
 @Setter
@@ -23,8 +26,8 @@ public class ShoppingCart extends Auditable implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "shopping_cart_generator")
     private Long id;
     private BigDecimal gst = new BigDecimal(0);
-    private BigDecimal grandTotal = new BigDecimal(0);;
-    private BigDecimal cartTotal = new BigDecimal(0);;
+    private BigDecimal grandTotal = new BigDecimal(0);
+    private BigDecimal cartTotal = new BigDecimal(0);
     private int totalItems= 0;
 
     @OneToMany(mappedBy = "shoppingCart", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

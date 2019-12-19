@@ -1,7 +1,6 @@
 package com.techieonthenet.service.impl;
 
 import com.techieonthenet.entity.Privilege;
-import com.techieonthenet.entity.Role;
 import com.techieonthenet.repository.PrivilegeRepository;
 import com.techieonthenet.service.PrivilegeService;
 import org.slf4j.Logger;
@@ -9,12 +8,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
-
+/**
+ * The type Privilege service.
+ */
 @Service
 public class PrivilegeServiceImpl implements PrivilegeService {
 
-@Autowired
+    /**
+     * The Privilege repository.
+     */
+    @Autowired
     PrivilegeRepository privilegeRepository;
     private static Logger LOGGER = LoggerFactory.getLogger(RoleServiceImpl.class);
 
