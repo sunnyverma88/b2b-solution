@@ -47,20 +47,19 @@ public class InitDBService {
             Role role1 = new Role();
             role1.setName("USER");
             roleService.createRole(role1, privileges);
+            privileges.clear();
+
+
+            privileges.add(privilegeService.findByName("PRIV_APPROVERS"));
+            privileges.add(privilegeService.findByName("PRIV_VIEW_PRODUCT"));
 
             Role role4 = new Role();
             role4.setName("GROUP_ADMIN");
             roleService.createRole(role4, privileges);
-            privileges.clear();
 
 
-            privileges.add(privilegeService.findByName("PRIV_VIEW_PRODUCT"));
-            privileges.add(privilegeService.findByName("PRIV_ADD_PRODUCT"));
-
-            Role role2 = new Role();
-            role2.setName("ADMIN");
-            roleService.createRole(role2, privileges);
-
+            privileges.add(privilegeService.findByName("PRIV_APPROVERS"));
+            privileges.add(privilegeService.findByName("PRIV_ADMIN_CAP"));
 
             Role role3 = new Role();
             role3.setName("SUPER_ADMIN");
@@ -90,7 +89,7 @@ public class InitDBService {
             user2.setPassword("p");
             user2.setPasswordResetRequired(false);
             user2.setEmail("Admin@gmail.com");
-            userRoles.add(roleService.findByName("ADMIN"));
+            userRoles.add(roleService.findByName("GROUP_ADMIN"));
             userService.createUser(user2, userRoles);
 
 

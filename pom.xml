@@ -187,17 +187,54 @@
         </dependency>
     </dependencies>
 
-<build>
-<plugins>
-    <plugin>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-maven-plugin</artifactId>
-        <configuration>
-            <fork>true</fork>
-        </configuration>
-    </plugin>
-</plugins>
-</build>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <fork>true</fork>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.heroku.sdk</groupId>
+                <artifactId>heroku-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
-
+    <profiles>
+        <profile>
+            <id>stage</id>
+            <activation>
+                <property>
+                    <name>apprize-stage</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.heroku.sdk</groupId>
+                        <artifactId>heroku-maven-plugin</artifactId>
+                        <configuration>
+                            <appName>apprize-stage</appName>
+                            <includeTarget>true</includeTarget>
+                            <jdkVersion>1.8</jdkVersion>
+                            <processTypes>
+                                <web>java $JAVA_OPTS -cp target/classes/:target/dependency/* com.techieonthenet.BootstrapApp</web>
+                            </processTypes>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>deploy</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

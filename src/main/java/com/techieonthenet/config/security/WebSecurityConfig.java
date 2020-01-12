@@ -22,6 +22,7 @@ import java.security.SecureRandom;
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+
     @Autowired
     private LoggingAccessDeniedHandler accessDeniedHandler;
 
@@ -31,6 +32,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final String SALT = "salt"; //Salt should be protected carefully
     private static final String PRIV_VIEW_PRODUCT = "PRIV_VIEW_PRODUCT";
+    private static final String PRIV_ADMIN_CAP = "PRIV_ADMIN_CAP";
+    private static final String PRIV_APPROVERS = "PRIV_APPROVERS";
+
+
 
     @Bean
     private static BCryptPasswordEncoder passwordEncoder() {
@@ -51,10 +56,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/webjars/**",
                         "/user/forgotPwd").permitAll()
                 .antMatchers("/main-page").hasAuthority(PRIV_VIEW_PRODUCT)
-                .antMatchers("/group/add").hasAuthority(PRIV_VIEW_PRODUCT)
-                .antMatchers("/product/add").hasAuthority(PRIV_VIEW_PRODUCT)
-                .antMatchers("/category/add").hasAuthority(PRIV_VIEW_PRODUCT)
-                .antMatchers("/task/modify").hasAuthority(PRIV_VIEW_PRODUCT)
+                .antMatchers("/group/add").hasAuthority(PRIV_ADMIN_CAP)
+                .antMatchers("/product/add").hasAuthority(PRIV_ADMIN_CAP)
+                .antMatchers("/category/add").hasAuthority(PRIV_ADMIN_CAP)
+                .antMatchers("/task/modify").hasAuthority(PRIV_APPROVERS)
+                .antMatchers("/user/add").hasAuthority(PRIV_ADMIN_CAP)
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

@@ -41,6 +41,7 @@ public class DashboardController {
 
 
         BigDecimal totalExpenseLastMonth = BigDecimal.valueOf(0);
+        BigDecimal totalExpenseTillDate = BigDecimal.valueOf(0);
         BigDecimal totalExpensePreviousLastMonth = BigDecimal.valueOf(0);
         BigDecimal totalExpensePreviousToPreviousLastMonth = BigDecimal.valueOf(0);
         Map<String, Integer> categoryMap = new HashMap<>();
@@ -65,6 +66,7 @@ public class DashboardController {
                     || order.getOrderStatus().equals(OrderStatus.DELIVERED)
                     || order.getOrderStatus().equals(OrderStatus.SHIPPED)) {
                 totalItemsTillDate += order.getCartItemList().stream().mapToInt(CartItem::getQty).sum();
+                totalExpenseTillDate = totalExpenseTillDate.add(order.getOrderTotal());
 
                 if (order.getOrderDate().compareTo(DateUtils.getLastMonthStartDate().minusMonths(2)) >= 0 &&
                         order.getOrderDate().compareTo(DateUtils.getLastMonthEndDate().minusMonths(2)) <= 0) {
@@ -91,6 +93,7 @@ public class DashboardController {
         }
         model.addAttribute("totalItemsLastMonth", totalItemsLastMonth);
         model.addAttribute("totalOrdersTillDate", totalItemsTillDate);
+        model.addAttribute("totalExpenseTillDate", totalExpenseTillDate);
         model.addAttribute("totalExpenseLastMonth", totalExpenseLastMonth.intValue());
         model.addAttribute("chartData", chartData);
 

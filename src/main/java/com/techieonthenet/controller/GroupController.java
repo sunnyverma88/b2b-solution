@@ -61,7 +61,10 @@ public class GroupController {
             Group group = convertGroupDtoToGroup(groupDto);
             if(groupService.findByGstNo(group.getGstNo()) == null){
                 groupService.save(group);
-                message="Group has been successfully added";} else { message="Group with provided GST No already exists";}
+                message = "Group has been successfully added , Click Add User to add users.";
+            } else {
+                message = "Group with provided GST No already exists";
+            }
         } catch (Exception e) {
             message ="Something went Wrong !! Please try again . Error Code  " + e.getLocalizedMessage();
         }

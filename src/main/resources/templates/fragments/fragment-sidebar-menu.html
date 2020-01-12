@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <div id="sidebar-menu" class="main_menu_side hidden-print main_menu" data-th-fragment="sidebar-menu">
     <div class="menu_section">
         <h3>General</h3>
@@ -13,12 +14,14 @@
                     </li>
                     <li><a href="/order/history/group" sec:authorize="hasAuthority('PRIV_VIEW_PRODUCT')">Group Order
                         History</a></li>
-                    <li><a href="/task/pending" sec:authorize="hasAuthority('PRIV_VIEW_PRODUCT')">Approvals</a></li>
+                    <p sec:authorize="hasAuthority('PRIV_APPROVERS')">
+                    <li><a href="/task/pending" sec:authorize="hasAuthority('PRIV_APPROVERS')">Approvals</a></li>
+                    </p>
                 </ul>
             </li>
         </ul>
     </div>
-    <div class="menu_section" sec:authorize="hasAuthority('PRIV_VIEW_PRODUCT')">
+    <div class="menu_section" sec:authorize="hasAuthority('PRIV_ADMIN_CAP')">
         <h3>Live On</h3>
         <ul class="nav side-menu">
             <li><a><i class="fa fa-bug"></i> Admin Pages <span class="fa fa-chevron-down"></span></a>
@@ -27,8 +30,6 @@
                     <li><a href="/product/add">Add Product</a></li>
                     <li><a href="/category/add">Add Category</a></li>
                     <li><a href="/user/add">Add User</a></li>
-                    <li><a href="#contacts.html">Contacts</a></li>
-                    <li><a href="#profile.html">Profile</a></li>
                 </ul>
             </li>
         </ul>
