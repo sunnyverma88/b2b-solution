@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -cp target/classes:target/dependency/* com.techieonthenet.BootsrapApp
+web: java $JAVA_OPTS -cp target/classes:target/dependency/* com.techieonthenet.BootstrapApp
