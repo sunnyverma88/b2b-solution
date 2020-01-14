@@ -2,21 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="32ca6a31-512f-4623-a0c7-fb02235b95c0" name="Default Changelist" comment="Pipeline changes">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/application-stage.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/b2b-solution.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/BootstrapApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/BootstrapApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/config/security/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/config/security/WebSecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/config/thymleaf/ThymeleafWebMvcConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/config/thymleaf/ThymeleafWebMvcConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/controller/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/controller/DashboardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/controller/GroupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/controller/GroupController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/service/InitDBService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/service/InitDBService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application-local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-local.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/db/migration/V1.4__initial_scripts.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db/migration/V1.4__initial_scripts.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/dashboard.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/fragments/fragment-sidebar-menu.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/fragments/fragment-sidebar-menu.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/fragments/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/fragments/layout.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application-prod.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-prod.properties" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -63,7 +51,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="SONARLINT_PRECOMMIT_ANALYSIS" value="true" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="HTML" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -84,11 +72,11 @@
       <recent name="com.techieonthenet.entity.common" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src/main/resources" />
       <recent name="$PROJECT_DIR$/src/main/resources/static/images" />
       <recent name="$PROJECT_DIR$/src/main/resources/templates" />
       <recent name="$PROJECT_DIR$/src/main/resources/templates/email" />
-      <recent name="$PROJECT_DIR$/src/main/resources/db/migration" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -215,7 +203,56 @@
       <option name="project" value="LOCAL" />
       <updated>1578865208896</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Pipeline changes">
+      <created>1578865521867</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1578865521867</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Pipeline changes">
+      <created>1578865797830</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1578865797830</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Pipeline changes">
+      <created>1578866167252</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1578866167252</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Pipeline changes">
+      <created>1578866431191</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1578866431191</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Pipeline changes">
+      <created>1578866725597</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1578866725597</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Pipeline changes">
+      <created>1578867805236</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1578867805236</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Pipeline changes">
+      <created>1578867989824</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1578867989824</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -238,7 +275,5 @@
     <MESSAGE value="Pipeline changes" />
     <option name="LAST_COMMIT_MESSAGE" value="Pipeline changes" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
-    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
-    <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
 </project>
