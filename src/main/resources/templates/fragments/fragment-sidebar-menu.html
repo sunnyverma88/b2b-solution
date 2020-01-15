@@ -3,21 +3,15 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <div id="sidebar-menu" class="main_menu_side hidden-print main_menu" data-th-fragment="sidebar-menu">
     <div class="menu_section">
-        <h3>General</h3>
+        <h3></h3>
         <ul class="nav side-menu">
-            <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                    <li><a href="/dashboard" sec:authorize="hasAuthority('PRIV_VIEW_PRODUCT')">Dashboard</a></li>
-                    <li><a href="/category/all" sec:authorize="hasAuthority('PRIV_VIEW_PRODUCT')">Categories</a></li>
-                    <li><a href="/product/all" sec:authorize="hasAuthority('PRIV_VIEW_PRODUCT')">Products</a></li>
-                    <li><a href="/order/history" sec:authorize="hasAuthority('PRIV_VIEW_PRODUCT')">Order History</a>
-                    </li>
-                    <li><a href="/order/history/group" sec:authorize="hasAuthority('PRIV_VIEW_PRODUCT')">Group Order
-                        History</a></li>
-                    <p sec:authorize="hasAuthority('PRIV_APPROVERS')">
-                    <li><a href="/task/pending" sec:authorize="hasAuthority('PRIV_APPROVERS')">Approvals</a></li>
-                    </p>
-                </ul>
+
+            <li><a href="/dashboard" sec:authorize="hasAuthority('PRIV_VIEW_PRODUCT')"><i class="fa fa-dashboard"></i>Dashboard</a></li>
+            <li><a href="/category/all" sec:authorize="hasAuthority('PRIV_VIEW_PRODUCT')"><i class="fa fa-crosshairs"></i>Categories</a></li>
+            <li><a href="/product/all" sec:authorize="hasAuthority('PRIV_VIEW_PRODUCT')"><i class="fa fa-product-hunt"></i>Products</a></li>
+            <li><a href="/order/history" sec:authorize="hasAuthority('PRIV_VIEW_PRODUCT')"><i class="fa fa-dashcube"></i>Order History</a>
+            <li><a href="/order/history/group" sec:authorize="hasAuthority('PRIV_VIEW_PRODUCT')"><i class="fa fa-asterisk"></i>Group History</a>
+            <li><a href="/task/pending" sec:authorize="hasAuthority('PRIV_APPROVERS')"><i class="fa fa-thumbs-up"></i>Approvals</a></li>
             </li>
         </ul>
     </div>
