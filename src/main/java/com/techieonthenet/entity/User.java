@@ -15,9 +15,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 
-/**
- * The type User.
- */
 @Entity
 @Table(name="APP_USERS")
 @Getter

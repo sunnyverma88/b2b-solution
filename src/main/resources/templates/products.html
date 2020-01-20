@@ -13,17 +13,6 @@
             <div class="title_left">
                 <h3> Products </h3>
             </div>
-
-            <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                    <div class="input-group">
-                        <input class="form-control" placeholder="Search for..." type="text">
-                        <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">Go!</button>
-                    </span>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <div class="clearfix"></div>
@@ -55,23 +44,22 @@
 
                         <div class="row">
 
-                            <div class="col-md-12">
+                            <div class="col-md-12" >
                                 <div th:each="product , prodStat : ${category.products}">
-
-
                                     <!-- product element -->
-                                    <div class="col-md-3 col-sm-6 col-xs-12">
-                                        <div class="pricing">
+                                    <span th:if="${product.isVisible()}">
+                                    <div class="col-md-3 col-sm-6 col-xs-12" >
+                                        <div class="pricing" >
                                             <div class="card_title">
                                                 <p th:text="${product.name}"></p>
                                             </div>
-                                            <div class="x_content">
+                                            <div class="x_content" >
                                                 <div class="card_body">
                                                     <img alt="image"
-                                                         style="height: 200px ; width: 100%; display: block; border-style: solid;"
+                                                         style="height: 150px ; width: 100%; display: block; border-style: solid;"
                                                          th:src="${product.imgList.get(0).imgUrl}"/>
-                                                    <p> Price : &#x20b9; <span th:text="${product.mrpPrice}"> </span>
-                                                    </p>
+                                                    <br>MRP : &#x20b9;<strike> <span th:text="${product.mrpPrice}"> </span></strike>
+                                                    <br>You Pay : &#x20b9; <span th:text="${product.sellingPrice}"> </span>
                                                 </div>
                                                 <div class="card_footer">
                                                     <br><br>
@@ -81,6 +69,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    </span>
                                     <!-- product element -->
                                 </div>
                             </div>

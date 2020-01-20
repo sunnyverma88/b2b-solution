@@ -10,21 +10,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 
-/**
- * The type Error controller.
- */
 @ControllerAdvice
 public class ErrorController {
 
     private static Logger logger = LoggerFactory.getLogger(ErrorController.class);
 
-    /**
-     * Exception string.
-     *
-     * @param throwable the throwable
-     * @param model     the model
-     * @return the string
-     */
     @ExceptionHandler(Throwable.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public String exception(final Throwable throwable, final Model model) {

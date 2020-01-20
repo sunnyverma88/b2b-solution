@@ -5,9 +5,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-/**
- * The type Hsn code gst mapping.
- */
 @Entity
 @Table(name = "HSNCODE_GST_MAPPING")
 @Getter

@@ -6,9 +6,6 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 
-/**
- * The type Group dto.
- */
 @Getter
 @Setter
 public class GroupDto {

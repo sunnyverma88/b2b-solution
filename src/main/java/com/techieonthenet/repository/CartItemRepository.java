@@ -7,18 +7,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-/**
- * The interface Cart item repository.
- */
 @Repository
 public interface CartItemRepository extends PagingAndSortingRepository<CartItem, Long> {
 
-    /**
-     * Find by shopping cart list.
-     *
-     * @param cart the cart
-     * @return the list
-     */
     List<CartItem> findByShoppingCart(ShoppingCart cart);
 
 }

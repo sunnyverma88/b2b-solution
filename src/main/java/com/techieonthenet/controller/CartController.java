@@ -20,10 +20,8 @@ import org.springframework.web.servlet.view.RedirectView;
 import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
 import java.security.Principal;
+import java.util.List;
 
-/**
- * The type Cart controller.
- */
 @Controller
 @RequestMapping("/cart")
 public class CartController {
@@ -39,14 +37,6 @@ public class CartController {
     @Autowired
     private ShoppingCartService scs;
 
-    /**
-     * Add redirect view.
-     *
-     * @param productId the product id
-     * @param principal the principal
-     * @param session   the session
-     * @return the redirect view
-     */
     @GetMapping(value = "/add/{pid}")
     public RedirectView add(@PathVariable(name = "pid") Long productId, Principal principal, HttpSession session) {
 
@@ -60,64 +50,63 @@ public class CartController {
         }
         cis.addProductToCartItem(product, cart, 1);
         session.setAttribute(CART_SIZE, scs.findByUserId(user.getId()).getTotalItems());
-        return new RedirectView("/cart/all");
+        return new RedirectView("/product/all");
     }
 
-    /**
-     * Add string.
-     *
-     * @param principal the principal
-     * @param model     the model
-     * @param session   the session
-     * @return the string
-     */
     @GetMapping(value = "/all")
-    public String add(Principal principal, Model model, HttpSession session) {
+    public String getAllCartItems(Principal principal, Model model, HttpSession session) {
         User user = (User) session.getAttribute("user");
+        String message="";
         ShoppingCart cart = scs.findByUserId(user.getId());
-
         ShoppingCartDto dto = new ShoppingCartDto();
         if (cart != null) {
             logger.info("Item Cart List - {}", cart.getCartItemList());
-            dto.setCartItems(cart.getCartItemList());
+            for(CartItem cartItem : cart.getCartItemList()) {
+                if (!cartItem.getProduct().isVisible()) {
+                    cartItem.setQty(0);
+                    cis.delete(cartItem);
+                    message="You Cart has been updated as one or more items were not available , Please select items again.";
+                    cart.getCartItemList().remove(cartItem);
+                }
+            }
             logger.info("Item Cart List - {}", dto.getCartItems());
         } else {
             cart = new ShoppingCart();
             cart.setUser(user);
             scs.save(cart);
         }
+        cart = scs.updateShoppingCart(scs.updateShoppingCart(scs.findByUserId(us.findByUsernameAndEnabled(principal.getName()).getId())));
+        dto.setCartItems(cart.getCartItemList());
         model.addAttribute("cartDtoForm", dto);
         session.setAttribute(CART_SIZE, cart.getTotalItems());
-        session.setAttribute("user" , user);
+        if (message != null) {
+        model.addAttribute("message" , message);}
         model.addAttribute("cart", cart);
         return "cart";
     }
 
-    /**
-     * Update cart redirect view.
-     *
-     * @param cartDtoForm the cart dto form
-     * @param principal   the principal
-     * @param session     the session
-     * @return the redirect view
-     */
     @PostMapping("/update")
     public RedirectView updateCart(@ModelAttribute ShoppingCartDto cartDtoForm, Principal principal, HttpSession session) {
         logger.info("Shopping Cart item size - {}", cartDtoForm.getCartItems().size());
+        session.setAttribute(CART_SIZE, updateCart(cartDtoForm.getCartItems(),principal.getName()).getTotalItems());
+        return new RedirectView("/cart/all");
+    }
 
-        cartDtoForm.getCartItems().forEach(cartItem -> {
+    private ShoppingCart updateCart(List<CartItem> cartItems , String  username)
+    {
+        cartItems.forEach(cartItem -> {
             CartItem updatedItem = cis.findById(cartItem.getId());
             logger.info("Updated Quantity {}", cartItem.getQty());
-            if (cartItem.getQty() == 0) {
+            if (cartItem.getQty() == 0 ) {
                 cis.delete(updatedItem);
             } else {
                 updatedItem.setQty(cartItem.getQty());
-                updatedItem.setSubTotal(updatedItem.getProduct().getMrpPrice().multiply(new BigDecimal(cartItem.getQty())));
+                updatedItem.setSubTotal(updatedItem.getProduct().getPriceWithoutGst().multiply(new BigDecimal(cartItem.getQty())));
+                updatedItem.setGrandTotal(updatedItem.getProduct().getSellingPrice().multiply(new BigDecimal(cartItem.getQty())));
                 cis.save(updatedItem);
             }
         });
-        ShoppingCart cart = scs.updateShoppingCart(scs.updateShoppingCart(scs.findByUserId(us.findByUsernameAndEnabled(principal.getName()).getId())));
-        session.setAttribute(CART_SIZE, cart.getTotalItems());
-        return new RedirectView("/cart/all");
+        ShoppingCart cart = scs.updateShoppingCart(scs.updateShoppingCart(scs.findByUserId(us.findByUsernameAndEnabled(username).getId())));
+        return cart;
     }
 }

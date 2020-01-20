@@ -13,9 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * The type Logging access denied handler.
- */
 @Component
 public class LoggingAccessDeniedHandler implements AccessDeniedHandler {
 
