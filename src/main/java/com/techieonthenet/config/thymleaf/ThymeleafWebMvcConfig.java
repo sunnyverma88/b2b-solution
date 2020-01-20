@@ -21,12 +21,23 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 
+/**
+ * The type Thymeleaf web mvc config.
+ */
 @Configuration
 public class ThymeleafWebMvcConfig implements WebMvcConfigurer {
 
+    /**
+     * The Context.
+     */
     @Autowired
     ApplicationContext context;
 
+    /**
+     * View resolver view resolver.
+     *
+     * @return the view resolver
+     */
     @Bean
     public ViewResolver viewResolver() {
         ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
@@ -34,6 +45,11 @@ public class ThymeleafWebMvcConfig implements WebMvcConfigurer {
         return viewResolver;
     }
 
+    /**
+     * Template engine spring template engine.
+     *
+     * @return the spring template engine
+     */
     @Bean
     public ISpringTemplateEngine templateEngine() {
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();

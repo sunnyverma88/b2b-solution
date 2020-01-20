@@ -10,6 +10,9 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+/**
+ * The type Cart item.
+ */
 @Entity
 @Getter
 @Setter

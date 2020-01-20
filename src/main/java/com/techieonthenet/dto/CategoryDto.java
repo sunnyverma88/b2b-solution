@@ -7,6 +7,9 @@ import lombok.Setter;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * The type Category dto.
+ */
 @Getter
 @Setter
 public class CategoryDto implements Serializable {

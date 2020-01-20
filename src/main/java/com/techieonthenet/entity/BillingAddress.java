@@ -9,6 +9,9 @@ import javax.persistence.OneToOne;
 import java.io.Serializable;
 
 
+/**
+ * The type Billing address.
+ */
 public class BillingAddress implements Serializable {
     private static final long serialVersionUID = 78293749582348L;
 

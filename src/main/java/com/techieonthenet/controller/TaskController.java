@@ -19,6 +19,9 @@ import org.springframework.web.servlet.view.RedirectView;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+/**
+ * The type Task controller.
+ */
 @RequestMapping("/task")
 @Controller
 public class TaskController {
@@ -30,6 +33,14 @@ public class TaskController {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    /**
+     * Gets all pending task by user.
+     *
+     * @param session the session
+     * @param model   the model
+     * @param message the message
+     * @return the all pending task by user
+     */
     @GetMapping("/pending")
     public String getAllPendingTaskByUser(HttpSession session, Model model, @RequestParam(name = "message", required = false) String message) {
         User user = (User) session.getAttribute("user");
@@ -42,6 +53,15 @@ public class TaskController {
         return "pending-tasks";
     }
 
+    /**
+     * Modify task redirect view.
+     *
+     * @param session            the session
+     * @param taskDto            the task dto
+     * @param redirectAttributes the redirect attributes
+     * @return the redirect view
+     * @throws Exception the exception
+     */
     @PostMapping("/modify")
     public RedirectView modifyTask(HttpSession session, @ModelAttribute TaskDto taskDto, RedirectAttributes redirectAttributes) throws Exception {
         try {

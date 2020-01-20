@@ -8,6 +8,9 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 
+/**
+ * The type Address.
+ */
 @Getter
 @Setter
 @Entity

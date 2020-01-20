@@ -1,10 +1,19 @@
 package com.techieonthenet.utils;
 
+/**
+ * The type App utils.
+ */
 public class AppUtils {
 
     private AppUtils() {
     }
 
+    /**
+     * Gets alpha numeric string.
+     *
+     * @param n the n
+     * @return the alpha numeric string
+     */
     public static String getAlphaNumericString(int n) {
 
         // chose a Character random from this String

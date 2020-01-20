@@ -9,6 +9,9 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
+/**
+ * The type Product.
+ */
 @Entity
 @Table(name = "Products")
 @Getter

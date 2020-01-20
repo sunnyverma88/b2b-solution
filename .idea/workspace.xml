@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="32ca6a31-512f-4623-a0c7-fb02235b95c0" name="Default Changelist" comment="Contacts Us form">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/edit-product.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/group-list.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/product-list.html" afterDir="false" />
+    <list default="true" id="32ca6a31-512f-4623-a0c7-fb02235b95c0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/BootstrapApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/BootstrapApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/config/LocalDateConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/config/LocalDateConverter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/config/security/LoggingAccessDeniedHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/config/security/LoggingAccessDeniedHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/config/security/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/config/security/WebSecurityConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/config/thymleaf/ThymeleafWebMvcConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/config/thymleaf/ThymeleafWebMvcConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/config/thymleaf/email/ThymleafEmailConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/config/thymleaf/email/ThymleafEmailConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/config/web/WebMvcConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/config/web/WebMvcConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/controller/CartController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/controller/CartController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/controller/CategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/controller/CategoryController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/controller/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/controller/DashboardController.java" afterDir="false" />
@@ -24,9 +23,11 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/dto/CartItemDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/dto/CartItemDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/dto/CategoryDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/dto/CategoryDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/dto/GroupDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/dto/GroupDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/dto/Pie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/dto/Pie.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/dto/ProductDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/dto/ProductDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/dto/ShippingAddressDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/dto/ShippingAddressDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/dto/ShoppingCartDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/dto/ShoppingCartDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/dto/TaskDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/dto/TaskDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/dto/UserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/dto/UserDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/entity/Address.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/entity/Address.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/entity/Authority.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/entity/Authority.java" afterDir="false" />
@@ -36,6 +37,7 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/entity/Group.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/entity/Group.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/entity/HsnCodeGstMapping.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/entity/HsnCodeGstMapping.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/entity/Image.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/entity/Image.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/entity/Mail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/entity/Mail.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/entity/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/entity/Order.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/entity/Payment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/entity/Payment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/entity/Privilege.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/entity/Privilege.java" afterDir="false" />
@@ -56,6 +58,7 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/entity/common/TaskType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/entity/common/TaskType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/exception/UserAlreadyExist.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/exception/UserAlreadyExist.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/exception/UserDefinedException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/exception/UserDefinedException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/interceptors/SessionAttributesInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/interceptors/SessionAttributesInterceptor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/repository/CartItemRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/repository/CartItemRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/repository/CategoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/repository/CategoryRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/repository/FileRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/repository/FileRepository.java" afterDir="false" />
@@ -71,6 +74,7 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/repository/amazon/s3/AmazonS3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/repository/amazon/s3/AmazonS3.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/service/CartItemService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/service/CartItemService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/service/CategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/service/CategoryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/service/EmailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/service/EmailService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/service/GroupService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/service/GroupService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/service/HsnCodeGstMappingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/service/HsnCodeGstMappingService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/service/InitDBService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/service/InitDBService.java" afterDir="false" />
@@ -79,6 +83,7 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/service/ProductService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/service/RoleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/service/RoleService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/service/SecurityService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/service/SecurityService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/service/SendGridEmailSenderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/service/SendGridEmailSenderService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/service/ShoppingCartService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/service/ShoppingCartService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/service/TaskService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/service/TaskService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/service/UserService.java" afterDir="false" />
@@ -96,16 +101,21 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/service/impl/UserDetailsServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/service/impl/UserDetailsServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/service/impl/UserServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/utils/AppUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/utils/AppUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/utils/DateUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/utils/DateUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/utils/PDFGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/utils/PDFGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application-local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-local.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/db/migration/V1__initial_scripts.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db/migration/V1__initial_scripts.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/add-category.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/add-category.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/add-group.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/add-group.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/add-product.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/add-product.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/add-user.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/add-user.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/cart.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/edit-product.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/edit-product.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/email/new-user.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/email/new-user.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/email/order-details.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/email/order-details.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/fragments/fragment-sidebar-menu.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/fragments/fragment-sidebar-menu.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/products.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/products.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/order-details.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/order-details.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/order-po.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/order-po.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/order.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/order.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/pending-tasks.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/pending-tasks.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/product-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/product-list.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -161,6 +171,7 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
@@ -401,7 +412,14 @@
       <option name="project" value="LOCAL" />
       <updated>1579280900773</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="enhancements--Product list and edit product screen">
+      <created>1579496341343</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1579496341343</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -426,7 +444,8 @@
     <MESSAGE value="Dashboard Changes" />
     <MESSAGE value="Graph changes" />
     <MESSAGE value="Contacts Us form" />
-    <option name="LAST_COMMIT_MESSAGE" value="Contacts Us form" />
+    <MESSAGE value="enhancements--Product list and edit product screen" />
+    <option name="LAST_COMMIT_MESSAGE" value="enhancements--Product list and edit product screen" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
 </project>

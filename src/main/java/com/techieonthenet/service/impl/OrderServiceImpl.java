@@ -17,12 +17,18 @@ import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * The type Order service.
+ */
 @Service
 public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private OrderRepository orderRepository;
 
+    /**
+     * The Task service.
+     */
     @Autowired
     TaskService taskService;
 

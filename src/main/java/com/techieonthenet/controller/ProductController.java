@@ -23,6 +23,9 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Product controller.
+ */
 @Controller
 @RequestMapping("/product")
 public class ProductController {
@@ -44,6 +47,14 @@ public class ProductController {
     @Autowired
     private HsnCodeGstMappingService hsnCodeGstMappingService;
 
+    /**
+     * Add product string.
+     *
+     * @param model     the model
+     * @param principal the principal
+     * @param session   the session
+     * @return the string
+     */
     @GetMapping("/add")
     public String addProduct(Model model, Principal principal, HttpSession session) {
 
@@ -53,6 +64,13 @@ public class ProductController {
         return "add-product";
     }
 
+    /**
+     * Add submitted product string.
+     *
+     * @param productDto the product dto
+     * @param model      the model
+     * @return the string
+     */
     @PostMapping("/add")
     public String addSubmittedProduct(@ModelAttribute ProductDto productDto, Model model) {
         logger.info("Adding Product  - Name - {}", productDto.getName());
@@ -73,6 +91,14 @@ public class ProductController {
         return "add-product";
     }
 
+    /**
+     * Edit submitted product redirect view.
+     *
+     * @param productDto         the product dto
+     * @param model              the model
+     * @param redirectAttributes the redirect attributes
+     * @return the redirect view
+     */
     @PostMapping("/edit")
     public RedirectView editSubmittedProduct(@ModelAttribute ProductDto productDto, Model model, RedirectAttributes redirectAttributes) {
         logger.info("Adding Product  - Name - {}", productDto.getName());
@@ -96,6 +122,12 @@ public class ProductController {
 
     }
 
+    /**
+     * Find all products string.
+     *
+     * @param model the model
+     * @return the string
+     */
     @Cacheable("products")
     @GetMapping("/all")
     public String findAllProducts(Model model) {
@@ -103,6 +135,14 @@ public class ProductController {
         return "products";
     }
 
+    /**
+     * Enable disable product redirect view.
+     *
+     * @param model     the model
+     * @param productId the product id
+     * @param action    the action
+     * @return the redirect view
+     */
     @GetMapping("/{productId}/{action}")
     public RedirectView enableDisableProduct(Model model, @PathVariable Long productId, @PathVariable String action) {
         Product product = productService.findById(productId);
@@ -116,7 +156,13 @@ public class ProductController {
     }
 
 
-
+    /**
+     * Gets all products for admin.
+     *
+     * @param model   the model
+     * @param message the message
+     * @return the all products for admin
+     */
     @GetMapping("/admin/all")
     public String getAllProductsForAdmin(Model model, @RequestParam(name = "message", required = false) String message) {
         if (message != null) {
@@ -126,6 +172,14 @@ public class ProductController {
         return "product-list";
     }
 
+    /**
+     * Gets order details.
+     *
+     * @param model     the model
+     * @param principal the principal
+     * @param productId the product id
+     * @return the order details
+     */
     @GetMapping("/{productId}/details")
     public String getOrderDetails(Model model, Principal principal, @PathVariable Long productId) {
         ProductDto productDto = convertProductToProductDto(productService.findById(productId));

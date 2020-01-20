@@ -33,11 +33,11 @@
                         <div class="container">
                             <div class="card">
                                 <div class="card-header">
-                                    Order # : <span th:text="${order.id}"/><br>
+                                    Order # : <span th:text="${order.id}"></span><br>
                                     Date -
                                     <strong th:text="${order.orderDate}"></strong>
                                     <span class="pull-right"> <strong>Status : </strong><span
-                                            th:text="${order.orderStatus.toString()}"/></span>
+                                            th:text="${order.orderStatus.toString()}"></span></span>
                                 </div>
                                 <div class="card-body">
                                     <hr>
@@ -70,10 +70,10 @@
                                                 <td class="center" th:text="${cartItem.product.name}"></td>
                                                 <td></td>
                                                 <td class="right"><span>&#x20b9;</span><span
-                                                        th:text="${cartItem.product.mrpPrice}"/></td>
+                                                        th:text="${cartItem.product.mrpPrice}"></span></td>
                                                 <td class="center" th:text="${cartItem.qty}">1</td>
                                                 <td style="text-align: right;"><span>&#x20b9;</span><span
-                                                        th:text="${cartItem.subTotal}"/></td>
+                                                        th:text="${cartItem.subTotal}"></span></td>
                                             </tr>
                                             </tbody>
                                         </table>
@@ -89,14 +89,14 @@
                                                         <strong>Subtotal</strong>
                                                     </td>
                                                     <td class="pull-right"><span>&#x20b9;</span><span
-                                                            th:text="${order.subTotal}"/></td>
+                                                            th:text="${order.subTotal}"></span></td>
                                                 </tr>
                                                 <tr>
                                                     <td class="left">
                                                         <strong>GST</strong>
                                                     </td>
                                                     <td class="pull-right"><span>&#x20b9;</span><span
-                                                            th:text="${order.gst}"/></td>
+                                                            th:text="${order.gst}"></span></td>
                                                 </tr>
                                                 <tr>
                                                     <td class="left">

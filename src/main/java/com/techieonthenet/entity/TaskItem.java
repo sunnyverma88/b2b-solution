@@ -11,6 +11,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/**
+ * The type Task item.
+ */
 @Entity
 @Table(name = "task_items")
 @Getter

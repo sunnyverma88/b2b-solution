@@ -20,14 +20,23 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Task service.
+ */
 @Service
 public class TaskServiceImpl implements TaskService {
 
     private static Logger logger = LoggerFactory.getLogger(TaskServiceImpl.class);
 
+    /**
+     * The Task repository.
+     */
     @Autowired
     TaskItemRepository taskRepository;
 
+    /**
+     * The Group service.
+     */
     @Autowired
     GroupService groupService;
 
@@ -59,6 +68,13 @@ public class TaskServiceImpl implements TaskService {
         createLevel1Task(group, order);
     }
 
+    /**
+     * Create level 1 task boolean.
+     *
+     * @param group the group
+     * @param order the order
+     * @return the boolean
+     */
     public boolean createLevel1Task(Group group, Order order) {
         boolean taskCreated = false;
         List<User> users = groupService.findById(group.getId()).getUsers();
@@ -82,6 +98,14 @@ public class TaskServiceImpl implements TaskService {
         return taskCreated;
     }
 
+    /**
+     * Create level 2 task boolean.
+     *
+     * @param group      the group
+     * @param order      the order
+     * @param parentTask the parent task
+     * @return the boolean
+     */
     public boolean createLevel2Task(Group group, Order order, TaskItem parentTask) {
         boolean taskCreated = false;
         List<User> users = groupService.findById(group.getId()).getUsers();
