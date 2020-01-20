@@ -24,7 +24,7 @@ public class UserDefinedException extends RuntimeException {
     /**
      * The constant MRP_GREATER_THAN_SELLING_PRICE.
      */
-    public static final String MRP_GREATER_THAN_SELLING_PRICE = "MRP Greater than Selling Price.";
+    public static final String SELLING_GREATER_THAN_MRP_PRICE = "Selling Price Greater than MRP Price.";
 
 
     /**
