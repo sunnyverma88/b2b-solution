@@ -77,7 +77,7 @@ public class ProductController {
 
         try {
             if (productDto.getSellingPrice().subtract(productDto.getMrpPrice()).intValue() > 0) {
-                throw new UserDefinedException(UserDefinedException.SELLING_GREATER_THAN_MRP_PRICE);
+                throw new UserDefinedException(UserDefinedException.MRP_GREATER_THAN_SELLING_PRICE);
             }
             productService.save(convertProductDtoToProduct(productDto));
             model.addAttribute("product", new ProductDto());
@@ -105,7 +105,7 @@ public class ProductController {
         String message = "";
         try {
             if (productDto.getSellingPrice().subtract(productDto.getMrpPrice()).intValue() > 0) {
-                throw new UserDefinedException(UserDefinedException.SELLING_GREATER_THAN_MRP_PRICE);
+                throw new UserDefinedException(UserDefinedException.MRP_GREATER_THAN_SELLING_PRICE);
             }
             productService.save(convertProductDtoToProduct(productDto));
             model.addAttribute("product", productDto);
