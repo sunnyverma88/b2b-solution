@@ -13,6 +13,9 @@ import java.io.IOException;
 import java.util.Map;
 
 
+/**
+ * The type Email service.
+ */
 @Service
 public class EmailService {
 
@@ -23,6 +26,16 @@ public class EmailService {
     private SpringTemplateEngine templateEngine;
 
 
+    /**
+     * Send simple message.
+     *
+     * @param toEmail      the to email
+     * @param subject      the subject
+     * @param valueMap     the value map
+     * @param templateName the template name
+     * @throws MessagingException the messaging exception
+     * @throws IOException        the io exception
+     */
     public void sendSimpleMessage(String toEmail, String subject, Map<String, Object> valueMap, String templateName) throws MessagingException, IOException {
 
         Context context = new Context();

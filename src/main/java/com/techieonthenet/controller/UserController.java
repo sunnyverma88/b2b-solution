@@ -26,6 +26,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * The type User controller.
+ */
 @Controller
 @RequestMapping("/user")
 public class UserController {
@@ -40,9 +43,20 @@ public class UserController {
     @Autowired
     private ModelMapper modelMapper;
 
+    /**
+     * The Email service.
+     */
     @Autowired
     EmailService emailService;
 
+    /**
+     * Add user string.
+     *
+     * @param model     the model
+     * @param principal the principal
+     * @param message   the message
+     * @return the string
+     */
     @GetMapping("/add")
     public String addUser(Model model, Principal principal, @RequestParam(name = "message", required = false) String message) {
         model.addAttribute("roles", roleService.findAll());
@@ -54,6 +68,13 @@ public class UserController {
         return "add-user";
     }
 
+    /**
+     * Add submitted user redirect view.
+     *
+     * @param userDto            the user dto
+     * @param redirectAttributes the redirect attributes
+     * @return the redirect view
+     */
     @PostMapping("/add")
     public RedirectView addSubmittedUser(@ModelAttribute UserDto userDto, RedirectAttributes redirectAttributes) {
         String message = "";
@@ -97,6 +118,14 @@ public class UserController {
         emailService.sendSimpleMessage(user.getEmail(), subject, valueMap, templateName);
     }
 
+    /**
+     * Forgot password redirect view.
+     *
+     * @param userDto the user dto
+     * @return the redirect view
+     * @throws IOException        the io exception
+     * @throws MessagingException the messaging exception
+     */
     @PostMapping("/forgotPwd")
     public RedirectView forgotPassword(@ModelAttribute UserDto userDto) throws IOException, MessagingException {
         try {

@@ -15,9 +15,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.security.Principal;
 
+/**
+ * The type Session attributes interceptor.
+ */
 public class SessionAttributesInterceptor implements HandlerInterceptor {
 
     private static Logger logger = LoggerFactory.getLogger(SessionAttributesInterceptor.class);
+    /**
+     * The Task service.
+     */
     @Autowired
     TaskService taskService;
     @Autowired
@@ -43,6 +49,12 @@ public class SessionAttributesInterceptor implements HandlerInterceptor {
         return true;
     }
 
+    /**
+     * Load session attributes.
+     *
+     * @param principal the principal
+     * @param session   the session
+     */
     public void loadSessionAttributes(Principal principal, HttpSession session) {
         logger.info("User - " + principal.getName());
         User user = us.findByUsernameAndEnabled(principal.getName());

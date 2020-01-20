@@ -10,6 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import java.io.Serializable;
 
+/**
+ * The type Shipping address.
+ */
 @Getter
 @Setter
 public class ShippingAddress extends Address implements Serializable {

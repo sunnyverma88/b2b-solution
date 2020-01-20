@@ -8,9 +8,17 @@ import org.thymeleaf.templatemode.TemplateMode;
 
 import java.nio.charset.StandardCharsets;
 
+/**
+ * The type Thymleaf email config.
+ */
 @Configuration
 public class ThymleafEmailConfig {
 
+    /**
+     * Spring template engine spring template engine.
+     *
+     * @return the spring template engine
+     */
     @Bean
     public SpringTemplateEngine springTemplateEngine() {
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
@@ -18,6 +26,11 @@ public class ThymleafEmailConfig {
         return templateEngine;
     }
 
+    /**
+     * Html template resolver spring resource template resolver.
+     *
+     * @return the spring resource template resolver
+     */
     @Bean
     public SpringResourceTemplateResolver htmlTemplateResolver() {
         SpringResourceTemplateResolver emailTemplateResolver = new SpringResourceTemplateResolver();

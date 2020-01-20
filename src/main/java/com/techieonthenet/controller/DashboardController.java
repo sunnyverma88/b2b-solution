@@ -21,6 +21,9 @@ import java.security.Principal;
 import java.time.format.TextStyle;
 import java.util.*;
 
+/**
+ * The type Dashboard controller.
+ */
 @Controller
 public class DashboardController {
 
@@ -29,6 +32,14 @@ public class DashboardController {
     @Autowired
     private OrderService orderService;
 
+    /**
+     * Dash page string.
+     *
+     * @param principal the principal
+     * @param model     the model
+     * @param session   the session
+     * @return the string
+     */
     @GetMapping("/dashboard")
     public String dashPage(Principal principal, Model model, HttpSession session) {
         User user = (User) session.getAttribute("user");

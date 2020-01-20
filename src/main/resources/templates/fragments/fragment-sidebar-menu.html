@@ -12,7 +12,6 @@
             <li><a href="/order/history" sec:authorize="hasAuthority('PRIV_VIEW_PRODUCT')"><i class="fa fa-dashcube"></i>Order History</a>
             <li><a href="/order/history/group" sec:authorize="hasAuthority('PRIV_VIEW_PRODUCT')"><i class="fa fa-asterisk"></i>Group History</a>
             <li><a href="/task/pending" sec:authorize="hasAuthority('PRIV_APPROVERS')"><i class="fa fa-thumbs-up"></i>Approvals</a></li>
-            </li>
         </ul>
     </div>
     <div class="menu_section" sec:authorize="hasAuthority('PRIV_ADMIN_CAP')">

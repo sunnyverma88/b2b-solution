@@ -8,10 +8,27 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * The interface Task item repository.
+ */
 @Repository
 public interface TaskItemRepository extends PagingAndSortingRepository<TaskItem, Long> {
 
+    /**
+     * Find by users and task status list.
+     *
+     * @param users  the users
+     * @param status the status
+     * @return the list
+     */
     List<TaskItem> findByUsersAndTaskStatus(List<User> users, TaskStatus status);
 
+    /**
+     * Find by parent task item and task status task item.
+     *
+     * @param taskItem   the task item
+     * @param taskStatus the task status
+     * @return the task item
+     */
     TaskItem findByParentTaskItemAndTaskStatus(TaskItem taskItem, TaskStatus taskStatus);
 }

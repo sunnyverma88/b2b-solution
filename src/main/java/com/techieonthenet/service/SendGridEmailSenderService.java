@@ -6,12 +6,21 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
+/**
+ * The type Send grid email sender service.
+ */
 @Service
 public class SendGridEmailSenderService {
 
     @Value("${sendgrid.api.key}")
     private String sendGridApiKey;
 
+    /**
+     * Send email.
+     *
+     * @param mail the mail
+     * @throws IOException the io exception
+     */
     public void sendEmail(Mail mail) throws IOException {
 
         SendGrid sg = new SendGrid(sendGridApiKey);

@@ -22,6 +22,9 @@ import java.math.BigDecimal;
 import java.security.Principal;
 import java.util.List;
 
+/**
+ * The type Cart controller.
+ */
 @Controller
 @RequestMapping("/cart")
 public class CartController {
@@ -37,6 +40,14 @@ public class CartController {
     @Autowired
     private ShoppingCartService scs;
 
+    /**
+     * Add redirect view.
+     *
+     * @param productId the product id
+     * @param principal the principal
+     * @param session   the session
+     * @return the redirect view
+     */
     @GetMapping(value = "/add/{pid}")
     public RedirectView add(@PathVariable(name = "pid") Long productId, Principal principal, HttpSession session) {
 
@@ -53,6 +64,14 @@ public class CartController {
         return new RedirectView("/product/all");
     }
 
+    /**
+     * Gets all cart items.
+     *
+     * @param principal the principal
+     * @param model     the model
+     * @param session   the session
+     * @return the all cart items
+     */
     @GetMapping(value = "/all")
     public String getAllCartItems(Principal principal, Model model, HttpSession session) {
         User user = (User) session.getAttribute("user");
@@ -85,6 +104,14 @@ public class CartController {
         return "cart";
     }
 
+    /**
+     * Update cart redirect view.
+     *
+     * @param cartDtoForm the cart dto form
+     * @param principal   the principal
+     * @param session     the session
+     * @return the redirect view
+     */
     @PostMapping("/update")
     public RedirectView updateCart(@ModelAttribute ShoppingCartDto cartDtoForm, Principal principal, HttpSession session) {
         logger.info("Shopping Cart item size - {}", cartDtoForm.getCartItems().size());
@@ -106,7 +133,6 @@ public class CartController {
                 cis.save(updatedItem);
             }
         });
-        ShoppingCart cart = scs.updateShoppingCart(scs.updateShoppingCart(scs.findByUserId(us.findByUsernameAndEnabled(username).getId())));
-        return cart;
+        return scs.updateShoppingCart(scs.findByUserId(us.findByUsernameAndEnabled(username).getId()));
     }
 }

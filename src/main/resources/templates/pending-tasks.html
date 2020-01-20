@@ -45,13 +45,13 @@
 
                                                 <p class="card-text">
                                                     Task # : <span id="task" th:text="${task.id}"></span><br>
-                                                    Order # : <span th:text="${task.order.id}"/><br>
+                                                    Order # : <span th:text="${task.order.id}"></span><br>
                                                     Date -
                                                     <strong th:text="${task.order.orderDate}"></strong><br>
                                                     Order Placed By : <span
                                                         th:text="${task.order.user.firstName}"></span>
                                                     <span class="pull-right"> <strong>Status : </strong><span
-                                                            th:text="${task.order.orderStatus}"/></span>
+                                                            th:text="${task.order.orderStatus}"></span></span>
                                                 </p>
                                                 <p class="card-text">
                                                 <table class="table table-striped">
@@ -71,10 +71,10 @@
                                                         <td class="center" th:text="${cartItem.product.name}"></td>
                                                         <td></td>
                                                         <td class="right"><span>&#x20b9;</span><span
-                                                                th:text="${cartItem.product.mrpPrice}"/></td>
+                                                                th:text="${cartItem.product.mrpPrice}"></span></td>
                                                         <td class="center" th:text="${cartItem.qty}">1</td>
                                                         <td style="text-align: right;"><span>&#x20b9;</span><span
-                                                                th:text="${cartItem.subTotal}"/></td>
+                                                                th:text="${cartItem.subTotal}"></span></td>
                                                     </tr>
                                                     </tbody>
                                                 </table>
@@ -87,14 +87,14 @@
                                                                     <strong>Subtotal</strong>
                                                                 </td>
                                                                 <td class="pull-right"><span>&#x20b9;</span><span
-                                                                        th:text="${task.order.subTotal}"/></td>
+                                                                        th:text="${task.order.subTotal}"></span></td>
                                                             </tr>
                                                             <tr>
                                                                 <td class="left">
                                                                     <strong>GST</strong>
                                                                 </td>
                                                                 <td class="pull-right"><span>&#x20b9;</span><span
-                                                                        th:text="${task.order.gst}"/></td>
+                                                                        th:text="${task.order.gst}"></span></td>
                                                             </tr>
                                                             <tr>
                                                                 <td class="left">

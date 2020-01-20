@@ -9,6 +9,9 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
+/**
+ * The type Product.
+ */
 @Entity
 @Table(name = "Products")
 @Getter
@@ -39,7 +42,7 @@ public class Product extends Auditable implements Serializable {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.DETACH)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<Image> imgList;
 
 }

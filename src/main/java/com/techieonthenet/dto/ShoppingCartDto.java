@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+/**
+ * The type Shopping cart dto.
+ */
 @Getter
 @Setter
 public class ShoppingCartDto {
@@ -19,6 +22,9 @@ public class ShoppingCartDto {
     private BigDecimal cartTotal;
     private int totalItems;
 
+    /**
+     * Instantiates a new Shopping cart dto.
+     */
     public ShoppingCartDto() {
         //default constructor
     }

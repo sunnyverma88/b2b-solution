@@ -6,6 +6,9 @@ import com.techieonthenet.service.HsnCodeGstMappingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * The type Hsn code gst mapping service.
+ */
 @Service
 public class HsnCodeGstMappingServiceImpl implements HsnCodeGstMappingService {
 
