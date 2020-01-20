@@ -76,8 +76,8 @@ public class ProductController {
         logger.info("Adding Product  - Name - {}", productDto.getName());
 
         try {
-            if (productDto.getMrpPrice().subtract(productDto.getSellingPrice()).intValue() > 0) {
-                throw new UserDefinedException(UserDefinedException.MRP_GREATER_THAN_SELLING_PRICE);
+            if (productDto.getSellingPrice().subtract(productDto.getMrpPrice()).intValue() > 0) {
+                throw new UserDefinedException(UserDefinedException.SELLING_GREATER_THAN_MRP_PRICE);
             }
             productService.save(convertProductDtoToProduct(productDto));
             model.addAttribute("product", new ProductDto());
@@ -104,8 +104,8 @@ public class ProductController {
         logger.info("Adding Product  - Name - {}", productDto.getName());
         String message = "";
         try {
-            if (productDto.getMrpPrice().subtract(productDto.getSellingPrice()).intValue() > 0) {
-                throw new UserDefinedException(UserDefinedException.MRP_GREATER_THAN_SELLING_PRICE);
+            if (productDto.getSellingPrice().subtract(productDto.getMrpPrice()).intValue() > 0) {
+                throw new UserDefinedException(UserDefinedException.SELLING_GREATER_THAN_MRP_PRICE);
             }
             productService.save(convertProductDtoToProduct(productDto));
             model.addAttribute("product", productDto);
@@ -154,7 +154,6 @@ public class ProductController {
         productService.save(product);
         return new RedirectView("/product/admin/all");
     }
-
 
     /**
      * Gets all products for admin.
