@@ -6,9 +6,6 @@ import com.techieonthenet.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/**
- * The type Category service.
- */
 @Service
 public class CategoryServiceImpl implements CategoryService {
 

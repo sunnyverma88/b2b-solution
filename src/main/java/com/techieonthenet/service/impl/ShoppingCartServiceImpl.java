@@ -12,12 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.util.List;
 
-/**
- * The type Shopping cart service.
- */
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
 
@@ -59,15 +55,16 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         int totalItems = 0;
         List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
         for (CartItem cartItem : cartItemList) {
+            if(cartItem.getQty() == 0 ) {
+                cartItemService.delete(cartItem);}
+            else {
             cartTotal = cartTotal.add(cartItem.getSubTotal());
-            gst = gst.add(new BigDecimal(hsnCodeGstMappingService.findByHsnCode(
-                    cartItem.getProduct().getHsnCode()).getGstPercentage()).
-                    multiply(cartItem.getSubTotal()));
+            gst = gst.add(cartItem.getProduct().getGst().multiply(new BigDecimal(cartItem.getQty())));
             logger.info("Cart Item {} Quantity -  {}", cartItem.getProduct().getName(), cartItem.getQty());
             totalItems += cartItem.getQty();
-            logger.info("Total Quantity - {} ", totalItems);
+            logger.info("Total Quantity - {} ", totalItems);}
         }
-        shoppingCart.setGst(gst.divide(new BigDecimal(100)).round(MathContext.DECIMAL32));
+        shoppingCart.setGst(gst);
         shoppingCart.setCartTotal(cartTotal);
         shoppingCart.setGrandTotal(cartTotal.add(shoppingCart.getGst()));
         shoppingCart.setTotalItems(totalItems);
@@ -92,5 +89,6 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
         return shoppingCartRepository.save(shoppingCart);
     }
+
 
 }

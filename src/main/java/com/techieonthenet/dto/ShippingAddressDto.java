@@ -3,9 +3,6 @@ package com.techieonthenet.dto;
 import lombok.Getter;
 import lombok.Setter;
 
-/**
- * The type Shipping address dto.
- */
 @Getter
 @Setter
 public class ShippingAddressDto {

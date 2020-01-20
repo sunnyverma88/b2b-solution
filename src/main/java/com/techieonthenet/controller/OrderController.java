@@ -21,9 +21,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * The type Order controller.
- */
 @Controller
 @RequestMapping("/order")
 public class OrderController {
@@ -52,14 +49,6 @@ public class OrderController {
     @Autowired
     private EmailService emailService;
 
-    /**
-     * Gets order details.
-     *
-     * @param model     the model
-     * @param principal the principal
-     * @param message   the message
-     * @return the order details
-     */
     @GetMapping("/details")
     public String getOrderDetails(Model model, Principal principal, @RequestParam(name = "message", required = false) String message) {
         User user = userService.findByUsernameAndEnabled(principal.getName());
@@ -80,14 +69,6 @@ public class OrderController {
         return "order";
     }
 
-    /**
-     * Save order redirect view.
-     *
-     * @param dto                the dto
-     * @param redirectAttributes the redirect attributes
-     * @param session            the session
-     * @return the redirect view
-     */
     @PostMapping("/save")
     public RedirectView saveOrder(@ModelAttribute ShippingAddressDto dto, RedirectAttributes redirectAttributes, HttpSession session) {
         String url = "";
@@ -112,14 +93,6 @@ public class OrderController {
         return new RedirectView(url);
     }
 
-    /**
-     * Gets order confirmation.
-     *
-     * @param model     the model
-     * @param principal the principal
-     * @param orderId   the order id
-     * @return the order confirmation
-     */
     @GetMapping("/{orderId}/po")
     public String getOrderConfirmation(Model model, Principal principal, @PathVariable Long orderId) {
         Order order = orderService.findById(orderId);
@@ -127,14 +100,6 @@ public class OrderController {
         return "order-po";
     }
 
-    /**
-     * Gets order details.
-     *
-     * @param model     the model
-     * @param principal the principal
-     * @param orderId   the order id
-     * @return the order details
-     */
     @GetMapping("/{orderId}/details")
     public String getOrderDetails(Model model, Principal principal, @PathVariable Long orderId) {
         Order order = orderService.findById(orderId);
@@ -142,13 +107,6 @@ public class OrderController {
         return "order-details";
     }
 
-    /**
-     * Gets order history for user.
-     *
-     * @param model   the model
-     * @param session the session
-     * @return the order history for user
-     */
     @GetMapping("/history")
     public String getOrderHistoryForUser(Model model, HttpSession session) {
         User user = (User) session.getAttribute("user");
@@ -157,13 +115,6 @@ public class OrderController {
         return "order-history";
     }
 
-    /**
-     * Gets order history for group.
-     *
-     * @param model   the model
-     * @param session the session
-     * @return the order history for group
-     */
     @GetMapping("/history/group")
     public String getOrderHistoryForGroup(Model model, HttpSession session) {
         User user = (User) session.getAttribute("user");

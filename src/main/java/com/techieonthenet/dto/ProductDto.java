@@ -5,18 +5,16 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 
-/**
- * The type Product dto.
- */
 @Getter
 @Setter
 public class ProductDto {
 
+    private Long id;
     private String name;
     private String brand;
     private String description;
     private String specifications;
-    private BigDecimal actualPrice;
+    private BigDecimal sellingPrice;
     private BigDecimal mrpPrice;
     private String imgUrl;
     private Long categoryId;

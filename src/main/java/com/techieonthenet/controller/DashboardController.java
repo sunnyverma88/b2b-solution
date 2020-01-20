@@ -21,9 +21,6 @@ import java.security.Principal;
 import java.time.format.TextStyle;
 import java.util.*;
 
-/**
- * The type Page controller.
- */
 @Controller
 public class DashboardController {
 

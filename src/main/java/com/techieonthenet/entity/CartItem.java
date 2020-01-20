@@ -10,9 +10,6 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-/**
- * The type Cart item.
- */
 @Entity
 @Getter
 @Setter
@@ -26,6 +23,7 @@ public class CartItem extends Auditable implements Serializable {
     private Long id;
     private int qty;
     private BigDecimal subTotal;
+    private BigDecimal grandTotal;
 
     @Convert(converter = LocalDateConverter.class)
     private LocalDate deliveryDate;
@@ -34,7 +32,7 @@ public class CartItem extends Auditable implements Serializable {
     @JoinColumn(name = "product_id", referencedColumnName = "id")
     private Product product;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "shopping_cart_id")
     private ShoppingCart shoppingCart;
 

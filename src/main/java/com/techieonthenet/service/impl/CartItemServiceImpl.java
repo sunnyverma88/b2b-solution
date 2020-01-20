@@ -13,9 +13,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
-/**
- * The type Cart item service.
- */
 @Service
 public class CartItemServiceImpl implements CartItemService {
 
@@ -51,7 +48,8 @@ public class CartItemServiceImpl implements CartItemService {
             for (CartItem cartItem : cartItemList) {
                 if (product.getId() == cartItem.getProduct().getId()) {
                     cartItem.setQty(cartItem.getQty() + qty);
-                    cartItem.setSubTotal(product.getMrpPrice().multiply(new BigDecimal(cartItem.getQty())));
+                    cartItem.setSubTotal(product.getPriceWithoutGst().multiply(new BigDecimal(cartItem.getQty())));
+                    cartItem.setGrandTotal(product.getSellingPrice().multiply(new BigDecimal(cartItem.getQty())));
                     cartItem.setDeliveryDate(estimatedDeliveryDate);
                     cartItem.setShoppingCart(cart);
                     cartItemRepository.save(cartItem);
@@ -65,7 +63,8 @@ public class CartItemServiceImpl implements CartItemService {
         cartItem.setProduct(product);
         cartItem.setQty(qty);
         cartItem.setDeliveryDate(estimatedDeliveryDate);
-        cartItem.setSubTotal(product.getMrpPrice().multiply(new BigDecimal(qty)));
+        cartItem.setSubTotal(product.getPriceWithoutGst().multiply(new BigDecimal(qty)));
+        cartItem.setGrandTotal(product.getSellingPrice().multiply(new BigDecimal(qty)));
         cartItem = cartItemRepository.save(cartItem);
         shoppingCartService.updateShoppingCart(cart);
         return true;
@@ -77,6 +76,6 @@ public class CartItemServiceImpl implements CartItemService {
     }
 
     public void delete(CartItem item) {
-        cartItemRepository.delete(item);
+        cartItemRepository.deleteById(item.getId());
     }
 }

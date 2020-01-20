@@ -10,9 +10,6 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
 
-/**
- * The type Role.
- */
 @Entity
 @Table(name = "App_Roles")
 @Getter

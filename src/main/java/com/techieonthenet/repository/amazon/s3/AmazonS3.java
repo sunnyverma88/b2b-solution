@@ -9,9 +9,6 @@ import software.amazon.awssdk.services.s3.model.*;
 import java.nio.ByteBuffer;
 import java.util.Optional;
 
-/**
- * The type Amazon s 3.
- */
 public class AmazonS3 implements FileRepository {
 
     private Region defaultRegion = Region.US_EAST_1;

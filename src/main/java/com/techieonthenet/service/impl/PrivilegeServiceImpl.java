@@ -8,15 +8,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/**
- * The type Privilege service.
- */
 @Service
 public class PrivilegeServiceImpl implements PrivilegeService {
 
-    /**
-     * The Privilege repository.
-     */
     @Autowired
     PrivilegeRepository privilegeRepository;
     private static Logger LOGGER = LoggerFactory.getLogger(RoleServiceImpl.class);

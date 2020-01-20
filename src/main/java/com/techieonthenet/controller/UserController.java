@@ -26,9 +26,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * The type User controller.
- */
 @Controller
 @RequestMapping("/user")
 public class UserController {
@@ -46,14 +43,6 @@ public class UserController {
     @Autowired
     EmailService emailService;
 
-    /**
-     * Add user string.
-     *
-     * @param model     the model
-     * @param principal the principal
-     * @param message   the message
-     * @return the string
-     */
     @GetMapping("/add")
     public String addUser(Model model, Principal principal, @RequestParam(name = "message", required = false) String message) {
         model.addAttribute("roles", roleService.findAll());
@@ -65,14 +54,6 @@ public class UserController {
         return "add-user";
     }
 
-    /**
-     * Add submitted user redirect view.
-     *
-     * @param userDto            the user dto
-     * @param model              the model
-     * @param redirectAttributes the redirect attributes
-     * @return the redirect view
-     */
     @PostMapping("/add")
     public RedirectView addSubmittedUser(@ModelAttribute UserDto userDto, RedirectAttributes redirectAttributes) {
         String message = "";

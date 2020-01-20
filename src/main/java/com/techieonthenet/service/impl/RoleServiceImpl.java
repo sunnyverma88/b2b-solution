@@ -11,15 +11,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
-/**
- * The type Role service.
- */
 @Service
 public class RoleServiceImpl implements RoleService {
 
-    /**
-     * The Role repo.
-     */
     @Autowired
     RoleRepository roleRepo;
 

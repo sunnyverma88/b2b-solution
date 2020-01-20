@@ -6,9 +6,6 @@ import lombok.Setter;
 
 import java.io.Serializable;
 
-/**
- * The type User dto.
- */
 @Getter
 @Setter
 public class UserDto implements Serializable {

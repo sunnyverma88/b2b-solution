@@ -8,9 +8,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * The type Category.
- */
 @Entity
 @Table(name = "CATEGORY")
 @Getter
