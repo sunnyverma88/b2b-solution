@@ -42,7 +42,7 @@ public class Product extends Auditable implements Serializable {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.DETACH)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<Image> imgList;
 
 }
