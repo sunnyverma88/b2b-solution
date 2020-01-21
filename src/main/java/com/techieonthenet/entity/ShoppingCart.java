@@ -30,7 +30,7 @@ public class ShoppingCart extends Auditable implements Serializable {
     private BigDecimal cartTotal = new BigDecimal(0);
     private int totalItems= 0;
 
-    @OneToMany(mappedBy = "shoppingCart", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "shoppingCart", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private List<CartItem> cartItemList = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.DETACH)

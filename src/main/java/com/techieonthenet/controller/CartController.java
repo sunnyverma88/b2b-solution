@@ -83,9 +83,9 @@ public class CartController {
             for(CartItem cartItem : cart.getCartItemList()) {
                 if (!cartItem.getProduct().isVisible()) {
                     cartItem.setQty(0);
-                    cis.delete(cartItem);
                     message="You Cart has been updated as one or more items were not available , Please select items again.";
                     cart.getCartItemList().remove(cartItem);
+                    cis.delete(cartItem);
                 }
             }
             logger.info("Item Cart List - {}", dto.getCartItems());
