@@ -50,7 +50,6 @@ public class CartController {
      */
     @GetMapping(value = "/add/{pid}")
     public RedirectView add(@PathVariable(name = "pid") Long productId, Principal principal, HttpSession session) {
-
         Product product = ps.findById(productId);
         User user = (User) session.getAttribute("user");
         ShoppingCart cart = scs.findByUserId(user.getId());
@@ -75,17 +74,17 @@ public class CartController {
     @GetMapping(value = "/all")
     public String getAllCartItems(Principal principal, Model model, HttpSession session) {
         User user = (User) session.getAttribute("user");
-        String message="";
+        String message = "";
         ShoppingCart cart = scs.findByUserId(user.getId());
         ShoppingCartDto dto = new ShoppingCartDto();
         if (cart != null) {
             logger.info("Item Cart List - {}", cart.getCartItemList());
-            for(CartItem cartItem : cart.getCartItemList()) {
+            for (CartItem cartItem : cart.getCartItemList()) {
                 if (!cartItem.getProduct().isVisible()) {
-                    cartItem.setQty(0);
-                    message="You Cart has been updated as one or more items were not available , Please select items again.";
+                    message = "You Cart has been updated as one or more items were not available , Please select items again.";
                     cart.getCartItemList().remove(cartItem);
                     cis.delete(cartItem);
+                    if (cart.getCartItemList().isEmpty()) { break;}
                 }
             }
             logger.info("Item Cart List - {}", dto.getCartItems());
@@ -98,8 +97,10 @@ public class CartController {
         dto.setCartItems(cart.getCartItemList());
         model.addAttribute("cartDtoForm", dto);
         session.setAttribute(CART_SIZE, cart.getTotalItems());
-        if (message != null) {
-        model.addAttribute("message" , message);}
+        logger.info(message);
+        if (message.isEmpty()) {
+            model.addAttribute("message", message);
+        }
         model.addAttribute("cart", cart);
         return "cart";
     }
@@ -115,16 +116,15 @@ public class CartController {
     @PostMapping("/update")
     public RedirectView updateCart(@ModelAttribute ShoppingCartDto cartDtoForm, Principal principal, HttpSession session) {
         logger.info("Shopping Cart item size - {}", cartDtoForm.getCartItems().size());
-        session.setAttribute(CART_SIZE, updateCart(cartDtoForm.getCartItems(),principal.getName()).getTotalItems());
+        session.setAttribute(CART_SIZE, updateCart(cartDtoForm.getCartItems(), principal.getName()).getTotalItems());
         return new RedirectView("/cart/all");
     }
 
-    private ShoppingCart updateCart(List<CartItem> cartItems , String  username)
-    {
+    private ShoppingCart updateCart(List<CartItem> cartItems, String username) {
         cartItems.forEach(cartItem -> {
             CartItem updatedItem = cis.findById(cartItem.getId());
             logger.info("Updated Quantity {}", cartItem.getQty());
-            if (cartItem.getQty() == 0 ) {
+            if (cartItem.getQty() == 0) {
                 cis.delete(updatedItem);
             } else {
                 updatedItem.setQty(cartItem.getQty());
