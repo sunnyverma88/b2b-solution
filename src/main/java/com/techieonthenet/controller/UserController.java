@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.mail.MessagingException;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.HashMap;
@@ -97,6 +98,24 @@ public class UserController {
         return new RedirectView("/user/add");
     }
 
+    @PostMapping("/changePassword")
+    public RedirectView changePassword(HttpSession session, @ModelAttribute UserDto userDto , RedirectAttributes redirectAttributes) {
+        String message = "";
+        User user= (User) session.getAttribute("user");
+        try {
+            user.setPassword(userDto.getPassword());
+            user.setPasswordResetRequired(Boolean.FALSE);
+            message = "Password change was successful. You must use your new password for next time login";
+            userService.save(user);
+        } catch (Exception e) {
+            logger.error("Exception adding user {}", e.getMessage());
+            message = "Something Went Wrong ! Please contact administrator  -  Exception - " + e.getMessage();
+
+        }
+        redirectAttributes.addFlashAttribute("message", message);
+        return new RedirectView("/dashboard");
+    }
+
     private User convertUserDtoToUser(UserDto userDto) {
         User user = new User();
         user.setFirstName(userDto.getFirstName());
@@ -134,7 +153,7 @@ public class UserController {
             user.setPasswordResetRequired(true);
             String generatedPwd = AppUtils.getAlphaNumericString(8);
             user.setPassword(generatedPwd);
-            sendEmailToUser(user, generatedPwd, "new-user", "Welcome to Apprize !!");
+            sendEmailToUser(user, generatedPwd, "forgot-pwd", "Reset Password Confirmation !!");
             userService.save(user);
         } catch (final Exception e) {
             throw new RuntimeException(e);

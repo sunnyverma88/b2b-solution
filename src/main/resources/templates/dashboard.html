@@ -3,12 +3,16 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Pricing Tables</title>
+    <title>Apprize - Dashboard</title>
 </head>
 
 <body>
 <div class="right_col" data-layout-fragment="content" role="main">
     <!-- top tiles -->
+
+    <div class="alert alert-success alert-dismissible"  th:if="${message}" th:text="${message}">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    </div>
     <div class="row">
         <div class="tile_count">
             <div class="col-md-3 col-sm-6  tile_stats_count">
@@ -36,7 +40,9 @@
     <!-- /top tiles -->
 
     <div class="row">
+
         <div class="col-md-12 col-sm-12 ">
+
             <div class="dashboard_graph">
 
                 <div class="row x_title">

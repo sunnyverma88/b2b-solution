@@ -7,6 +7,8 @@ import com.techieonthenet.entity.common.OrderStatus;
 import com.techieonthenet.repository.OrderRepository;
 import com.techieonthenet.service.OrderService;
 import com.techieonthenet.service.TaskService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -23,6 +25,8 @@ import java.util.List;
 @Service
 public class OrderServiceImpl implements OrderService {
 
+    private static Logger logger = LoggerFactory.getLogger(OrderServiceImpl.class);
+
     @Autowired
     private OrderRepository orderRepository;
 
@@ -34,7 +38,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Iterable<Order> findAll() {
-        return orderRepository.findAll();
+        Pageable paging =PageRequest.of(0,25,Sort.by("id").descending());
+        return orderRepository.findAll(paging).getContent();
     }
 
     @Override

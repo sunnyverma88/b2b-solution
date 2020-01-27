@@ -10,6 +10,7 @@ import com.techieonthenet.entity.common.TaskStatus;
 import com.techieonthenet.entity.common.TaskType;
 import com.techieonthenet.exception.UserDefinedException;
 import com.techieonthenet.repository.TaskItemRepository;
+import com.techieonthenet.service.EmailService;
 import com.techieonthenet.service.GroupService;
 import com.techieonthenet.service.TaskService;
 import org.slf4j.Logger;
@@ -17,6 +18,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +27,7 @@ import java.util.List;
  * The type Task service.
  */
 @Service
-public class TaskServiceImpl implements TaskService {
+public class TaskServiceImpl implements TaskService  {
 
     private static Logger logger = LoggerFactory.getLogger(TaskServiceImpl.class);
 
@@ -39,6 +42,9 @@ public class TaskServiceImpl implements TaskService {
      */
     @Autowired
     GroupService groupService;
+
+    @Autowired
+    EmailService emailService;
 
     @Override
     public Iterable<TaskItem> findAll() {
@@ -75,7 +81,7 @@ public class TaskServiceImpl implements TaskService {
      * @param order the order
      * @return the boolean
      */
-    public boolean createLevel1Task(Group group, Order order) {
+    public boolean createLevel1Task(Group group, Order order){
         boolean taskCreated = false;
         List<User> users = groupService.findById(group.getId()).getUsers();
         TaskItem taskItem = new TaskItem();
@@ -90,9 +96,15 @@ public class TaskServiceImpl implements TaskService {
                 taskCreated = true;
             }
         }
-
         if (taskCreated == Boolean.FALSE)
             throw new UserDefinedException(UserDefinedException.ORDER_APPROVAL_LEVEL_1_APPROVER_NOT_PRESENT);
+        try {
+            emailService.sendTaskAssignmentEmail(order,taskItem);
+        } catch (MessagingException e) {
+            logger.error("Error Occured while sending email" , e.getMessage());
+        } catch (IOException e) {
+            logger.error("Error Occured while sending email" , e.getMessage());
+        }
         createLevel2Task(group, order, taskItem);
         order.getTaskItems().add(taskItem);
         return taskCreated;
@@ -128,7 +140,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public void modifyTask(TaskItem task, String action, User user) {
+    public void modifyTask(TaskItem task, String action, User user){
         Boolean taskModified = false;
         for (User user1 : task.getUsers()) {
             logger.info("Logged User ID - {} Task User Id - {}", user.getId(), user1.getId());
@@ -139,6 +151,14 @@ public class TaskServiceImpl implements TaskService {
                 if (childTask != null) {
                     childTask.setTaskStatus(TaskStatus.PENDING_APPROVAL);
                     save(childTask);
+                    try {
+                        emailService.sendTaskAssignmentEmail(childTask.getOrder(),childTask);
+                    } catch (MessagingException e) {
+                        logger.error("Error Occured while sending email" , e.getMessage());
+                    } catch (IOException e) {
+                        logger.error("Error Occured while sending email" , e.getMessage());
+                    }
+
                     taskModified = true;
                 } else {
                     task.getOrder().setOrderStatus(OrderStatus.APPROVED_PENDING_SHIPMENT);

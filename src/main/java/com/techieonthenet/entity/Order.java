@@ -20,7 +20,7 @@ import java.util.List;
 @Getter
 @Setter
 @Table(name="Orders")
-@SequenceGenerator(name = "order_generator", sequenceName = "order_seq", allocationSize = 1)
+@SequenceGenerator(name = "order_generator", sequenceName = "order_seq", allocationSize = 1 , initialValue = 500)
 public class Order extends Auditable implements Serializable {
 
     private static final long serialVersionUID = 2893475845L;

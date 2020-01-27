@@ -51,7 +51,7 @@ public interface TaskService {
      * @param group the group
      * @param order the order
      */
-    void createApprovalTasks(Group group, Order order);
+    void createApprovalTasks(Group group, Order order) ;
 
     /**
      * Modify task.
