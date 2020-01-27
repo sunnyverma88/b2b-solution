@@ -5,11 +5,11 @@ import com.techieonthenet.dto.TaskDto;
 import com.techieonthenet.entity.TaskItem;
 import com.techieonthenet.entity.User;
 import com.techieonthenet.entity.common.TaskStatus;
+import com.techieonthenet.service.EmailService;
 import com.techieonthenet.service.TaskService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -30,8 +30,9 @@ public class TaskController {
 
     @Autowired
     private TaskService taskService;
+
     @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private EmailService emailService;
 
     /**
      * Gets all pending task by user.
@@ -70,10 +71,13 @@ public class TaskController {
             TaskItem task = taskService.findById(taskDto.getId());
             task.setRemarks(taskDto.getRemarks());
             taskService.modifyTask(task, taskDto.getAction(), user);
+            emailService.sendOrderUpdatemail(task.getOrder(),task , user);
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("message", e.getLocalizedMessage());
         }
         return new RedirectView("/task/pending");
     }
+
+
 
 }

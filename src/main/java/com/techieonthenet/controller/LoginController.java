@@ -38,7 +38,7 @@ public class LoginController {
      */
 // Login form with error
     @GetMapping("/login-error")
-    public String loginError(Model model) {
+    public String loginError(Model model ) {
         logger.info("Inside login Error");
         model.addAttribute("loginError", true);
         return "login";

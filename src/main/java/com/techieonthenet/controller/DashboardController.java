@@ -1,6 +1,7 @@
 package com.techieonthenet.controller;
 
 import com.techieonthenet.dto.Pie;
+import com.techieonthenet.dto.UserDto;
 import com.techieonthenet.entity.CartItem;
 import com.techieonthenet.entity.Order;
 import com.techieonthenet.entity.Role;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
@@ -41,8 +43,12 @@ public class DashboardController {
      * @return the string
      */
     @GetMapping("/dashboard")
-    public String dashPage(Principal principal, Model model, HttpSession session) {
+    public String dashPage(Principal principal, Model model, HttpSession session , @RequestParam( name = "message" , required = false) String message) {
         User user = (User) session.getAttribute("user");
+        if(user.isPasswordResetRequired())
+        {   model.addAttribute("user" , new UserDto());
+            return "password-change";
+        }
         Map<String, Integer> chartData = new HashMap<>();
         int totalItemsTillDate = 0;
         int totalItemsLastMonth = 0;
@@ -118,6 +124,9 @@ public class DashboardController {
             listMapPie.add(new Pie(entry.getKey(), entry.getValue()));
         }
         model.addAttribute("pieJsonData", listMapPie);
+        if (message != null) {
+            model.addAttribute("message", message);
+        }
         return "dashboard";
     }
 

@@ -3,6 +3,7 @@ package com.techieonthenet.controller;
 import com.techieonthenet.dto.ShippingAddressDto;
 import com.techieonthenet.entity.*;
 import com.techieonthenet.entity.common.TaskStatus;
+import com.techieonthenet.entity.common.TaskType;
 import com.techieonthenet.service.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,13 +14,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
-import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 import java.security.Principal;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * The type Order controller.
@@ -51,6 +48,9 @@ public class OrderController {
 
     @Autowired
     private EmailService emailService;
+
+
+
 
     /**
      * Gets order details.
@@ -101,7 +101,8 @@ public class OrderController {
             taskService.createApprovalTasks(user.getGroup(), order);
             session.setAttribute("cartSize", 0);
             session.setAttribute("tasks", taskService.findByUserAndTaskStatus(user, TaskStatus.PENDING_APPROVAL));
-            sendOrderConfirmationEmail(order);
+            emailService.sendOrderConfirmationEmail(order , getApprovalUserName(order, TaskType.ORDER_APPROVAL_LEVEL_1) ,
+                    getApprovalUserName(order, TaskType.ORDER_APPROVAL_LEVEL_2));
             url = "/order/" + order.getId() + "/po";
         } catch (Exception e) {
             e.printStackTrace();
@@ -172,9 +173,22 @@ public class OrderController {
         return "order-history";
     }
 
-    private void sendOrderConfirmationEmail(Order order) throws IOException, MessagingException {
-        Map<String, Object> valueMap = new HashMap<>();
-        valueMap.put("order", order);
-        emailService.sendSimpleMessage(order.getUser().getEmail(), "Thanks for your order - Apprize !!", valueMap, "order-details");
+    @GetMapping("/history/admin")
+    public String getOrderHistoryForAdmin(Model model) {
+        Iterable<Order> orders = orderService.findAll();
+        model.addAttribute("orders", orders);
+        return "admin-order-history";
     }
+
+    private String getApprovalUserName(Order order, TaskType taskType) {
+        String taskUser = "";
+        for (TaskItem taskItem : order.getTaskItems()) {
+            if (taskItem.getTaskType().equals(taskType)) {
+                taskUser = taskItem.getUsers().stream().findFirst().get().getFirstName().toUpperCase().concat(" ").concat(taskItem.getUsers().stream().findFirst().get().getLastName().toUpperCase());
+                break;
+            }
+        }
+        return taskUser;
+    }
+
 }
