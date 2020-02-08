@@ -29,9 +29,8 @@ public class SendGridEmailSenderService {
             request.setMethod(Method.POST);
             request.setEndpoint("mail/send");
             request.setBody(mail.build());
-            System.out.println("Request :" + request.getHeaders());
             Response response = sg.api(request);
-        } catch (IOException ex) {
+        }catch (IOException ex) {
             throw ex;
         }
     }
