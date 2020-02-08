@@ -35,7 +35,7 @@ public class Category extends Auditable implements Serializable {
     @Column(name = "visible", columnDefinition = "boolean default true", nullable = false)
     private boolean isVisible;
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL , fetch = FetchType.LAZY)
     private List<Product> products;
 
 }

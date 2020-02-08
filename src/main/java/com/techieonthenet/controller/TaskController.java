@@ -71,13 +71,10 @@ public class TaskController {
             TaskItem task = taskService.findById(taskDto.getId());
             task.setRemarks(taskDto.getRemarks());
             taskService.modifyTask(task, taskDto.getAction(), user);
-            emailService.sendOrderUpdatemail(task.getOrder(),task , user);
+            emailService.sendOrderUpdatemail(task.getOrder(), task, user);
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("message", e.getLocalizedMessage());
         }
         return new RedirectView("/task/pending");
     }
-
-
-
 }
