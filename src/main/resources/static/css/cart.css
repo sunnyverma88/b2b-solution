@@ -136,3 +136,12 @@
       max-width: 800px;
       margin: 1em auto;
   }
+
+ @media print {
+       html, body {
+          border: 1px solid white;
+          height: 99%;
+          page-break-after: avoid;
+          page-break-before: avoid;
+       }
+  }
