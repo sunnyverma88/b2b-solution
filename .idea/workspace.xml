@@ -3,10 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="32ca6a31-512f-4623-a0c7-fb02235b95c0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/email/forgot-pwd.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/email/forgot-pwd.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/email/order-confirm.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/email/order-confirm.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/email/order-update.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/email/order-update.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/email/task-assign.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/email/task-assign.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/config/security/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/config/security/WebSecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/fragments/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/fragments/layout.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -61,7 +59,7 @@
     <property name="SONARLINT_PRECOMMIT_ANALYSIS" value="false" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="HTML" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/static/images" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
@@ -425,7 +423,14 @@
       <option name="project" value="LOCAL" />
       <updated>1585678347189</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="Email logo changes">
+      <created>1585679150150</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1585679150150</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -461,6 +466,7 @@
     <MESSAGE value="PROD property" />
     <MESSAGE value="Order Edit Changes" />
     <MESSAGE value="Logo changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Logo changes" />
+    <MESSAGE value="Email logo changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Email logo changes" />
   </component>
 </project>
