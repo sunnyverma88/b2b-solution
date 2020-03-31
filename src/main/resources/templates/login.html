@@ -11,7 +11,7 @@
 
     <!-- Bootstrap -->
     <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/images/logo_1.png" rel="icon">
+    <link href="/images/apprize-favicon.png" rel="icon">
     <!-- Font Awesome -->
     <link href="/webjars/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
@@ -29,7 +29,7 @@
 <div align="center" class="container">
 
     <form class="form-signin" method="post" name="f" th:action="@{/login}">
-        <img src="/images/apprize-logo.png">
+        <img src="/images/apprize-logo.png" style="height:100px ; width :300px;">
 
         <div class="alert alert-warning" th:if="${param.error}">
             Invalid username and password.
