@@ -81,4 +81,14 @@ public class CartItemServiceImpl implements CartItemService {
     public void delete(CartItem item) {
         cartItemRepository.deleteById(item.getId());
     }
+
+    public CartItem update(CartItem cartItem)
+    {
+        CartItem updatedItem = cartItemRepository.findById(cartItem.getId()).get();
+        updatedItem.setQty(cartItem.getQty());
+        updatedItem.setSubTotal(updatedItem.getProduct().getPriceWithoutGst().multiply(new BigDecimal(cartItem.getQty())));
+        updatedItem.setGrandTotal(updatedItem.getProduct().getSellingPrice().multiply(new BigDecimal(cartItem.getQty())));
+        save(updatedItem);
+        return updatedItem;
+    }
 }

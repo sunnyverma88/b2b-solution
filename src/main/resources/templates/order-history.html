@@ -47,7 +47,7 @@
                             </thead>
                             <tbody>
                             <tr class='clickable-row' th:each="order , itemStat: ${orders}">
-                                <td><a th:href="@{${'/order/' + order.id + '/details'}}">
+                                <td><a th:href="@{${'/order/details/' + order.id}}">
                                     <u>
                                         <div th:text="${order.id}"></div>
                                     </u>

@@ -52,6 +52,31 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
     @Override
+    public ShoppingCart updateShoppingCart(ShoppingCart shoppingCart , List<CartItem> cartItems) {
+        BigDecimal cartTotal = new BigDecimal(0);
+        BigDecimal gst = new BigDecimal(0);
+        int totalItems = 0;
+        List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
+        for (CartItem cartItem : cartItemList) {
+            if(cartItem.getQty() == 0 ) {
+                cartItemService.delete(cartItem);}
+            else {
+                cartItemService.update(cartItem);
+                gst = gst.add(cartItem.getProduct().getGst().multiply(new BigDecimal(cartItem.getQty())));
+                logger.info("Cart Item {} Quantity -  {}", cartItem.getProduct().getName(), cartItem.getQty());
+                totalItems += cartItem.getQty();
+                logger.info("Total Quantity - {} ", totalItems);
+            }
+        }
+        shoppingCart.setGst(gst);
+        shoppingCart.setCartTotal(cartTotal);
+        shoppingCart.setGrandTotal(cartTotal.add(shoppingCart.getGst()));
+        shoppingCart.setTotalItems(totalItems);
+        shoppingCartRepository.save(shoppingCart);
+        return shoppingCart;
+    }
+
+    @Override
     public ShoppingCart updateShoppingCart(ShoppingCart shoppingCart) {
         BigDecimal cartTotal = new BigDecimal(0);
         BigDecimal gst = new BigDecimal(0);

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html data-layout-decorate="~{fragments/layout}" lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Shopping Cart </title>
+</head>
+<body>
+<!-- page content -->
+<div class="right_col" data-layout-fragment="content" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>Edit Order</h3>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2> Order Details</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link "><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li><a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="alert alert-success" th:if="${message}"><span th:text="${message}"></span>
+                        </div>
+                        <section class="shopping-cart dark">
+                            <div class="container">
+                                <div class="content">
+                                    <div class="row">
+                                        <form method="post" th:action="@{/order/update}"
+                                              th:object="${orderDto}">
+
+                                        <div class="col-md-12 col-lg-8">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id">Order ID <span
+                                                        class="required">*</span>
+                                                </label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <input class="form-control col-md-7 col-xs-12" id="id" maxlength="50" name="id"
+                                                           required th:field="*{id}" type="text" readonly>
+                                                </div>
+                                            </div><br><br><br>
+
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Order Status</label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <select class="form-control" th:field="*{orderStatus}">
+                                                        <option th:each="status : ${T(com.techieonthenet.entity.common.OrderStatus).values()}"
+                                                                th:text="${status}"
+                                                                th:value="${status}">
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                                <div class="items"
+                                                     th:each="cartItem , itemStat: ${orderDto.cartItemList}">
+
+                                                    <div class="product">
+                                                        <div class="row">
+                                                            <div class="col-sm-2">
+
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <div class="info">
+                                                                    <div class="row">
+                                                                        <div class="col-md-5 product-name">
+                                                                            <div class="product-name">
+                                                                                <a href="#"
+                                                                                   th:text="${cartItem.getProduct().name}"></a>
+                                                                                <div class="product-info">
+                                                                                    <div>Brand : <span
+                                                                                            class="value"
+                                                                                            th:text="${cartItem.getProduct().brand}"></span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-4 quantity">
+                                                                            <input hidden
+                                                                                   th:field="*{cartItemList[__${itemStat.index}__].id}"
+                                                                                   th:value="${cartItem.getId()}"/>
+                                                                            <label for="quantity">Quantity:</label>
+                                                                            <input class="form-control quantity-input"
+                                                                                   id="quantity"
+                                                                                   th:field="*{cartItemList[__${itemStat.index}__].qty}"
+                                                                                   th:value="${cartItem.qty}"
+                                                                                   th:max="${cartItem.qty}" min="0" type="number">
+                                                                        </div>
+                                                                        <div class="col-md-3 price">
+                                                                            <p>&#x20b9;<span
+                                                                                    th:text="${cartItem.grandTotal}"></span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                        </div>
+                                        <div class="col-md-12 col-lg-4">
+                                            <div class="summary" th:if="${orderDto.orderTotal &gt; 0}">
+                                                <h3>Summary</h3>
+                                                <div class="summary-item"><span class="text">Subtotal</span>
+                                                    <p class="price">&#x20b9;<span class="price"
+                                                                                   th:text="${orderDto.subTotal}"></span>
+                                                    </p></div>
+                                                <div class="summary-item"><span class="text">GST</span>
+                                                    <p class="price">&#x20b9;<span class="price"
+                                                                                   th:text="${orderDto.gst}"></span></div>
+                                                <div class="summary-item"><span class="text">Shipping</span>
+                                                    <p class="price">&#x20b9;<span class="price">0</span></div>
+                                                <div class="summary-item"><span class="text">Total</span>
+                                                    <p class="price">&#x20b9;<span class="price"
+                                                                                   th:text="${orderDto.orderTotal}"></span>
+                                                </div>
+                                                <button class="btn btn-primary btn-lg btn-block" type="submit">
+                                                    Update Order
+                                                </button>
+                                            </div>
+
+                                        </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- /page content -->
+
+</body>
+
+</html>

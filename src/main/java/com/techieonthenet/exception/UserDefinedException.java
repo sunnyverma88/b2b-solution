@@ -25,6 +25,9 @@ public class UserDefinedException extends RuntimeException {
      * The constant MRP_GREATER_THAN_SELLING_PRICE.
      */
     public static final String MRP_GREATER_THAN_SELLING_PRICE = "MRP Price Greater than Selling Price.";
+    public static final String ORDER_STATUS_NOT_APPROVED = "Order Status should be APPROVED to perform this action.";
+
+    public static final String MINIMUM_ITEMS_IN_ORDER = "Order must have 1 Item , Please cancel the order in this case.";
 
 
     /**

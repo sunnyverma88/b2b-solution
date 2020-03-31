@@ -1,6 +1,9 @@
 package com.techieonthenet.service;
 
+import com.techieonthenet.entity.CartItem;
 import com.techieonthenet.entity.ShoppingCart;
+
+import java.util.List;
 
 /**
  * The interface Shopping cart service.
@@ -44,6 +47,8 @@ public interface ShoppingCartService {
      * @param shoppingCart the shopping cart
      * @return the shopping cart
      */
+    ShoppingCart updateShoppingCart(ShoppingCart shoppingCart , List<CartItem> cartItems);
+
     ShoppingCart updateShoppingCart(ShoppingCart shoppingCart);
 
     /**
