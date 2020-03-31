@@ -3,8 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="32ca6a31-512f-4623-a0c7-fb02235b95c0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/config/security/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/config/security/WebSecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/fragments/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/fragments/layout.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/email/forgot-pwd.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/email/forgot-pwd.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/email/new-user.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/email/new-user.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/email/order-confirm.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/email/order-confirm.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/email/order-update.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/email/order-update.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/email/task-assign.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/email/task-assign.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -430,7 +433,14 @@
       <option name="project" value="LOCAL" />
       <updated>1585679150150</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="Security changes">
+      <created>1585681596216</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1585681596217</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -467,6 +477,7 @@
     <MESSAGE value="Order Edit Changes" />
     <MESSAGE value="Logo changes" />
     <MESSAGE value="Email logo changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Email logo changes" />
+    <MESSAGE value="Security changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Security changes" />
   </component>
 </project>
