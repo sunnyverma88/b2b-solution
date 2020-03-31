@@ -1,10 +1,12 @@
 package com.techieonthenet.controller;
 
+import com.techieonthenet.dto.OrderDto;
 import com.techieonthenet.dto.ShippingAddressDto;
 import com.techieonthenet.entity.*;
 import com.techieonthenet.entity.common.TaskStatus;
 import com.techieonthenet.entity.common.TaskType;
 import com.techieonthenet.service.*;
+import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +50,9 @@ public class OrderController {
 
     @Autowired
     private EmailService emailService;
+
+    @Autowired
+    ModelMapper modelMapper;
 
 
 
@@ -103,9 +108,8 @@ public class OrderController {
             session.setAttribute("tasks", taskService.findByUserAndTaskStatus(user, TaskStatus.PENDING_APPROVAL));
             emailService.sendOrderConfirmationEmail(order , getApprovalUserName(order, TaskType.ORDER_APPROVAL_LEVEL_1) ,
                     getApprovalUserName(order, TaskType.ORDER_APPROVAL_LEVEL_2));
-            url = "/order/" + order.getId() + "/po";
+            url = "/order/po/" + order.getId() + "";
         } catch (Exception e) {
-            e.printStackTrace();
             logger.error("Error Occurred : {}", e.getMessage());
             redirectAttributes.addFlashAttribute("message", e.getMessage());
             url = "/order/details";
@@ -121,7 +125,7 @@ public class OrderController {
      * @param orderId   the order id
      * @return the order confirmation
      */
-    @GetMapping("/{orderId}/po")
+    @GetMapping("/po/{orderId}")
     public String getOrderConfirmation(Model model, Principal principal, @PathVariable Long orderId) {
         Order order = orderService.findById(orderId);
         model.addAttribute("order", order);
@@ -136,11 +140,33 @@ public class OrderController {
      * @param orderId   the order id
      * @return the order details
      */
-    @GetMapping("/{orderId}/details")
+    @GetMapping("/details/{orderId}")
     public String getOrderDetails(Model model, Principal principal, @PathVariable Long orderId) {
         Order order = orderService.findById(orderId);
         model.addAttribute("order", order);
         return "order-details";
+    }
+
+    @GetMapping("/edit/{orderId}")
+    public String editOrderDetails(Model model, Principal principal, @PathVariable Long orderId) {
+        Order order = orderService.findById(orderId);
+        OrderDto orderDto = modelMapper.map(order , OrderDto.class);
+        model.addAttribute("orderDto", orderDto);
+        return "edit-order";
+    }
+
+    @PostMapping("/update")
+    public RedirectView updateOrder(@ModelAttribute OrderDto orderDto, RedirectAttributes redirectAttributes) {
+        String redirectUrl;
+        Order order= modelMapper.map(orderDto , Order.class);
+       try {
+           orderService.updateOrder(order);
+           redirectUrl = "/order/details/" + order.getId();
+       }catch(Exception e) {
+            redirectAttributes.addFlashAttribute("message", "Something Went Wrong !! " + e.getLocalizedMessage());
+            redirectUrl = "/order/history/admin";
+        }
+        return new RedirectView(redirectUrl);
     }
 
     /**
@@ -174,7 +200,10 @@ public class OrderController {
     }
 
     @GetMapping("/history/admin")
-    public String getOrderHistoryForAdmin(Model model) {
+    public String getOrderHistoryForAdmin(Model model,@RequestParam(name = "message", required = false) String message) {
+        if (message != null) {
+            model.addAttribute("message", message);
+        }
         Iterable<Order> orders = orderService.findAll();
         model.addAttribute("orders", orders);
         return "admin-order-history";

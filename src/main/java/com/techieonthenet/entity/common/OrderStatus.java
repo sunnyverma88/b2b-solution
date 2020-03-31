@@ -19,6 +19,8 @@ public enum OrderStatus {
      */
     SHIPPED,
 
+    CANCELLED,
+
     /**
      * Rejected order status.
      */

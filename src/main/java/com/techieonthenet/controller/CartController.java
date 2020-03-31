@@ -98,7 +98,7 @@ public class CartController {
         model.addAttribute("cartDtoForm", dto);
         session.setAttribute(CART_SIZE, cart.getTotalItems());
         logger.info(message);
-        if (message.isEmpty()) {
+        if (message != null) {
             model.addAttribute("message", message);
         }
         model.addAttribute("cart", cart);

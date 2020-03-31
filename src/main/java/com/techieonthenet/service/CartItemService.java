@@ -60,5 +60,7 @@ public interface CartItemService {
      */
     void delete(CartItem item);
 
+    CartItem update(CartItem cartItem);
+
 
 }

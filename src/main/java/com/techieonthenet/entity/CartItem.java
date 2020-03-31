@@ -31,7 +31,7 @@ public class CartItem extends Auditable implements Serializable {
     @Convert(converter = LocalDateConverter.class)
     private LocalDate deliveryDate;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.DETACH , fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id", referencedColumnName = "id")
     private Product product;
 

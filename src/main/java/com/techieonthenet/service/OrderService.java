@@ -59,4 +59,6 @@ public interface OrderService {
      * @return the list
      */
     List<Order> findByGroup(Group group);
+
+    Order updateOrder(Order order);
 }

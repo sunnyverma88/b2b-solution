@@ -4,7 +4,9 @@ import com.techieonthenet.dto.ShippingAddressDto;
 import com.techieonthenet.entity.*;
 import com.techieonthenet.entity.common.AddressType;
 import com.techieonthenet.entity.common.OrderStatus;
+import com.techieonthenet.exception.UserDefinedException;
 import com.techieonthenet.repository.OrderRepository;
+import com.techieonthenet.service.CartItemService;
 import com.techieonthenet.service.OrderService;
 import com.techieonthenet.service.TaskService;
 import org.slf4j.Logger;
@@ -16,6 +18,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -35,6 +38,9 @@ public class OrderServiceImpl implements OrderService {
      */
     @Autowired
     TaskService taskService;
+
+    @Autowired
+    CartItemService cartItemService;
 
     @Override
     public Iterable<Order> findAll() {
@@ -91,5 +97,35 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> findByGroup(Group group) {
         Pageable paging = PageRequest.of(0, 25, Sort.by("id").descending());
         return orderRepository.findByGroup(group, paging).getContent();
+    }
+
+    @Override
+    public Order updateOrder(Order order){
+        Order updatedOrder = orderRepository.findById(order.getId()).get();
+        if (!updatedOrder.getOrderStatus().equals(OrderStatus.APPROVED_PENDING_SHIPMENT)
+                && !order.getOrderStatus().equals(OrderStatus.CANCELLED)
+                && !order.getOrderStatus().equals(OrderStatus.DELIVERED)) {
+            throw new UserDefinedException(UserDefinedException.ORDER_STATUS_NOT_APPROVED);
+        }
+        BigDecimal subTotal = new BigDecimal(0);
+        BigDecimal gst = new BigDecimal(0);
+        BigDecimal orderTotal = new BigDecimal(0);
+        if(order.getCartItemList().size() ==1 && order.getCartItemList().get(0).getQty() ==0)
+            throw new UserDefinedException(UserDefinedException.MINIMUM_ITEMS_IN_ORDER);
+        for (CartItem cartItem : order.getCartItemList()) {
+            if (cartItem.getQty() == 0)
+                cartItemService.delete(cartItemService.findById(cartItem.getId()));
+            else {
+                CartItem updatedItem = cartItemService.update(cartItem);
+                subTotal = subTotal.add(updatedItem.getSubTotal());
+                gst = gst.add(updatedItem.getProduct().getGst().multiply(new BigDecimal(cartItem.getQty())));
+            }
+        }
+        updatedOrder.setSubTotal(subTotal);
+        updatedOrder.setOrderStatus(order.getOrderStatus());
+        updatedOrder.setGst(gst);
+        updatedOrder.setOrderTotal(subTotal.add(gst));
+        save(updatedOrder);
+      return updatedOrder;
     }
 }
