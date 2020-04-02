@@ -210,19 +210,14 @@ public class OrderController {
     }
 
     private String getApprovalUserName(Order order, TaskType taskType) {
-        String[] taskUser = new String[0];
+        String taskUser = "";
         for (TaskItem taskItem : order.getTaskItems()) {
-            int i=0;
             if (taskItem.getTaskType().equals(taskType)) {
-                taskUser=new String[taskItem.getUsers().size()];
-                for(User user: taskItem.getUsers()) {
-                    taskUser[i] = user.getFirstName().toUpperCase().concat(" ").
-                            concat(user.getLastName().toUpperCase());
-                }
+                taskUser = taskItem.getUsers().stream().findFirst().get().getFirstName().concat(" ").concat(taskItem.getUsers().stream().findFirst().get().getLastName());
                 break;
             }
         }
-        return taskUser.toString();
+        return taskUser;
     }
 
 }

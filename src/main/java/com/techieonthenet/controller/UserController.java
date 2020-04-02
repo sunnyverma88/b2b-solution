@@ -118,8 +118,8 @@ public class UserController {
 
     private User convertUserDtoToUser(UserDto userDto) {
         User user = new User();
-        user.setFirstName(userDto.getFirstName());
-        user.setLastName(userDto.getLastName());
+        user.setFirstName(AppUtils.toCamelCase(userDto.getFirstName()));
+        user.setLastName(AppUtils.toCamelCase(userDto.getLastName()));
         user.setPassword(userDto.getPassword());
         user.setEmail(userDto.getEmail());
         user.setApproverType(userDto.getApproverType());

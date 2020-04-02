@@ -67,7 +67,7 @@ public class EmailService {
         Map<String, Object> valueMap = new HashMap<>();
         valueMap.put("order", order);
         valueMap.put("task" , task);
-        valueMap.put("approver" , user.getFirstName().toUpperCase().concat(" ").concat(user.getLastName().toUpperCase()));
+        valueMap.put("approver" , user.getFirstName().concat(" ").concat(user.getLastName()));
         valueMap.put("orderDetailUrl" , contextPath.concat("order/").concat(order.getId().toString()).concat("/details") );
         sendSimpleMessage(order.getUser().getEmail(), "Apprize - Order # "+ order.getId() +" Updated", valueMap, "order-update");
     }
