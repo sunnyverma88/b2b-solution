@@ -99,6 +99,7 @@ public class TaskServiceImpl implements TaskService  {
         if (taskCreated == Boolean.FALSE)
             throw new UserDefinedException(UserDefinedException.ORDER_APPROVAL_LEVEL_1_APPROVER_NOT_PRESENT);
         try {
+            logger.info("Send Task Assigment email");
             emailService.sendTaskAssignmentEmail(order,taskItem);
         } catch (MessagingException e) {
             logger.error("Error Occured while sending email" , e.getMessage());
