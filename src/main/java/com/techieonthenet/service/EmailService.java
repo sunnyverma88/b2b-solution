@@ -6,6 +6,7 @@ import com.sendgrid.Mail;
 import com.techieonthenet.entity.Order;
 import com.techieonthenet.entity.TaskItem;
 import com.techieonthenet.entity.User;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,8 @@ public class EmailService {
 
     @Value("${base.url.path}")
     private String contextPath;
+
+    private static org.slf4j.Logger logger = LoggerFactory.getLogger(EmailService.class);
 
 
     /**
@@ -75,13 +78,13 @@ public class EmailService {
     public void sendTaskAssignmentEmail(Order order , TaskItem task) throws MessagingException, IOException
     {
         for (User user : task.getUsers()) {
+            logger.info("Email Sending for task assignment to User :" + user.getFirstName());
             Map<String, Object> valueMap = new HashMap<>();
             valueMap.put("order", order);
             valueMap.put("orderDetailUrl" , contextPath.concat("order/").concat(order.getId().toString()).concat("/details") );
             valueMap.put("orderApprovalUrl" , contextPath.concat("task/pending"));
             valueMap.put("user" , user);
             sendSimpleMessage(user.getEmail(), "Apprize - Order # " + order.getId() + " - Requires your attention", valueMap, "task-assign");
-
         }
     }
 
