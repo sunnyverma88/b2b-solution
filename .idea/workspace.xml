@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="32ca6a31-512f-4623-a0c7-fb02235b95c0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/email/forgot-pwd.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/email/forgot-pwd.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/email/new-user.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/email/new-user.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/email/order-confirm.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/email/order-confirm.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/email/order-update.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/email/order-update.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/service/impl/TaskServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/service/impl/TaskServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/email/task-assign.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/email/task-assign.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -440,7 +437,14 @@
       <option name="project" value="LOCAL" />
       <updated>1585681596217</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="Email favicon">
+      <created>1585682047097</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1585682047097</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -478,6 +482,7 @@
     <MESSAGE value="Logo changes" />
     <MESSAGE value="Email logo changes" />
     <MESSAGE value="Security changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Security changes" />
+    <MESSAGE value="Email favicon" />
+    <option name="LAST_COMMIT_MESSAGE" value="Email favicon" />
   </component>
 </project>
