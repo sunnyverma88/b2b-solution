@@ -152,6 +152,7 @@ public class TaskServiceImpl implements TaskService  {
                     childTask.setTaskStatus(TaskStatus.PENDING_APPROVAL);
                     save(childTask);
                     try {
+                        logger.info("Send Task Assigment email");
                         emailService.sendTaskAssignmentEmail(childTask.getOrder(),childTask);
                     } catch (MessagingException e) {
                         logger.error("Error Occured while sending email" , e.getMessage());
