@@ -136,13 +136,6 @@ public class TaskServiceImpl implements TaskService  {
         if (taskCreated == Boolean.FALSE)
             throw new UserDefinedException(UserDefinedException.ORDER_APPROVAL_LEVEL_2_APPROVER_NOT_PRESENT);
         order.getTaskItems().add(taskItem2);
-        try {
-            emailService.sendTaskAssignmentEmail(order,taskItem2);
-        } catch (MessagingException e) {
-            logger.error("Error Occured while sending email" , e.getMessage());
-        } catch (IOException e) {
-            logger.error("Error Occured while sending email" , e.getMessage());
-        }
         return taskCreated;
     }
 
