@@ -78,6 +78,7 @@ public class EmailService {
     public void sendTaskAssignmentEmail(Order order , TaskItem task) throws MessagingException, IOException
     {
         for (User user : task.getUsers()) {
+            logger.info("TaskItem User size :" + task.getUsers().size());
             logger.info("Email Sending for task assignment to User :" + user.getFirstName());
             Map<String, Object> valueMap = new HashMap<>();
             valueMap.put("order", order);
