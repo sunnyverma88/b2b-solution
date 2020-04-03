@@ -94,7 +94,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         }
         shoppingCart.setGst(gst);
         shoppingCart.setCartTotal(cartTotal);
-        shoppingCart.setGrandTotal(cartTotal.add(shoppingCart.getGst()));
+        shoppingCart.setGrandTotal(cartTotal.add(shoppingCart.getGst()).add(shoppingCart.getShippingCost()));
         shoppingCart.setTotalItems(totalItems);
         shoppingCartRepository.save(shoppingCart);
         return shoppingCart;

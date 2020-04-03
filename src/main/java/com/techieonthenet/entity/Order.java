@@ -41,6 +41,8 @@ public class Order extends Auditable implements Serializable {
 
     private BigDecimal orderTotal;
 
+    private BigDecimal shippingCost;
+
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<CartItem> cartItemList = new ArrayList<>();
 

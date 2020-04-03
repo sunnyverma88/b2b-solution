@@ -61,11 +61,15 @@
                                                 </li>
                                                 <li class="list-group-item d-flex justify-content-between">
                                                     <span>GST &#x20b9;</span>
-                                                    <strong th:text="${cart.gst}">$20</strong>
+                                                    <strong th:text="${cart.gst}"></strong>
+                                                </li>
+                                                <li class="list-group-item d-flex justify-content-between">
+                                                    <span>Shipping &#x20b9;</span>
+                                                    <strong th:text="${cart.shippingCost}"></strong>
                                                 </li>
                                                 <li class="list-group-item d-flex justify-content-between">
                                                     <span>Total &#x20b9;</span>
-                                                    <strong th:text="${cart.grandTotal}">$20</strong>
+                                                    <strong th:text="${cart.grandTotal}"></strong>
                                                 </li>
                                             </ul>
 
