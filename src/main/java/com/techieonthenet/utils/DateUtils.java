@@ -13,13 +13,13 @@ public class DateUtils {
      * @return the last month end date
      */
 
-    public static LocalDate getCurrentMonthEndDate() {
+    public static LocalDate getCurrentMonthStartDate() {
         LocalDate today = LocalDate.now();
         LocalDate startOfMonth = today.withDayOfMonth(1);
         return startOfMonth;
     }
 
-    public static LocalDate getCurrentMonthStartDate() {
+    public static LocalDate getCurrentMonthEndDate() {
         LocalDate today = LocalDate.now();
         LocalDate endOfMonth = today.withDayOfMonth(today.lengthOfMonth());
         return endOfMonth;
