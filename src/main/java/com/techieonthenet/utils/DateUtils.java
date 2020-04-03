@@ -12,6 +12,21 @@ public class DateUtils {
      *
      * @return the last month end date
      */
+
+    public static LocalDate getCurrentMonthEndDate() {
+        LocalDate today = LocalDate.now();
+        LocalDate startOfMonth = today.withDayOfMonth(1);
+        return startOfMonth;
+    }
+
+    public static LocalDate getCurrentMonthStartDate() {
+        LocalDate today = LocalDate.now();
+        LocalDate endOfMonth = today.withDayOfMonth(today.lengthOfMonth());
+        return endOfMonth;
+    }
+
+
+
     public static LocalDate getLastMonthEndDate() {
         LocalDate date = LocalDate.now();
         date = date.minusDays(date.getDayOfMonth());

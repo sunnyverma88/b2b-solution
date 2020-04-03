@@ -51,13 +51,13 @@ public class DashboardController {
         }
         Map<String, Integer> chartData = new HashMap<>();
         int totalItemsTillDate = 0;
-        int totalItemsLastMonth = 0;
+        int totalItemsCurrentMonth = 0;
 
 
-        BigDecimal totalExpenseLastMonth = BigDecimal.valueOf(0);
+        BigDecimal totalExpenseCurrentMonth = BigDecimal.valueOf(0);
         BigDecimal totalExpenseTillDate = BigDecimal.valueOf(0);
-        BigDecimal totalExpensePreviousLastMonth = BigDecimal.valueOf(0);
-        BigDecimal totalExpensePreviousToPreviousLastMonth = BigDecimal.valueOf(0);
+        BigDecimal totalExpensePreviousCurrentMonth = BigDecimal.valueOf(0);
+        BigDecimal totalExpensePreviousToPreviousCurrentMonth = BigDecimal.valueOf(0);
         Map<String, Integer> categoryMap = new HashMap<>();
         List<CartItem> cartItemList = new ArrayList<>();
         List<Order> orderList = new ArrayList<>();
@@ -82,33 +82,33 @@ public class DashboardController {
                 totalItemsTillDate += order.getCartItemList().stream().mapToInt(CartItem::getQty).sum();
                 totalExpenseTillDate = totalExpenseTillDate.add(order.getOrderTotal());
 
-                if (order.getOrderDate().compareTo(DateUtils.getLastMonthStartDate().minusMonths(2)) >= 0 &&
-                        order.getOrderDate().compareTo(DateUtils.getLastMonthEndDate().minusMonths(2)) <= 0) {
+                if (order.getOrderDate().compareTo(DateUtils.getCurrentMonthStartDate().minusMonths(2)) >= 0 &&
+                        order.getOrderDate().compareTo(DateUtils.getCurrentMonthEndDate().minusMonths(2)) <= 0) {
 
-                    totalExpensePreviousToPreviousLastMonth = totalExpensePreviousToPreviousLastMonth.add(order.getOrderTotal());
-                    chartData.put(DateUtils.getLastMonthEndDate().minusMonths(2).getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH), totalExpensePreviousToPreviousLastMonth.intValue());
+                    totalExpensePreviousToPreviousCurrentMonth = totalExpensePreviousToPreviousCurrentMonth.add(order.getOrderTotal());
+                    chartData.put(DateUtils.getCurrentMonthEndDate().minusMonths(2).getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH), totalExpensePreviousToPreviousCurrentMonth.intValue());
                     cartItemList.addAll(order.getCartItemList());
                 }
-                if (order.getOrderDate().compareTo(DateUtils.getLastMonthStartDate().minusMonths(1)) >= 0 &&
-                        order.getOrderDate().compareTo(DateUtils.getLastMonthEndDate().minusMonths(1)) <= 0) {
+                if (order.getOrderDate().compareTo(DateUtils.getCurrentMonthStartDate().minusMonths(1)) >= 0 &&
+                        order.getOrderDate().compareTo(DateUtils.getCurrentMonthEndDate().minusMonths(1)) <= 0) {
 
-                    totalExpensePreviousLastMonth = totalExpensePreviousLastMonth.add(order.getOrderTotal());
-                    chartData.put(DateUtils.getLastMonthEndDate().minusMonths(1).getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH), totalExpensePreviousLastMonth.intValue());
+                    totalExpensePreviousCurrentMonth = totalExpensePreviousCurrentMonth.add(order.getOrderTotal());
+                    chartData.put(DateUtils.getCurrentMonthEndDate().minusMonths(1).getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH), totalExpensePreviousCurrentMonth.intValue());
                     cartItemList.addAll(order.getCartItemList());
                 }
-                if (order.getOrderDate().compareTo(DateUtils.getLastMonthStartDate()) >= 0 &&
-                        order.getOrderDate().compareTo(DateUtils.getLastMonthEndDate()) <= 0) {
-                    totalItemsLastMonth += order.getCartItemList().stream().mapToInt(CartItem::getQty).sum();
-                    totalExpenseLastMonth = totalExpenseLastMonth.add(order.getOrderTotal());
-                    chartData.put(DateUtils.getLastMonthEndDate().getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH), totalExpenseLastMonth.intValue());
+                if (order.getOrderDate().compareTo(DateUtils.getCurrentMonthStartDate()) >= 0 &&
+                        order.getOrderDate().compareTo(DateUtils.getCurrentMonthEndDate()) <= 0) {
+                    totalItemsCurrentMonth += order.getCartItemList().stream().mapToInt(CartItem::getQty).sum();
+                    totalExpenseCurrentMonth = totalExpenseCurrentMonth.add(order.getOrderTotal());
+                    chartData.put(DateUtils.getCurrentMonthEndDate().getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH), totalExpenseCurrentMonth.intValue());
                     cartItemList.addAll(order.getCartItemList());
                 }
             }
         }
-        model.addAttribute("totalItemsLastMonth", totalItemsLastMonth);
+        model.addAttribute("totalItemsCurrentMonth", totalItemsCurrentMonth);
         model.addAttribute("totalOrdersTillDate", totalItemsTillDate);
         model.addAttribute("totalExpenseTillDate", totalExpenseTillDate);
-        model.addAttribute("totalExpenseLastMonth", totalExpenseLastMonth.intValue());
+        model.addAttribute("totalExpenseCurrentMonth", totalExpenseCurrentMonth.intValue());
         model.addAttribute("chartData", chartData);
 
         //pie graph logic
