@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="32ca6a31-512f-4623-a0c7-fb02235b95c0" name="Default Changelist" comment="Added feature for shipping cost">
+    <list default="true" id="32ca6a31-512f-4623-a0c7-fb02235b95c0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/controller/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/controller/DashboardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/utils/DateUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/utils/DateUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/dashboard.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/edit-order.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/edit-order.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/service/impl/OrderServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/service/impl/OrderServiceImpl.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -187,13 +183,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1568765710894</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Order and Shopping cart changes">
-      <created>1569092294216</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1569092294216</updated>
     </task>
     <task id="LOCAL-00004" summary="Order and Shopping cart changes">
       <created>1576722285489</created>
@@ -531,7 +520,14 @@
       <option name="project" value="LOCAL" />
       <updated>1585924923815</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="Dashboard Fix">
+      <created>1585928088665</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1585928088665</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -550,7 +546,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Order and Shopping cart changes" />
     <MESSAGE value="sendgrid api changes" />
     <MESSAGE value="Pipeline changes" />
     <MESSAGE value="Pipeline changes for PROD" />
@@ -575,6 +570,7 @@
     <MESSAGE value="issue #43 fix" />
     <MESSAGE value="issue #42 fix" />
     <MESSAGE value="Added feature for shipping cost" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added feature for shipping cost" />
+    <MESSAGE value="Dashboard Fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="Dashboard Fix" />
   </component>
 </project>

@@ -29,22 +29,19 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService {
 
     private static Logger logger = LoggerFactory.getLogger(OrderServiceImpl.class);
-
-    @Autowired
-    private OrderRepository orderRepository;
-
     /**
      * The Task service.
      */
     @Autowired
     TaskService taskService;
-
     @Autowired
     CartItemService cartItemService;
+    @Autowired
+    private OrderRepository orderRepository;
 
     @Override
     public Iterable<Order> findAll() {
-        Pageable paging =PageRequest.of(0,25,Sort.by("id").descending());
+        Pageable paging = PageRequest.of(0, 25, Sort.by("id").descending());
         return orderRepository.findAll(paging).getContent();
     }
 
@@ -90,7 +87,12 @@ public class OrderServiceImpl implements OrderService {
         order.setShippingCost(cart.getShippingCost());
         order.setOrderTotal(cart.getGrandTotal().add(cart.getShippingCost()));
         save(order);
-        taskService.createApprovalTasks(user.getGroup(), order);
+        if (order.getOrderTotal().compareTo(user.getGroup().getApprovalThreshold()) > 1) {
+            taskService.createApprovalTasks(user.getGroup(), order);
+        } else {
+            order.setOrderStatus(OrderStatus.APPROVED_PENDING_SHIPMENT);
+        }
+        save(order);
         return order;
     }
 
@@ -101,7 +103,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order updateOrder(Order order){
+    public Order updateOrder(Order order) {
         Order updatedOrder = orderRepository.findById(order.getId()).get();
         if (!updatedOrder.getOrderStatus().equals(OrderStatus.APPROVED_PENDING_SHIPMENT)
                 && !order.getOrderStatus().equals(OrderStatus.CANCELLED)
@@ -111,7 +113,7 @@ public class OrderServiceImpl implements OrderService {
         BigDecimal subTotal = new BigDecimal(0);
         BigDecimal gst = new BigDecimal(0);
         BigDecimal orderTotal = new BigDecimal(0);
-        if(order.getCartItemList().size() ==1 && order.getCartItemList().get(0).getQty() ==0)
+        if (order.getCartItemList().size() == 1 && order.getCartItemList().get(0).getQty() == 0)
             throw new UserDefinedException(UserDefinedException.MINIMUM_ITEMS_IN_ORDER);
         for (CartItem cartItem : order.getCartItemList()) {
             if (cartItem.getQty() == 0)
@@ -127,6 +129,6 @@ public class OrderServiceImpl implements OrderService {
         updatedOrder.setGst(gst);
         updatedOrder.setOrderTotal(subTotal.add(gst));
         save(updatedOrder);
-      return updatedOrder;
+        return updatedOrder;
     }
 }
