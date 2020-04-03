@@ -87,7 +87,7 @@ public class OrderServiceImpl implements OrderService {
         order.setShippingCost(cart.getShippingCost());
         order.setOrderTotal(cart.getGrandTotal().add(cart.getShippingCost()));
         save(order);
-        if (order.getOrderTotal().compareTo(user.getGroup().getApprovalThreshold()) > 1) {
+        if (order.getOrderTotal().compareTo(user.getGroup().getApprovalThreshold()) > 0) {
             taskService.createApprovalTasks(user.getGroup(), order);
         } else {
             order.setOrderStatus(OrderStatus.APPROVED_PENDING_SHIPMENT);
