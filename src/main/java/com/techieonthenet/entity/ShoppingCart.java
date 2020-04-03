@@ -28,6 +28,9 @@ public class ShoppingCart extends Auditable implements Serializable {
     private BigDecimal gst = new BigDecimal(0);
     private BigDecimal grandTotal = new BigDecimal(0);
     private BigDecimal cartTotal = new BigDecimal(0);
+
+    private BigDecimal shippingCost = new BigDecimal(0);
+
     private int totalItems= 0;
 
     @OneToMany(mappedBy = "shoppingCart", cascade = CascadeType.ALL)
