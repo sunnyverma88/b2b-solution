@@ -118,7 +118,7 @@
                                                     <p class="price">&#x20b9;<span class="price"
                                                                                    th:text="${orderDto.gst}"></span></div>
                                                 <div class="summary-item"><span class="text">Shipping</span>
-                                                    <p class="price">&#x20b9;<span class="price">0</span></div>
+                                                    <p class="price">&#x20b9;<span class="price" th:text="${orderDto.shippingCost}"></span></div>
                                                 <div class="summary-item"><span class="text">Total</span>
                                                     <p class="price">&#x20b9;<span class="price"
                                                                                    th:text="${orderDto.orderTotal}"></span>
