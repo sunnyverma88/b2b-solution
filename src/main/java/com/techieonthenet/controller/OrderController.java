@@ -103,7 +103,6 @@ public class OrderController {
             List<CartItem> cartItemList = cartItemService.findByShoppingCart(cart);
             Order order = orderService.createOrder(cartItemList, dto, user, cart);
             cart = shoppingCartService.clearShoppingCart(cart);
-            taskService.createApprovalTasks(user.getGroup(), order);
             session.setAttribute("cartSize", 0);
             session.setAttribute("tasks", taskService.findByUserAndTaskStatus(user, TaskStatus.PENDING_APPROVAL));
             emailService.sendOrderConfirmationEmail(order , getApprovalUserName(order, TaskType.ORDER_APPROVAL_LEVEL_1) ,
