@@ -67,6 +67,7 @@ public class EmailService {
     }
 
     public void sendOrderUpdatemail(Order order, TaskItem task , User user) throws IOException, MessagingException {
+        logger.info("Send Oorder Update Email : {}" , task.getTaskStatus());
         Map<String, Object> valueMap = new HashMap<>();
         valueMap.put("order", order);
         valueMap.put("task" , task);
