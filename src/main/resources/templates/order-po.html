@@ -45,15 +45,23 @@
                                             <address>
                                                 <strong><u>Buyer</u></strong><br>
                                                 <span th:text="${order.user.group.name}"></span><br>
-                                                GST - <span th:text="${order.user.group.gstNo}"></span><br>
+
+                                                GST # <span th:text="${order.user.group.gstNo}"></span><br>
+                                                <b><span>Shipping Address :</span></b>
+                                                <br><span th:text="${order.address.addressline1}"></span>
+                                                <br><span th:text="${order.address.addressline2}"></span>
+                                                <br><span th:text="${order.address.city}"></span>
+                                                <br><span th:text="${order.address.state}"></span>
+                                                -- <span th:text="${order.address.zipcode}"></span>
                                             </address>
                                         </div>
                                         <div class="col-xs-6 text-right">
                                             <address>
                                                 <strong><u>Seller</u></strong><br>
-                                                Apprize.in - An EndGate Global Innovation<br>
+                                                Apprize<br>
                                                 EndGate Technologies Pvt Ltd<br>
-                                                Icon laurels, Kachnayakanahalli, Bommassandra<br>
+                                                GST # 29AAECE3859L1CD<br>
+                                                Icon laurels,Bommassandra<br>
                                                 Bangalore - 560099
                                             </address>
                                         </div>
