@@ -87,6 +87,7 @@ public class OrderServiceImpl implements OrderService {
         order.setOrderDate(LocalDate.now());
         order.setGst(cart.getGst());
         order.setSubTotal(cart.getCartTotal());
+        order.setShippingCost(cart.getShippingCost());
         order.setOrderTotal(cart.getGrandTotal().add(cart.getShippingCost()));
         save(order);
         taskService.createApprovalTasks(user.getGroup(), order);
