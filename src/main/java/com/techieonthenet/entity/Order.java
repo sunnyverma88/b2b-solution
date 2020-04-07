@@ -61,4 +61,7 @@ public class Order extends Auditable implements Serializable {
     @JoinColumn(name = "group_id")
     private Group group;
 
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private List<OrderComment> orderComments = new ArrayList<>();
+
 }

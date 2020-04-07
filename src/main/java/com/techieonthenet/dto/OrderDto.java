@@ -37,4 +37,6 @@ public class OrderDto {
 
     private Group group;
 
+    private String comment;
+
 }
