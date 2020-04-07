@@ -2,15 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="32ca6a31-512f-4623-a0c7-fb02235b95c0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/entity/OrderComment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/db/migration/V2.2__initial_scripts.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/controller/OrderController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/dto/OrderDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/dto/OrderDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/entity/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/entity/Order.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/service/OrderService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/techieonthenet/service/impl/OrderServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/techieonthenet/service/impl/OrderServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/edit-order.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/edit-order.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -190,20 +184,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1568765710894</updated>
-    </task>
-    <task id="LOCAL-00007" summary="Pipeline changes">
-      <created>1578865521867</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1578865521867</updated>
-    </task>
-    <task id="LOCAL-00008" summary="Pipeline changes">
-      <created>1578865797830</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1578865797830</updated>
     </task>
     <task id="LOCAL-00009" summary="Pipeline changes">
       <created>1578866167252</created>
@@ -534,7 +514,21 @@
       <option name="project" value="LOCAL" />
       <updated>1585929687543</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="Approval threshold condition check">
+      <created>1586261289749</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1586261289749</updated>
+    </task>
+    <task id="LOCAL-00057" summary="shipping cost">
+      <created>1586261872669</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1586261872669</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -553,7 +547,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Dashboard Changes" />
     <MESSAGE value="Graph changes" />
     <MESSAGE value="Contacts Us form" />
     <MESSAGE value="enhancements--Product list and edit product screen" />
@@ -578,7 +571,8 @@
     <MESSAGE value="Approval threshold Fix" />
     <MESSAGE value="Date Util fix" />
     <MESSAGE value="Approval threshold condition check" />
-    <option name="LAST_COMMIT_MESSAGE" value="Approval threshold condition check" />
+    <MESSAGE value="shipping cost" />
+    <option name="LAST_COMMIT_MESSAGE" value="shipping cost" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

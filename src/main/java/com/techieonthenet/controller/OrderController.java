@@ -18,6 +18,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpSession;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -161,7 +162,9 @@ public class OrderController {
         comment.setDescription(orderDto.getComment());
         comment.setOrder(order);
         comment.setUser(user);
-        order.getOrderComments().add(comment);
+        List<OrderComment> orderComments=new ArrayList<>();
+        orderComments.add(comment);
+        order.setOrderComments(orderComments);
        try {
            orderService.updateOrder(order,user);
            redirectUrl = "/order/details/" + order.getId();
