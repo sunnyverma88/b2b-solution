@@ -23,6 +23,8 @@ public class OrderDto {
 
     private BigDecimal gst;
 
+    private BigDecimal shippingCost;
+
     private BigDecimal subTotal;
 
     private BigDecimal orderTotal;
@@ -36,6 +38,8 @@ public class OrderDto {
     private User user;
 
     private Group group;
+
+
 
     private String comment;
 
