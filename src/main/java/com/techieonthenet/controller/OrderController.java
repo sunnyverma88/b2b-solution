@@ -55,8 +55,6 @@ public class OrderController {
     ModelMapper modelMapper;
 
 
-
-
     /**
      * Gets order details.
      *
@@ -155,11 +153,17 @@ public class OrderController {
     }
 
     @PostMapping("/update")
-    public RedirectView updateOrder(@ModelAttribute OrderDto orderDto, RedirectAttributes redirectAttributes) {
+    public RedirectView updateOrder(@ModelAttribute OrderDto orderDto, RedirectAttributes redirectAttributes, HttpSession session) {
         String redirectUrl;
+        User user = (User) session.getAttribute("user");
         Order order= modelMapper.map(orderDto , Order.class);
+        OrderComment comment = new OrderComment();
+        comment.setDescription(orderDto.getComment());
+        comment.setOrder(order);
+        comment.setUser(user);
+        order.getOrderComments().add(comment);
        try {
-           orderService.updateOrder(order);
+           orderService.updateOrder(order,user);
            redirectUrl = "/order/details/" + order.getId();
        }catch(Exception e) {
             redirectAttributes.addFlashAttribute("message", "Something Went Wrong !! " + e.getLocalizedMessage());

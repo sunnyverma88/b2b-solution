@@ -103,7 +103,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order updateOrder(Order order) {
+    public Order updateOrder(Order order,User user) {
         Order updatedOrder = orderRepository.findById(order.getId()).get();
         if (!updatedOrder.getOrderStatus().equals(OrderStatus.APPROVED_PENDING_SHIPMENT)
                 && !order.getOrderStatus().equals(OrderStatus.CANCELLED)
@@ -124,6 +124,7 @@ public class OrderServiceImpl implements OrderService {
                 gst = gst.add(updatedItem.getProduct().getGst().multiply(new BigDecimal(cartItem.getQty())));
             }
         }
+
         updatedOrder.setSubTotal(subTotal);
         updatedOrder.setOrderStatus(order.getOrderStatus());
         updatedOrder.setGst(gst);
