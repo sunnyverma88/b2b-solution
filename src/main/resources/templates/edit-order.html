@@ -38,28 +38,32 @@
                                         <form method="post" th:action="@{/order/update}"
                                               th:object="${orderDto}">
 
-                                        <div class="col-md-12 col-lg-8">
-                                            <div class="form-group">
-                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id">Order ID <span
-                                                        class="required">*</span>
-                                                </label>
-                                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                                    <input class="form-control col-md-7 col-xs-12" id="id" maxlength="50" name="id"
-                                                           required th:field="*{id}" type="text" readonly>
+                                            <div class="col-md-12 col-lg-8">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id">Order
+                                                        ID <span
+                                                                class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <input class="form-control col-md-7 col-xs-12" id="id"
+                                                               maxlength="50" name="id"
+                                                               required th:field="*{id}" type="text" readonly>
+                                                    </div>
                                                 </div>
-                                            </div><br><br><br>
+                                                <br><br><br>
 
-                                            <div class="form-group">
-                                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Order Status</label>
-                                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                                    <select class="form-control" th:field="*{orderStatus}">
-                                                        <option th:each="status : ${T(com.techieonthenet.entity.common.OrderStatus).values()}"
-                                                                th:text="${status}"
-                                                                th:value="${status}">
-                                                        </option>
-                                                    </select>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Order
+                                                        Status</label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <select class="form-control" th:field="*{orderStatus}">
+                                                            <option th:each="status : ${T(com.techieonthenet.entity.common.OrderStatus).values()}"
+                                                                    th:text="${status}"
+                                                                    th:value="${status}">
+                                                            </option>
+                                                        </select>
+                                                    </div>
                                                 </div>
-                                            </div>
 
                                                 <div class="items"
                                                      th:each="cartItem , itemStat: ${orderDto.cartItemList}">
@@ -93,7 +97,8 @@
                                                                                    id="quantity"
                                                                                    th:field="*{cartItemList[__${itemStat.index}__].qty}"
                                                                                    th:value="${cartItem.qty}"
-                                                                                   th:max="${cartItem.qty}" min="0" type="number">
+                                                                                   th:max="${cartItem.qty}" min="0"
+                                                                                   type="number">
                                                                         </div>
                                                                         <div class="col-md-3 price">
                                                                             <p>&#x20b9;<span
@@ -106,39 +111,45 @@
                                                     </div>
 
                                                 </div>
-                                        </div>
-                                            <div class="form-group">
-                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="comment"> Comment
-                                                    <span class="required">*</span></label>
-                                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                         <textarea class="form-control col-md-7 col-xs-12" data-parsley-maxlength="100"
-                                      data-parsley-trigger="keyup" data-parsley-validation-threshold="10"
-                                      id="comment" name="comment" required="required"
-                                      th:field="*{comment}"></textarea>
+                                                <br><br><br>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12"
+                                                           for="comment"> Comment
+                                                        <span class="required">*</span></label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <textarea class="form-control col-md-7 col-xs-12" data-parsley-maxlength="100"
+                                                   data-parsley-trigger="keyup" data-parsley-validation-threshold="10"
+                                                   id="comment" name="comment" required="required"
+                                                   th:field="*{comment}"></textarea>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        <div class="col-md-12 col-lg-4">
-                                            <div class="summary" th:if="${orderDto.orderTotal &gt; 0}">
-                                                <h3>Summary</h3>
-                                                <div class="summary-item"><span class="text">Subtotal</span>
-                                                    <p class="price">&#x20b9;<span class="price"
-                                                                                   th:text="${orderDto.subTotal}"></span>
-                                                    </p></div>
-                                                <div class="summary-item"><span class="text">GST</span>
-                                                    <p class="price">&#x20b9;<span class="price"
-                                                                                   th:text="${orderDto.gst}"></span></div>
-                                                <div class="summary-item"><span class="text">Shipping</span>
-                                                    <p class="price">&#x20b9;<span class="price" th:text="${orderDto.shippingCost}"></span></div>
-                                                <div class="summary-item"><span class="text">Total</span>
-                                                    <p class="price">&#x20b9;<span class="price"
-                                                                                   th:text="${orderDto.orderTotal}"></span>
-                                                </div>
-                                                <button class="btn btn-primary btn-lg btn-block" type="submit">
-                                                    Update Order
-                                                </button>
                                             </div>
 
-                                        </div>
+                                            <div class="col-md-12 col-lg-4">
+                                                <div class="summary" th:if="${orderDto.orderTotal &gt; 0}">
+                                                    <h3>Summary</h3>
+                                                    <div class="summary-item"><span class="text">Subtotal</span>
+                                                        <p class="price">&#x20b9;<span class="price"
+                                                                                       th:text="${orderDto.subTotal}"></span>
+                                                        </p></div>
+                                                    <div class="summary-item"><span class="text">GST</span>
+                                                        <p class="price">&#x20b9;<span class="price"
+                                                                                       th:text="${orderDto.gst}"></span>
+                                                    </div>
+                                                    <div class="summary-item"><span class="text">Shipping</span>
+                                                        <p class="price">&#x20b9;<span class="price"
+                                                                                       th:text="${orderDto.shippingCost}"></span>
+                                                    </div>
+                                                    <div class="summary-item"><span class="text">Total</span>
+                                                        <p class="price">&#x20b9;<span class="price"
+                                                                                       th:text="${orderDto.orderTotal}"></span>
+                                                    </div>
+                                                    <button class="btn btn-primary btn-lg btn-block" type="submit">
+                                                        Update Order
+                                                    </button>
+                                                </div>
+
+                                            </div>
 
 
                                         </form>

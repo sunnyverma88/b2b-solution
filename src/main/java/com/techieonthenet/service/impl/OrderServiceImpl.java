@@ -130,9 +130,7 @@ public class OrderServiceImpl implements OrderService {
         comment.setDescription(orderComment);
         comment.setOrder(updatedOrder);
         comment.setUser(user);
-        List<OrderComment> orderComments = updatedOrder.getOrderComments();
-        orderComments.add(comment);
-        updatedOrder.setOrderComments(orderComments);
+        updatedOrder.getOrderComments().add(comment);
         updatedOrder.setOrderStatus(order.getOrderStatus());
         updatedOrder.setGst(gst);
         updatedOrder.setOrderTotal(subTotal.add(gst));
