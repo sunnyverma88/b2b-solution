@@ -1,9 +1,11 @@
 package com.techieonthenet.entity;
 
+import com.techieonthenet.entity.common.Auditable;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Getter
 @Setter
@@ -12,7 +14,7 @@ import javax.persistence.*;
 @SequenceGenerator(name = "order_comment_generator",
         sequenceName = "order_comment_seq", allocationSize = 1 ,
         initialValue = 500)
-public class OrderComment {
+public class OrderComment extends Auditable implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,
