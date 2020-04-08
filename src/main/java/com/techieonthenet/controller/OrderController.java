@@ -18,7 +18,6 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpSession;
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,6 +28,9 @@ import java.util.List;
 public class OrderController {
 
     private static final Logger logger = LoggerFactory.getLogger(OrderController.class);
+    public static final String ORDER_HISTORY_ADMIN = "/order/history/admin";
+    public static final String ORDER_PO = "/order/po/";
+    public static final String ORDER_DETAILS = "/order/details";
 
 
     @Autowired
@@ -68,7 +70,7 @@ public class OrderController {
     public String getOrderDetails(Model model, Principal principal, @RequestParam(name = "message", required = false) String message) {
         User user = userService.findByUsernameAndEnabled(principal.getName());
         model.addAttribute("cart", shoppingCartService.findByUserId(user.getId()));
-        Address billingAddress = groupService.findById(user.getGroup().getId()).getAddress();
+        final Address billingAddress = groupService.findById(user.getGroup().getId()).getAddress();
         logger.info("Billing Address Name  : {} ", billingAddress.getName());
         model.addAttribute("billingAddress", billingAddress);
         ShippingAddressDto dto = new ShippingAddressDto();
@@ -106,11 +108,11 @@ public class OrderController {
             session.setAttribute("tasks", taskService.findByUserAndTaskStatus(user, TaskStatus.PENDING_APPROVAL));
             emailService.sendOrderConfirmationEmail(order , getApprovalUserName(order, TaskType.ORDER_APPROVAL_LEVEL_1) ,
                     getApprovalUserName(order, TaskType.ORDER_APPROVAL_LEVEL_2));
-            url = "/order/po/" + order.getId() + "";
+            url = ORDER_PO + order.getId() + "";
         } catch (Exception e) {
             logger.error("Error Occurred : {}", e.getMessage());
             redirectAttributes.addFlashAttribute("message", e.getMessage());
-            url = "/order/details";
+            url = ORDER_DETAILS;
         }
         return new RedirectView(url);
     }
@@ -159,18 +161,12 @@ public class OrderController {
         User user = (User) session.getAttribute("user");
         Order order= modelMapper.map(orderDto , Order.class);
         OrderComment comment = new OrderComment();
-        comment.setDescription(orderDto.getComment());
-        comment.setOrder(order);
-        comment.setUser(user);
-        List<OrderComment> orderComments=new ArrayList<>();
-        orderComments.add(comment);
-        order.setOrderComments(orderComments);
        try {
-           orderService.updateOrder(order,user);
+           orderService.updateOrder(order,user , orderDto.getComment());
            redirectUrl = "/order/details/" + order.getId();
        }catch(Exception e) {
             redirectAttributes.addFlashAttribute("message", "Something Went Wrong !! " + e.getLocalizedMessage());
-            redirectUrl = "/order/history/admin";
+            redirectUrl = ORDER_HISTORY_ADMIN;
         }
         return new RedirectView(redirectUrl);
     }
