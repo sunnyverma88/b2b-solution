@@ -60,5 +60,5 @@ public interface OrderService {
      */
     List<Order> findByGroup(Group group);
 
-    Order updateOrder(Order order , User user);
+    Order updateOrder(Order order , User user , String orderComment);
 }
