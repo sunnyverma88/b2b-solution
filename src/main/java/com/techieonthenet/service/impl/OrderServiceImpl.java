@@ -126,6 +126,7 @@ public class OrderServiceImpl implements OrderService {
         }
 
         updatedOrder.setSubTotal(subTotal);
+        updatedOrder.setOrderComments(order.getOrderComments());
         updatedOrder.setOrderStatus(order.getOrderStatus());
         updatedOrder.setGst(gst);
         updatedOrder.setOrderTotal(subTotal.add(gst));
